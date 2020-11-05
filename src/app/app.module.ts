@@ -1,12 +1,13 @@
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { BrowserModule } from '@angular/platform-browser';
+import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 
-import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { FormsModule } from '@angular/forms';
-import { MaterialModule } from './shared/material/material.module';
+import { AppRoutingModule } from './app-routing.module';
+import { FeatureModule } from './shared/feature/feature.module';
 import { I18nModule } from './shared/i18n/i18n.module';
+import { MaterialModule } from './shared/material/material.module';
 
 @NgModule({
   declarations: [AppComponent],
@@ -14,6 +15,7 @@ import { I18nModule } from './shared/i18n/i18n.module';
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
+    FeatureModule,
     FormsModule,
     MaterialModule,
     I18nModule,

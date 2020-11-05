@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-
+import { CapacityPlanningComponent } from './capacity-planning.component';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
+  declarations: [CapacityPlanningComponent],
+  imports: [CommonModule],
+  exports: [CapacityPlanningComponent],
 })
-export class CapacityPlanningModule { }
+export class CapacityPlanningModule {}

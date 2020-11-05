@@ -19,6 +19,6 @@ export const onInitAnimate = trigger('onInitAnimate', [
       bottom: '0%',
     })
   ),
-  transition('close => open', animate('250ms')),
-  transition('open => close', animate('250ms')),
+  transition('close => open', animate('500ms')),
+  transition('open => close', animate('500ms')),
 ]);

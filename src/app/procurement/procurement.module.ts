@@ -1,12 +1,10 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-
-
+import { ProcurementComponent } from './procurement.component';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    CommonModule
-  ]
+  declarations: [ProcurementComponent],
+  imports: [CommonModule],
+  exports: [ProcurementComponent],
 })
-export class ProcurementModule { }
+export class ProcurementModule {}
