@@ -1,9 +1,5 @@
 import { Component } from '@angular/core';
-
-interface Food {
-  value: string;
-  viewValue: string;
-}
+import { TranslateService } from '@ngx-translate/core';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +7,16 @@ interface Food {
   styleUrls: ['./app.component.scss'],
 })
 export class AppComponent {
-  title = 'IbsysII-Grp3';
-  foods: Food[] = [
-    { value: 'steak-0', viewValue: 'Steak' },
-    { value: 'pizza-1', viewValue: 'Pizza' },
-    { value: 'tacos-2', viewValue: 'Tacos' },
-  ];
+  language = 'en';
+  param = { value: 'Test' };
+
+  constructor(public translate: TranslateService) {
+    // this language will be used as a fallback when a translation isn't found in the current language
+    translate.setDefaultLang(this.language);
+
+    translate.addLangs(['en', 'de']);
+
+    // the lang to use, if the lang isn't available, it will use the current loader to get them
+    translate.use('en');
+  }
 }
