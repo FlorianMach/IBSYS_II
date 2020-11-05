@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({
@@ -6,17 +6,24 @@ import { TranslateService } from '@ngx-translate/core';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
+export class AppComponent implements OnInit {
   language = 'en';
+  // dummy for demonstration how to use variables in i18n context
   param = { value: 'Test' };
 
-  constructor(public translate: TranslateService) {
-    // this language will be used as a fallback when a translation isn't found in the current language
-    translate.setDefaultLang(this.language);
+  ngOnInit(): void {
+    this.initLanguageService();
+  }
 
-    translate.addLangs(['en', 'de']);
+  constructor(public translate: TranslateService) {}
+
+  private initLanguageService(): void {
+    // this language will be used as a fallback when a translation isn't found in the current language
+    this.translate.setDefaultLang(this.language);
+
+    this.translate.addLangs(['en', 'de']);
 
     // the lang to use, if the lang isn't available, it will use the current loader to get them
-    translate.use('en');
+    this.translate.use('en');
   }
 }
