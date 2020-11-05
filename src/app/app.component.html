@@ -3,26 +3,210 @@
   [@onInitAnimate]="init ? 'open' : 'close'"
 >
   <div class="app-content-wrapper">
-    <div>{{ "HELLO" | translate: param }}</div>
+    <mat-toolbar>
+      <span>My Application</span>
+      <span class="app-bar-spacer"></span>
+      <mat-form-field>
+        <mat-select
+          #langSelect
+          (selectionChange)="translate.use(langSelect.value)"
+          [(ngModel)]="language"
+        >
+          <mat-option *ngFor="let lang of translate.getLangs()" [value]="lang">
+            {{ lang }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </mat-toolbar>
 
-    <mat-form-field>
-      <mat-label> {{ "HOME.LANGUAGE" | translate }} </mat-label>
-      <mat-select
-        #langSelect
-        (selectionChange)="translate.use(langSelect.value)"
-        [(ngModel)]="language"
-      >
-        <mat-option *ngFor="let lang of translate.getLangs()" [value]="lang">
-          {{ lang }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-
-    <app-xml-reader></app-xml-reader>
-    <app-product-planning></app-product-planning>
-    <app-material-requirements-planning></app-material-requirements-planning>
-    <app-capacity-planning></app-capacity-planning>
-    <app-procurement></app-procurement>
-    <app-result></app-result>
+    <div class="content-flex-box">
+      <mat-horizontal-stepper [linear]="true" labelPosition="bottom" #stepper>
+        <mat-step>
+          <ng-template matStepLabel>{{ "XML.NAME" | translate }}</ng-template>
+          <div class="stepper-content">
+            <app-xml-reader></app-xml-reader>
+            <div class="stepper-button-wrapper">
+              <button
+                class="stepper-button-margin"
+                mat-flat-button
+                color="primary"
+                matStepperNext
+              >
+                {{ "UTIL.BUTTON.NEXT" | translate }}
+              </button>
+            </div>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>{{
+            "PRODUCT_PLANNING.NAME" | translate
+          }}</ng-template>
+          <app-product-planning></app-product-planning>
+          <div class="stepper-button-wrapper">
+            <button
+              class="stepper-button-margin"
+              mat-flat-button
+              color="accent"
+              matStepperPrevious
+            >
+              {{ "UTIL.BUTTON.BACK" | translate }}
+            </button>
+            <button
+              class="stepper-button-margin"
+              mat-flat-button
+              color="primary"
+              matStepperNext
+            >
+              {{ "UTIL.BUTTON.NEXT" | translate }}
+            </button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>{{
+            "MRP.NAME_P1" | translate
+          }}</ng-template>
+          <app-material-requirements-planning></app-material-requirements-planning>
+          <div class="stepper-button-wrapper">
+            <button
+              class="stepper-button-margin"
+              mat-flat-button
+              color="accent"
+              matStepperPrevious
+            >
+              {{ "UTIL.BUTTON.BACK" | translate }}
+            </button>
+            <button
+              class="stepper-button-margin"
+              mat-flat-button
+              color="primary"
+              matStepperNext
+            >
+              {{ "UTIL.BUTTON.NEXT" | translate }}
+            </button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>{{
+            "MRP.NAME_P2" | translate
+          }}</ng-template>
+          <app-material-requirements-planning></app-material-requirements-planning>
+          <div class="stepper-button-wrapper">
+            <button
+              class="stepper-button-margin"
+              mat-flat-button
+              color="accent"
+              matStepperPrevious
+            >
+              {{ "UTIL.BUTTON.BACK" | translate }}
+            </button>
+            <button
+              class="stepper-button-margin"
+              mat-flat-button
+              color="primary"
+              matStepperNext
+            >
+              {{ "UTIL.BUTTON.NEXT" | translate }}
+            </button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>{{
+            "MRP.NAME_P3" | translate
+          }}</ng-template>
+          <app-material-requirements-planning></app-material-requirements-planning>
+          <div class="stepper-button-wrapper">
+            <button
+              class="stepper-button-margin"
+              mat-flat-button
+              color="accent"
+              matStepperPrevious
+            >
+              {{ "UTIL.BUTTON.BACK" | translate }}
+            </button>
+            <button
+              class="stepper-button-margin"
+              mat-flat-button
+              color="primary"
+              matStepperNext
+            >
+              {{ "UTIL.BUTTON.NEXT" | translate }}
+            </button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>{{
+            "CAPACITY_PLANNING.NAME" | translate
+          }}</ng-template>
+          <app-capacity-planning></app-capacity-planning>
+          <div class="stepper-button-wrapper">
+            <button
+              class="stepper-button-margin"
+              mat-flat-button
+              color="accent"
+              matStepperPrevious
+            >
+              {{ "UTIL.BUTTON.BACK" | translate }}
+            </button>
+            <button
+              class="stepper-button-margin"
+              mat-flat-button
+              color="primary"
+              matStepperNext
+            >
+              {{ "UTIL.BUTTON.NEXT" | translate }}
+            </button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>{{
+            "PROCUREMENT.NAME" | translate
+          }}</ng-template>
+          <app-procurement></app-procurement>
+          <div class="stepper-button-wrapper">
+            <button
+              class="stepper-button-margin"
+              mat-flat-button
+              color="accent"
+              matStepperPrevious
+            >
+              {{ "UTIL.BUTTON.BACK" | translate }}
+            </button>
+            <button
+              class="stepper-button-margin"
+              mat-flat-button
+              color="primary"
+              matStepperNext
+            >
+              {{ "UTIL.BUTTON.NEXT" | translate }}
+            </button>
+          </div>
+        </mat-step>
+        <mat-step>
+          <ng-template matStepLabel>{{
+            "RESULT.NAME" | translate
+          }}</ng-template>
+          <app-result></app-result>
+          <p>You are now done.</p>
+          <div class="stepper-button-wrapper">
+            <button
+              class="stepper-button-margin"
+              mat-flat-button
+              color="accent"
+              matStepperPrevious
+            >
+              {{ "UTIL.BUTTON.BACK" | translate }}
+            </button>
+            <button
+              class="stepper-button-margin"
+              mat-flat-button
+              color="primary"
+              (click)="stepper.reset()"
+            >
+              {{ "UTIL.BUTTON.RESET" | translate }}
+            </button>
+          </div>
+        </mat-step>
+      </mat-horizontal-stepper>
+    </div>
   </div>
 </div>
