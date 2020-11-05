@@ -1,0 +1,21 @@
+// Custom Theming for Angular Material
+// For more information: https://material.angular.io/guide/theming
+@import "~@angular/material/theming";
+
+$primary: #1da1f2;
+$accent: #2c353c;
+// https://material.io/resources/color/#!/?view.left=0&view.right=0&primary.color=424242&secondary.color=FFC107
+// https://medium.com/@tomastrajan/the-complete-guide-to-angular-material-themes-4d165a9d24d1
+$primary-palette: map-merge(
+  $mat-blue,
+  (
+    500: $primary,
+  )
+);
+$accent-palette: map-merge(
+  $mat-grey,
+  (
+    500: $accent,
+  )
+);
+$warn-palette: $mat-red;
