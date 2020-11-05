@@ -1,14 +1,21 @@
-<div>{{ "HELLO" | translate: param }}</div>
+<div
+  class="no-scroll app-content-wrapper"
+  [@onInitAnimate]="init ? 'open' : 'close'"
+>
+  <div class="app-content-wrapper">
+    <div>{{ "HELLO" | translate: param }}</div>
 
-<mat-form-field>
-  <mat-label> {{ "HOME.LANGUAGE" | translate }} </mat-label>
-  <mat-select
-    #langSelect
-    (selectionChange)="translate.use(langSelect.value)"
-    [(ngModel)]="language"
-  >
-    <mat-option *ngFor="let lang of translate.getLangs()" [value]="lang">
-      {{ lang }}
-    </mat-option>
-  </mat-select>
-</mat-form-field>
+    <mat-form-field>
+      <mat-label> {{ "HOME.LANGUAGE" | translate }} </mat-label>
+      <mat-select
+        #langSelect
+        (selectionChange)="translate.use(langSelect.value)"
+        [(ngModel)]="language"
+      >
+        <mat-option *ngFor="let lang of translate.getLangs()" [value]="lang">
+          {{ lang }}
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
+  </div>
+</div>
