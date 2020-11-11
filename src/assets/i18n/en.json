@@ -1,0 +1,33 @@
+{
+    "HOME": {
+        "LANGUAGE": "Language"
+    },
+    "XML": {
+        "NAME": "Xml"
+    },
+    "PRODUCT_PLANNING": {
+        "NAME": "MRP II"
+    },
+    "MRP": {
+        "NAME_P1": "MRP I - P1",
+        "NAME_P2": "MRP I - P2",
+        "NAME_P3": "MRP I - P3"
+    },
+    "CAPACITY_PLANNING": {
+        "NAME": "Capacity planning"
+    },
+    "PROCUREMENT": {
+        "NAME": "Procurement"
+    },
+    "RESULT": {
+        "NAME": "Result"
+    },
+    "UTIL": {
+        "BUTTON": {
+            "NEXT": "Next",
+            "BACK": "Back",
+            "RESET": "Reset"
+        }
+    },
+    "HELLO": "Hello {{value}}"
+}

@@ -1,0 +1,37 @@
+.no-scroll {
+  overflow: hidden;
+}
+
+.app-bar-spacer {
+  flex: 1 1 auto;
+}
+
+.app-content-wrapper {
+  position: relative;
+  height: 100%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.content-flex-box {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.stepper-content {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.stepper-button-wrapper {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: auto;
+}
+
+.stepper-button-margin {
+  margin: 0.25em;
+}

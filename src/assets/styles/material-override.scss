@@ -1,0 +1,20 @@
+.mat-stepper-horizontal {
+  flex-grow: 1;
+  display: flex !important;
+  flex-direction: column !important;
+}
+
+.mat-horizontal-stepper-header-container {
+  flex-grow: 1 !important;
+}
+
+.mat-horizontal-content-container {
+  padding: 0 12px 12px 12px !important;
+  flex-grow: 100 !important;
+}
+
+.mat-horizontal-stepper-content {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
