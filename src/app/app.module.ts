@@ -20,7 +20,9 @@ import { WarningDialogComponent } from './warning-dialog/warning-dialog.componen
     FormsModule,
     MaterialModule,
     I18nModule,
+
   ],
+  exports: [],
   providers: [],
   bootstrap: [AppComponent],
 })
