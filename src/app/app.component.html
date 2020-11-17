@@ -65,7 +65,12 @@
           <ng-template matStepLabel>{{
             "MRP.NAME_P1" | translate
           }}</ng-template>
-          <app-material-requirements-planning></app-material-requirements-planning>
+          <app-material-requirements-planning
+            *ngIf="xmlData"
+            [data]="xmlData"
+            [bom]="bomP1"
+            [salesOrderAmount]="xmlData.results.forecast._attributes.p1"
+          ></app-material-requirements-planning>
           <div class="stepper-button-wrapper">
             <button
               class="stepper-button-margin"
@@ -89,7 +94,12 @@
           <ng-template matStepLabel>{{
             "MRP.NAME_P2" | translate
           }}</ng-template>
-          <app-material-requirements-planning></app-material-requirements-planning>
+          <app-material-requirements-planning
+            *ngIf="xmlData"
+            [data]="xmlData"
+            [bom]="bomP2"
+            [salesOrderAmount]="xmlData.results.forecast._attributes.p2"
+          ></app-material-requirements-planning>
           <div class="stepper-button-wrapper">
             <button
               class="stepper-button-margin"
@@ -113,7 +123,12 @@
           <ng-template matStepLabel>{{
             "MRP.NAME_P3" | translate
           }}</ng-template>
-          <app-material-requirements-planning></app-material-requirements-planning>
+          <app-material-requirements-planning
+            *ngIf="xmlData"
+            [data]="xmlData"
+            [bom]="bomP3"
+            [salesOrderAmount]="xmlData.results.forecast._attributes.p3"
+          ></app-material-requirements-planning>
           <div class="stepper-button-wrapper">
             <button
               class="stepper-button-margin"

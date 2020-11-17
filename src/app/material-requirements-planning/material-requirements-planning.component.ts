@@ -1,5 +1,5 @@
-import { Component, OnInit } from '@angular/core';
-import { XmlReaderService } from '../xml-reader/xml-reader.service';
+import { Component, Input, OnInit } from '@angular/core';
+import { workFlowMap } from '../shared/const/workflow';
 import { MaterialRequirementsPlanningService } from './material-requirements-planning.service';
 
 @Component({
@@ -8,16 +8,23 @@ import { MaterialRequirementsPlanningService } from './material-requirements-pla
   styleUrls: ['./material-requirements-planning.component.scss'],
 })
 export class MaterialRequirementsPlanningComponent implements OnInit {
-  data: any;
+  @Input() data: any;
+  @Input() bom: any;
+  @Input() salesOrderAmount: string;
+
+  viewData: Array<any>;
 
   constructor(
-    private materialRequirementsPlanningService: MaterialRequirementsPlanningService,
-    private xmlReaderService: XmlReaderService
+    private materialRequirementsPlanningService: MaterialRequirementsPlanningService
   ) {}
 
   ngOnInit(): void {
-    this.xmlReaderService.subscribe((data) => {
-      this.data = data;
-    });
+    this.viewData = this.materialRequirementsPlanningService.getViewData(
+      this.data,
+      workFlowMap,
+      this.bom,
+      this.salesOrderAmount
+    );
+    console.log(this.viewData);
   }
 }

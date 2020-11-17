@@ -1,1 +1,39 @@
 <p>material-requirements-planning works!</p>
+
+<div style="width: 100%" style="display: flex">
+  <div style="flex-basis: 14.28%">Teil</div>
+  <div style="flex-basis: 14.28%">Verbindliche Aufträge / Vertriebswunsch</div>
+  <div style="flex-basis: 14.28%">
+    Geplanter Lagerbestand am Ende der Planperiode (Sicherheitsbestand)
+  </div>
+  <div style="flex-basis: 14.28%">Lagerbestand am Ende der Vorperiode</div>
+  <div style="flex-basis: 14.28%">Aufträge in der Warteschlange</div>
+  <div style="flex-basis: 14.28%">Aufträge in Bearbeitung</div>
+  <div style="flex-basis: 14.28%">
+    ProduktionsAufträge für die Kommende Periode
+  </div>
+</div>
+
+<div *ngFor="let data of viewData" style="width: 100%" style="display: flex">
+  <div style="flex-basis: 14.28%">
+    {{ data.id <= 3 ? "P" + data.id : "E" + data.id }}
+  </div>
+  <div style="flex-basis: 14.28%">
+    {{ data.requiredAmount }}
+  </div>
+  <div style="flex-basis: 14.28%">
+    {{ data.safetyStock }}
+  </div>
+  <div style="flex-basis: 14.28%">
+    {{ data.currentStock }}
+  </div>
+  <div style="flex-basis: 14.28%">
+    {{ data.ordersInWaitingQueue }}
+  </div>
+  <div style="flex-basis: 14.28%">
+    {{ data.workInProgress }}
+  </div>
+  <div style="flex-basis: 14.28%">
+    {{ data.result }}
+  </div>
+</div>
