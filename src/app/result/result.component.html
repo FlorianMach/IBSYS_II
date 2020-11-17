@@ -1,1 +1,112 @@
-<p>result works!</p>
+<mat-tab-group>
+
+    <mat-tab label="Direktverkauf">
+
+        <mat-table class="capacities-table mat-elevation-z8" [dataSource]="dataSourceCapacities">
+
+            <ng-containter matColumnDef="workplace">
+                <mat-header-cell *matHeaderCellDef>Workplace</mat-header-cell>
+                <mat-cell *matCellDef="let capacity">{{capacity.workplace}}</mat-cell>
+            </ng-containter>
+
+            <ng-container matColumnDef="shifts">
+                <mat-header-cell *matHeaderCellDef>Shifts</mat-header-cell>
+                <mat-cell *matCellDef="let capacity">{{capacity.shifts}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="overtime">
+                <mat-header-cell *matHeaderCellDef>Overtime</mat-header-cell>
+                <mat-cell *matCellDef="let capacity">{{capacity.overtime}}</mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumnsCapacities"></mat-header-row>
+
+            <mat-row *matRowDef="let capacity; columns: displayedColumnsCapacities"></mat-row>
+
+        </mat-table>
+
+    </mat-tab>
+
+    <mat-tab label="Einkaufsaufträge">
+
+        <mat-table class="capacities-table mat-elevation-z8" [dataSource]="dataSourceCapacities">
+
+            <ng-containter matColumnDef="workplace">
+                <mat-header-cell *matHeaderCellDef>Workplace</mat-header-cell>
+                <mat-cell *matCellDef="let capacity">{{capacity.workplace}}</mat-cell>
+            </ng-containter>
+
+            <ng-container matColumnDef="shifts">
+                <mat-header-cell *matHeaderCellDef>Shifts</mat-header-cell>
+                <mat-cell *matCellDef="let capacity">{{capacity.shifts}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="overtime">
+                <mat-header-cell *matHeaderCellDef>Overtime</mat-header-cell>
+                <mat-cell *matCellDef="let capacity">{{capacity.overtime}}</mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumnsCapacities"></mat-header-row>
+
+            <mat-row *matRowDef="let capacity; columns: displayedColumnsCapacities"></mat-row>
+
+        </mat-table>
+
+    </mat-tab>
+
+    <mat-tab label="Produktionsaufträge">
+
+        <mat-table class="capacities-table mat-elevation-z8" [dataSource]="dataSourceCapacities">
+
+            <ng-containter matColumnDef="workplace">
+                <mat-header-cell *matHeaderCellDef>Workplace</mat-header-cell>
+                <mat-cell *matCellDef="let capacity">{{capacity.workplace}}</mat-cell>
+            </ng-containter>
+
+            <ng-container matColumnDef="shifts">
+                <mat-header-cell *matHeaderCellDef>Shifts</mat-header-cell>
+                <mat-cell *matCellDef="let capacity">{{capacity.shifts}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="overtime">
+                <mat-header-cell *matHeaderCellDef>Overtime</mat-header-cell>
+                <mat-cell *matCellDef="let capacity">{{capacity.overtime}}</mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumnsCapacities"></mat-header-row>
+
+            <mat-row *matRowDef="let capacity; columns: displayedColumnsCapacities"></mat-row>
+
+        </mat-table>
+
+    </mat-tab>
+
+    <mat-tab label="Produktionskapazitäten">
+
+        <mat-table class="capacities-table mat-elevation-z8" [dataSource]="dataSourceCapacities">
+
+            <ng-containter matColumnDef="workplace">
+                <mat-header-cell *matHeaderCellDef>Workplace</mat-header-cell>
+                <mat-cell *matCellDef="let capacity">{{capacity.workplace}}</mat-cell>
+            </ng-containter>
+
+            <ng-container matColumnDef="shifts">
+                <mat-header-cell *matHeaderCellDef>Shifts</mat-header-cell>
+                <mat-cell *matCellDef="let capacity">{{capacity.shifts}}</mat-cell>
+            </ng-container>
+
+            <ng-container matColumnDef="overtime">
+                <mat-header-cell *matHeaderCellDef>Overtime</mat-header-cell>
+                <mat-cell *matCellDef="let capacity">{{capacity.overtime}}</mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumnsCapacities"></mat-header-row>
+
+            <mat-row *matRowDef="let capacity; columns: displayedColumnsCapacities"></mat-row>
+
+        </mat-table>
+
+    </mat-tab>
+
+</mat-tab-group>
+  
