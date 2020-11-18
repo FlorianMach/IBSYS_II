@@ -33,7 +33,21 @@
         "NAME": "Einkauf"
     },
     "RESULT": {
-        "NAME": "Ergebnis"
+        "NAME": "Ergebnis",
+        "PRODUCTION": {
+            "CAPACITIES": {
+                "NAME": "Produktionskapazitäten"
+            },
+            "ORDERS": {
+                "NAME": "Produktionsaufträge"
+            }
+        },
+        "PURCHASE": {
+            "NAME": "Einkaufsaufträge"
+        },
+        "DIRECTSALES": {
+            "NAME": "Direktverkauf"
+        }
     },
     "UTIL": {
         "BUTTON": {
