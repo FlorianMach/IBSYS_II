@@ -46,7 +46,11 @@
             "NAME": "Einkaufsaufträge"
         },
         "DIRECTSALES": {
-            "NAME": "Direktverkauf"
+            "NAME": "Direktverkauf",
+            "ARTICLE": "Artikel",
+            "QUANTITY": "Menge",
+            "PRICE": "Preis",
+            "PENALTY": "Strafe"
         }
     },
     "UTIL": {

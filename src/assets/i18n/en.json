@@ -46,7 +46,11 @@
             "NAME": "Purchase Orders"
         },
         "DIRECTSALES": {
-            "NAME": "Direct Sales"
+            "NAME": "Direct Sales",
+            "ARTICLE": "Article",
+            "QUANTITY": "Quantity",
+            "PRICE": "Price",
+            "PENALTY": "Penalty"
         }
     },
     "UTIL": {
