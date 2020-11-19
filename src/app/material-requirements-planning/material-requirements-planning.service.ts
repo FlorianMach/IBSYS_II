@@ -66,21 +66,75 @@ export class MaterialRequirementsPlanningService {
       };
 
       // Aktueller Lagerbestand durchsuchen
-      xmlData.results.warehousestock.article.forEach((item) => {
-        if (item._attributes) {
-          if (item._attributes.id === key) {
-            adjustedItem.currentStock = this.calcAmount(item._attributes);
+      if (xmlData.results.warehousestock.article) {
+        xmlData.results.warehousestock.article.forEach((item) => {
+          if (item._attributes) {
+            if (item._attributes.id === key) {
+              adjustedItem.currentStock = this.calcAmount(item._attributes);
+            }
           }
-        }
-      });
+        });
+      }
 
       // Warteschlange Arbeitsplatz durchsuchen
-      xmlData.results.waitinglistworkstations.workplace.forEach(
-        (workplaceInQ) => {
-          if (workplaceInQ.waitinglist) {
+      if (xmlData.results.waitinglistworkstations.workplace) {
+        xmlData.results.waitinglistworkstations.workplace.forEach(
+          (workplaceInQ) => {
+            if (workplaceInQ.waitinglist) {
+              // Hinweis: Wenn die Warteschlange nur ein Objekt hat, dann ist es kein Array...
+              if (workplaceInQ.waitinglist._attributes) {
+                const workplace = workplaceInQ.waitinglist;
+                const uniqueKey =
+                  workplace._attributes.order +
+                  '-' +
+                  workplace._attributes.item +
+                  '-' +
+                  workplace._attributes.firstbatch +
+                  '-' +
+                  workplace._attributes.lastbatch;
+                if (
+                  uniqueOrderList[uniqueKey] != workplace._attributes.amount &&
+                  workplace._attributes.item === key
+                ) {
+                  uniqueOrderList[uniqueKey] = workplace._attributes.amount;
+                  adjustedItem.ordersInWaitingQueue += this.calcAmount(
+                    workplace._attributes
+                  );
+                }
+              } else {
+                workplaceInQ.waitinglist.forEach((workplace) => {
+                  const uniqueKey =
+                    workplace._attributes.order +
+                    '-' +
+                    workplace._attributes.item +
+                    '-' +
+                    workplace._attributes.firstbatch +
+                    '-' +
+                    workplace._attributes.lastbatch;
+                  if (
+                    uniqueOrderList[uniqueKey] !=
+                      workplace._attributes.amount &&
+                    workplace._attributes.item === key
+                  ) {
+                    uniqueOrderList[uniqueKey] = workplace._attributes.amount;
+                    adjustedItem.ordersInWaitingQueue += this.calcAmount(
+                      workplace._attributes
+                    );
+                  }
+                });
+              }
+            }
+          }
+        );
+      }
+
+      // Warteschlangen Material durchsuchen
+      if (xmlData.results.waitingliststock.missingpart) {
+        xmlData.results.waitingliststock.missingpart.forEach((workplaceInQ) => {
+          if (workplaceInQ.workplace) {
             // Hinweis: Wenn die Warteschlange nur ein Objekt hat, dann ist es kein Array...
-            if (workplaceInQ.waitinglist._attributes) {
-              const workplace = workplaceInQ.waitinglist;
+            if (workplaceInQ.workplace._attributes) {
+              const workplace = workplaceInQ.workplace.waitinglist;
               const uniqueKey =
                 workplace._attributes.order +
                 '-' +
@@ -99,7 +153,7 @@ export class MaterialRequirementsPlanningService {
                 );
               }
             } else {
-              workplaceInQ.waitinglist.forEach((workplace) => {
+              workplaceInQ.workplace.waitinglist.forEach((workplace) => {
                 const uniqueKey =
                   workplace._attributes.order +
                   '-' +
@@ -120,62 +174,19 @@ export class MaterialRequirementsPlanningService {
               });
             }
           }
-        }
-      );
-
-      // Warteschlangen Material durchsuchen
-      xmlData.results.waitingliststock.missingpart.forEach((workplaceInQ) => {
-        if (workplaceInQ.workplace) {
-          // Hinweis: Wenn die Warteschlange nur ein Objekt hat, dann ist es kein Array...
-          if (workplaceInQ.workplace._attributes) {
-            const workplace = workplaceInQ.workplace.waitinglist;
-            const uniqueKey =
-              workplace._attributes.order +
-              '-' +
-              workplace._attributes.item +
-              '-' +
-              workplace._attributes.firstbatch +
-              '-' +
-              workplace._attributes.lastbatch;
-            if (
-              uniqueOrderList[uniqueKey] != workplace._attributes.amount &&
-              workplace._attributes.item === key
-            ) {
-              uniqueOrderList[uniqueKey] = workplace._attributes.amount;
-              adjustedItem.ordersInWaitingQueue += this.calcAmount(
-                workplace._attributes
-              );
-            }
-          } else {
-            workplaceInQ.workplace.waitinglist.forEach((workplace) => {
-              const uniqueKey =
-                workplace._attributes.order +
-                '-' +
-                workplace._attributes.item +
-                '-' +
-                workplace._attributes.firstbatch +
-                '-' +
-                workplace._attributes.lastbatch;
-              if (
-                uniqueOrderList[uniqueKey] != workplace._attributes.amount &&
-                workplace._attributes.item === key
-              ) {
-                uniqueOrderList[uniqueKey] = workplace._attributes.amount;
-                adjustedItem.ordersInWaitingQueue += this.calcAmount(
-                  workplace._attributes
-                );
-              }
-            });
-          }
-        }
-      });
+        });
+      }
 
       // Teile in Bearbeitung durchsuchen
-      xmlData.results.ordersinwork.workplace.forEach((workplace) => {
-        if (workplace._attributes.item === key) {
-          adjustedItem.workInProgress += this.calcAmount(workplace._attributes);
-        }
-      });
+      if (xmlData.results.ordersinwork.workplace) {
+        xmlData.results.ordersinwork.workplace.forEach((workplace) => {
+          if (workplace._attributes.item === key) {
+            adjustedItem.workInProgress += this.calcAmount(
+              workplace._attributes
+            );
+          }
+        });
+      }
 
       resultArr.push(adjustedItem);
     }
