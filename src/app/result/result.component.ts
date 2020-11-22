@@ -11,11 +11,11 @@ export class ResultComponent implements OnInit {
   data: any;
   displayedColumns = ['article', 'quantity', 'price', 'penalty'];
   dataSource = ELEMENT_DATA;
-  displayedColumns2 = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns2 = ['article', 'quantity', 'modus'];
   dataSource2 = ELEMENT_DATA_SECOND;
-  displayedColumns3 = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns3 = ['article', 'quantity'];
   dataSource3 = ELEMENT_DATA_THIRD;
-  displayedColumns4 = ['position', 'name', 'weight', 'symbol'];
+  displayedColumns4 = ['station', 'shift', 'overtime'];
   dataSource4 = ELEMENT_DATA_FOURTH;
 
   constructor(
@@ -31,75 +31,69 @@ export class ResultComponent implements OnInit {
 }
 
 
-export interface DirectSales {
+export interface SellDirect {
   article: string;
-  quantity: number;
-  price: number;
-  penalty: number;
+  quantity: string;
+  price: string;
+  penalty: string;
 }
 
-const ELEMENT_DATA: DirectSales[] = [
-  {article: '1', quantity: 1, price: 1.0079, penalty: 1},
-  {article: '2', quantity: 2, price: 4.0026, penalty: 2},
-  {article: '3', quantity: 3, price: 6.941, penalty: 3}
+const ELEMENT_DATA: SellDirect[] = [
+  {article: '1', quantity: '1', price: '1.0079', penalty: '1'},
+  {article: '2', quantity: '2', price: '4.0026', penalty: '2'},
+  {article: '3', quantity: '3', price: '6.941', penalty: '3'}
 ];
 
-export interface PeriodicElement2 {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+export interface Order {
+  article: string;
+  quantity: string;
+  modus: string
 }
 
-const ELEMENT_DATA_SECOND: PeriodicElement2[] = [
-  {position: 1, name: 'Hydrogen2', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+const ELEMENT_DATA_SECOND: Order[] = [
+  {article: '1', quantity: 'Hydrogen2', modus: 'Normal'},
+  {article: '2', quantity: 'Helium', modus: 'Normal'},
+  {article: '3', quantity: 'Lithium', modus: 'Normal'},
+  {article: '4', quantity: 'Beryllium', modus: 'Normal'},
+  {article: '5', quantity: 'Boron', modus: 'Normal'},
+  {article: '6', quantity: 'Carbon', modus: 'Normal'},
+  {article: '7', quantity: 'Nitrogen', modus: 'Normal'},
+  {article: '8', quantity: 'Oxygen', modus: 'Normal'},
+  {article: '9', quantity: 'Fluorine', modus: 'Normal'},
+  {article: '10', quantity: 'Neon', modus: 'Normal'},
 ];
 
-export interface PeriodicElement3 {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+export interface Production {
+  article: string;
+  quantity: string;
 }
 
-const ELEMENT_DATA_THIRD: PeriodicElement3[] = [
-  {position: 1, name: 'Hydrogen3', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+const ELEMENT_DATA_THIRD: Production[] = [
+  {article: '1', quantity: 'Hydrogen3'},
+  {article: '2', quantity: 'Helium'},
+  {article: '3', quantity: 'Lithium'},
+  {article: '4', quantity: 'Beryllium'},
+  {article: '5', quantity: 'Boron'},
+  {article: '6', quantity: 'Carbon'},
+  {article: '7', quantity: 'Nitrogen'},
+  {article: '8', quantity: 'Oxygen'},
+  {article: '9', quantity: 'Fluorine'},
 ];
 
-export interface PeriodicElement4 {
-  name: string;
-  position: number;
-  weight: number;
-  symbol: string;
+export interface WorkingTime {
+  station: string;
+  shift: string;
+  overtime: string;
 }
 
-const ELEMENT_DATA_FOURTH: PeriodicElement4[] = [
-  {position: 1, name: 'Hydrogen4', weight: 1.0079, symbol: 'H'},
-  {position: 2, name: 'Helium', weight: 4.0026, symbol: 'He'},
-  {position: 3, name: 'Lithium', weight: 6.941, symbol: 'Li'},
-  {position: 4, name: 'Beryllium', weight: 9.0122, symbol: 'Be'},
-  {position: 5, name: 'Boron', weight: 10.811, symbol: 'B'},
-  {position: 6, name: 'Carbon', weight: 12.0107, symbol: 'C'},
-  {position: 7, name: 'Nitrogen', weight: 14.0067, symbol: 'N'},
-  {position: 8, name: 'Oxygen', weight: 15.9994, symbol: 'O'},
-  {position: 9, name: 'Fluorine', weight: 18.9984, symbol: 'F'},
-  {position: 10, name: 'Neon', weight: 20.1797, symbol: 'Ne'},
+const ELEMENT_DATA_FOURTH: WorkingTime[] = [
+  {station: '1', shift: 'Hydrogen4', overtime: '1.0079'},
+  {station: '2', shift: 'Helium', overtime: '4.0026'},
+  {station: '3', shift: 'Lithium', overtime: '6.941'},
+  {station: '4', shift: 'Beryllium', overtime: '9.0122'},
+  {station: '5', shift: 'Boron', overtime: '10.811'},
+  {station: '6', shift: 'Carbon', overtime: '12.0107'},
+  {station: '7', shift: 'Nitrogen', overtime: '14.0067'},
+  {station: '8', shift: 'Oxygen', overtime: '15.9994'},
+  {station: '9', shift: 'Fluorine', overtime: '18.9984'},
 ];

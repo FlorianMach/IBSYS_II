@@ -39,28 +39,22 @@
         <div class="example-container mat-elevation-z8">
             <table mat-table [dataSource]="dataSource2">
           
-              <!-- Position Column -->
-              <ng-container matColumnDef="position">
-                <th mat-header-cell *matHeaderCellDef> No. </th>
-                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+              <!-- Article Column -->
+              <ng-container matColumnDef="article">
+                <th mat-header-cell *matHeaderCellDef> {{ "RESULT.PURCHASE.ARTICLE" | translate }} </th>
+                <td mat-cell *matCellDef="let element"> {{element.article}} </td>
               </ng-container>
           
-              <!-- Name Column -->
-              <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Name </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              <!-- Quantity Column -->
+              <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef> {{ "RESULT.PURCHASE.QUANTITY" | translate }} </th>
+                <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
               </ng-container>
-          
-              <!-- Weight Column -->
-              <ng-container matColumnDef="weight">
-                <th mat-header-cell *matHeaderCellDef> Weight </th>
-                <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-              </ng-container>
-          
-              <!-- Symbol Column -->
-              <ng-container matColumnDef="symbol">
-                <th mat-header-cell *matHeaderCellDef> Symbol </th>
-                <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+
+              <!-- Modus Column -->
+              <ng-container matColumnDef="modus">
+                <th mat-header-cell *matHeaderCellDef> {{ "RESULT.PURCHASE.MODUS" | translate }} </th>
+                <td mat-cell *matCellDef="let element"> {{element.modus}} </td>
               </ng-container>
           
               <tr mat-header-row *matHeaderRowDef="displayedColumns2; sticky: true"></tr>
@@ -73,28 +67,16 @@
         <div class="example-container mat-elevation-z8">
             <table mat-table [dataSource]="dataSource3">
           
-              <!-- Position Column -->
-              <ng-container matColumnDef="position">
-                <th mat-header-cell *matHeaderCellDef> No. </th>
-                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+              <!-- Article Column -->
+              <ng-container matColumnDef="article">
+                <th mat-header-cell *matHeaderCellDef> {{ "RESULT.PRODUCTION.ORDERS.ARTICLE" | translate }} </th>
+                <td mat-cell *matCellDef="let element"> {{element.article}} </td>
               </ng-container>
           
-              <!-- Name Column -->
-              <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Name </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
-              </ng-container>
-          
-              <!-- Weight Column -->
-              <ng-container matColumnDef="weight">
-                <th mat-header-cell *matHeaderCellDef> Weight </th>
-                <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-              </ng-container>
-          
-              <!-- Symbol Column -->
-              <ng-container matColumnDef="symbol">
-                <th mat-header-cell *matHeaderCellDef> Symbol </th>
-                <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+              <!-- Quantity Column -->
+              <ng-container matColumnDef="quantity">
+                <th mat-header-cell *matHeaderCellDef> {{ "RESULT.PRODUCTION.ORDERS.QUANTITY" | translate }} </th>
+                <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
               </ng-container>
           
               <tr mat-header-row *matHeaderRowDef="displayedColumns3; sticky: true"></tr>
@@ -107,28 +89,22 @@
         <div class="example-container mat-elevation-z8">
             <table mat-table [dataSource]="dataSource4">
           
-              <!-- Position Column -->
-              <ng-container matColumnDef="position">
-                <th mat-header-cell *matHeaderCellDef> No. </th>
-                <td mat-cell *matCellDef="let element"> {{element.position}} </td>
+              <!-- Station Column -->
+              <ng-container matColumnDef="station">
+                <th mat-header-cell *matHeaderCellDef> {{ "RESULT.PRODUCTION.CAPACITIES.STATION" | translate }} </th>
+                <td mat-cell *matCellDef="let element"> {{element.station}} </td>
               </ng-container>
           
-              <!-- Name Column -->
-              <ng-container matColumnDef="name">
-                <th mat-header-cell *matHeaderCellDef> Name </th>
-                <td mat-cell *matCellDef="let element"> {{element.name}} </td>
+              <!-- Shift Column -->
+              <ng-container matColumnDef="shift">
+                <th mat-header-cell *matHeaderCellDef> {{ "RESULT.PRODUCTION.CAPACITIES.SHIFT" | translate }} </th>
+                <td mat-cell *matCellDef="let element"> {{element.shift}} </td>
               </ng-container>
           
-              <!-- Weight Column -->
-              <ng-container matColumnDef="weight">
-                <th mat-header-cell *matHeaderCellDef> Weight </th>
-                <td mat-cell *matCellDef="let element"> {{element.weight}} </td>
-              </ng-container>
-          
-              <!-- Symbol Column -->
-              <ng-container matColumnDef="symbol">
-                <th mat-header-cell *matHeaderCellDef> Symbol </th>
-                <td mat-cell *matCellDef="let element"> {{element.symbol}} </td>
+              <!-- Overtime Column -->
+              <ng-container matColumnDef="overtime">
+                <th mat-header-cell *matHeaderCellDef> {{ "RESULT.PRODUCTION.CAPACITIES.OVERTIME" | translate }} </th>
+                <td mat-cell *matCellDef="let element"> {{element.overtime}} </td>
               </ng-container>
           
               <tr mat-header-row *matHeaderRowDef="displayedColumns4; sticky: true"></tr>

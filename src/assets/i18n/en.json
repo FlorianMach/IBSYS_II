@@ -36,14 +36,22 @@
         "NAME": "Result",
         "PRODUCTION": {
             "CAPACITIES": {
-                "NAME": "Production Capacities"
+                "NAME": "Production Capacities",
+                "STATION": "Workplace",
+                "SHIFT": "# Shifts",
+                "OVERTIME": "Overtime"
             },
             "ORDERS": {
-                "NAME": "Productions Orders"
+                "NAME": "Productions Orders",
+                "ARTICLE": "Article",
+                "QUANTITY": "Quantity"
             }
         },
         "PURCHASE": {
-            "NAME": "Purchase Orders"
+            "NAME": "Purchase Orders",
+            "ARTICLE": "Article",
+            "QUANTITY": "Quantity",
+            "MODUS": "Mode"
         },
         "DIRECTSALES": {
             "NAME": "Direct Sales",
