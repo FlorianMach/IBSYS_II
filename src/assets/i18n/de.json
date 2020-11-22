@@ -33,6 +33,7 @@
         "NAME": "Einkauf"
     },
     "RESULT": {
+        "XML": "Exportiere Ergebnis XML",
         "NAME": "Ergebnis",
         "PRODUCTION": {
             "CAPACITIES": {
