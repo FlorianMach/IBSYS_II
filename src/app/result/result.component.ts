@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { XmlReaderService } from '../xml-reader/xml-reader.service';
 import { ResultService } from './result.service';
+import { saveAs } from 'file-saver';
+import * as FileSaver from 'file-saver';
 
 @Component({
   selector: 'app-result',
@@ -30,11 +32,51 @@ export class ResultComponent implements OnInit {
   }
 
   exportXml() {
-    
+    var xmlString = "<input>" + this.selldirectXml(ELEMENT_DATA) + this.orderlistXml(ELEMENT_DATA_SECOND) + this.productionlistXml(ELEMENT_DATA_THIRD) + this.workingtimeXml(ELEMENT_DATA_FOURTH) + "</input>";
+    var parser = new DOMParser();
+    var xmlDoc = parser.parseFromString(xmlString, "text/xml");
+    let blob = new Blob([xmlString], {type: 'text/xml'});
+    let url = URL.createObjectURL(blob);
+    window.open(url);
+    URL.revokeObjectURL(url);
+  }
+
+  selldirectXml(data: SellDirect[]): string {
+    var xmlString = "<selldirect>";
+    for(var i = 0; i < data.length; i++) {
+      xmlString = xmlString + "<item article=\"" + data[i].article + "\" quantity=\"" + data[i].quantity + "\" price=\"" + data[i].price + "\" penalty=\"" + data[i].penalty + "\" />"
+    }
+    xmlString = xmlString + "</selldirect>";
+    return xmlString;
+  }
+
+  orderlistXml(data: Order[]): string {
+    var xmlString = "<orderlist>";
+    for(var i = 0; i < data.length; i++) {
+      xmlString = xmlString + "<order article=\"" + data[i].article + "\" quantity=\"" + data[i].quantity + "\" modus=\"" + data[i].modus + "\" />";
+    }
+    xmlString = xmlString + "</orderlist>";
+    return xmlString;
+  }
+
+  productionlistXml(data: Production[]): string {
+    var xmlString = "<productionlist>";
+    for(var i = 0; i < data.length; i++) {
+      xmlString = xmlString + "<production article=\"" + data[i].article + "\" quantity=\"" + data[i].quantity + "\" />";
+    }
+    xmlString = xmlString + "</productionlist>";
+    return xmlString;
+  }
+
+  workingtimeXml(data: WorkingTime[]): string {
+    var xmlString = "<workingtimelist>";
+    for(var i = 0; i < data.length; i++) {
+      xmlString = xmlString + "<workingtime station=\"" + data[i].station + "\" shift=\"" + data[i].shift + "\" overtime=\"" + data[i].overtime + "\" />"
+    }
+    xmlString = xmlString + "</workingtimelist>";
+    return xmlString;
   }
 }
-
-
 
 export interface SellDirect {
   article: string;
