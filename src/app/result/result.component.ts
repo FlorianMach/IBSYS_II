@@ -28,7 +28,12 @@ export class ResultComponent implements OnInit {
       this.data = data;
     });
   }
+
+  exportXml() {
+    
+  }
 }
+
 
 
 export interface SellDirect {
