@@ -33,12 +33,13 @@ export class ResultComponent implements OnInit {
 
   exportXml() {
     var xmlString = "<input>" + this.selldirectXml(ELEMENT_DATA) + this.orderlistXml(ELEMENT_DATA_SECOND) + this.productionlistXml(ELEMENT_DATA_THIRD) + this.workingtimeXml(ELEMENT_DATA_FOURTH) + "</input>";
-    var parser = new DOMParser();
-    var xmlDoc = parser.parseFromString(xmlString, "text/xml");
     let blob = new Blob([xmlString], {type: 'text/xml'});
+    /*
     let url = URL.createObjectURL(blob);
     window.open(url);
     URL.revokeObjectURL(url);
+    */
+   FileSaver.saveAs(blob, "input_data.xml");
   }
 
   selldirectXml(data: SellDirect[]): string {
