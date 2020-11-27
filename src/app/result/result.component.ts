@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { XmlReaderService } from '../xml-reader/xml-reader.service';
 import { ResultService } from './result.service';
 import { saveAs } from 'file-saver';
 import * as FileSaver from 'file-saver';
+import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
+import { MatTable } from '@angular/material/table';
 
 @Component({
   selector: 'app-result',
@@ -10,6 +12,7 @@ import * as FileSaver from 'file-saver';
   styleUrls: ['./result.component.scss'],
 })
 export class ResultComponent implements OnInit {
+  @ViewChild('table') table: MatTable<Production>;
   data: any;
   displayedColumns = ['article', 'quantity', 'price', 'penalty'];
   dataSource = ELEMENT_DATA;
@@ -29,6 +32,12 @@ export class ResultComponent implements OnInit {
     this.xmlReaderService.subscribe((data) => {
       this.data = data;
     });
+  }
+
+  dropTable(event: CdkDragDrop<Production[]>) {
+    const prevIndex = this.dataSource3.findIndex((d) => d === event.item.data);
+    moveItemInArray(this.dataSource3, prevIndex, event.currentIndex);
+    this.table.renderRows();
   }
 
   exportXml() {

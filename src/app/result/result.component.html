@@ -65,7 +65,7 @@
     <mat-tab>
         <ng-template mat-tab-label> {{ "RESULT.PRODUCTION.ORDERS.NAME" | translate }} </ng-template>
         <div class="example-container mat-elevation-z8">
-            <table mat-table [dataSource]="dataSource3">
+            <table mat-table #table [dataSource]="dataSource3" class="mat-elevation-z8" cdkDropList [cdkDropListData]="dataSource3" (cdkDropListDropped)="dropTable($event)">
           
               <!-- Article Column -->
               <ng-container matColumnDef="article">
@@ -80,7 +80,7 @@
               </ng-container>
           
               <tr mat-header-row *matHeaderRowDef="displayedColumns3; sticky: true"></tr>
-              <tr mat-row *matRowDef="let row; columns: displayedColumns3;"></tr>
+              <tr mat-row *matRowDef="let row; columns: displayedColumns3;" cdkDrag [cdkDragData]="row"></tr>
             </table>
           </div>
       </mat-tab>
