@@ -14,7 +14,15 @@
         "NAME_P3": "MRP I - P3"
     },
     "CAPACITY_PLANNING": {
-        "NAME": "Capacity planning"
+        "NAME": "Capacity planning",
+        "WORKPLACE": "Workplace",
+        "CAPACITYREQ": "Capacity Requirements",
+        "SETUPTIME": "Set-Up Time",
+        "CAPACITYREQLAST": "Capacity Requirements Last Period",
+        "SETUPTIMELAST": "Set-Up Time Last Periode",
+        "TOTALREQUIREMENT": "Total Requirement",
+        "OVERTIME": "Overtime per Week",
+        "SECONDSHIFT": "Second Shift"
     },
     "PROCUREMENT": {
         "NAME": "Procurement"

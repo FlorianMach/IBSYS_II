@@ -6,69 +6,59 @@
 
         <!-- Workplace Column -->
         <ng-container matColumnDef="workplace">
-            <th mat-header-cell *matHeaderCellDef> Arbeitsplatz </th>
+            <th mat-header-cell *matHeaderCellDef> {{ "CAPACITY_PLANNING.WORKPLACE" | translate }} </th>
             <td mat-cell *matCellDef="let element"> {{element.workplace}} </td>
         </ng-container> 
 
         <!-- capacityRequirements Column -->
         <ng-container matColumnDef="capacityRequirements">
-            <th mat-header-cell *matHeaderCellDef> Kapazitätsbedarf </th>
-            <td mat-cell *matCellDef="let element"> {{element.capacityRequirements}} </td>
+            <th mat-header-cell *matHeaderCellDef> {{ "CAPACITY_PLANNING.CAPACITYREQ" | translate }} </th>
+            <td mat-cell *matCellDef="let element"> {{element.capareq}} </td>
         </ng-container> 
 
         <!-- Set-up Time Column -->
         <ng-container matColumnDef="setupTime">
-            <th mat-header-cell *matHeaderCellDef> Rüstzeit </th>
+            <th mat-header-cell *matHeaderCellDef> {{ "CAPACITY_PLANNING.SETUPTIME" | translate }} </th>
             <td mat-cell *matCellDef="let element">  
-                <mat-form-field class="example-form-field">
-                    <input matInput type="number">
-                </mat-form-field>
+                <input matInput type="number" value={{element.setup}}>
             </td>
         </ng-container> 
 
         <!-- capacityRequirementsLastPeriod Column -->
         <ng-container matColumnDef="capacityRequirementsLastPeriod">
-            <th mat-header-cell *matHeaderCellDef> Kapazitätsbedarf Vorperiode </th>
+            <th mat-header-cell *matHeaderCellDef> {{ "CAPACITY_PLANNING.CAPACITYREQLAST" | translate }} </th>
             <td mat-cell *matCellDef="let element">  
-                <mat-form-field class="example-form-field">
-                    <input matInput type="number">
-                </mat-form-field>
+                <input matInput type="number" value={{element.capalast}}>
             </td>
         </ng-container> 
 
         <!-- setupTimeLastPeriod Column -->
         <ng-container matColumnDef="setupTimeLastPeriod">
-            <th mat-header-cell *matHeaderCellDef> Rüstzeit Vorperiode </th>
+            <th mat-header-cell *matHeaderCellDef> {{ "CAPACITY_PLANNING.SETUPTIMELAST" | translate }} </th>
             <td mat-cell *matCellDef="let element">  
-                <mat-form-field class="example-form-field">
-                    <input matInput type="number">
-                </mat-form-field>
+                <input matInput type="number" value={{element.setuplast}}>
             </td>
         </ng-container> 
 
         <!-- totalRequirement Column -->
         <ng-container matColumnDef="totalRequirement">
-            <th mat-header-cell *matHeaderCellDef> Gesamtbedarf </th>
+            <th mat-header-cell *matHeaderCellDef> {{ "CAPACITY_PLANNING.TOTALREQUIREMENT" | translate }} </th>
             <td mat-cell *matCellDef="let element">  
-                <mat-form-field class="example-form-field">
-                    <input matInput type="number">
-                </mat-form-field>
+                <input matInput type="number" value={{element.totalRequirement}}>
             </td>
         </ng-container> 
 
         <!-- Overtime Column -->
         <ng-container matColumnDef="overtime">
-            <th mat-header-cell *matHeaderCellDef> Überstunden pro Woche </th>
+            <th mat-header-cell *matHeaderCellDef> {{ "CAPACITY_PLANNING.OVERTIME" | translate }} </th>
             <td mat-cell *matCellDef="let element">  
-                <mat-form-field class="example-form-field">
-                    <input matInput type="number">
-                </mat-form-field>
+                <input matInput type="number" value={{element.overtime}}>
             </td>
         </ng-container> 
 
         <!-- Second Shift Column -->
         <ng-container matColumnDef="secondShift">
-            <th mat-header-cell *matHeaderCellDef> 2. Schicht </th>
+            <th mat-header-cell *matHeaderCellDef> {{ "CAPACITY_PLANNING.SECONDSHIFT" | translate }} </th>
             <td mat-cell *matCellDef="let element"> 
                 <mat-checkbox
                     name="shift"

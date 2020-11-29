@@ -5,6 +5,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatCardModule } from '@angular/material/card';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { I18nModule } from '../shared/i18n/i18n.module';
 
 
 @NgModule({
@@ -14,7 +15,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     MatInputModule,
     MatTableModule,
     MatCardModule,
-    MatCheckboxModule
+    MatCheckboxModule,
+    I18nModule
   ],
   exports: [CapacityPlanningComponent],
 })

@@ -95,7 +95,13 @@ export class CapacityPlanningComponent implements OnInit {
     'overtime',
     'secondShift'];
 
-  dataSource = [];
+  dataSource = [
+    {workplace: 1, capareq: 170, setup: 20, capalast: 22, setuplast: 25, totalRequirement: 15, overtime: 5},
+    {workplace: 2, capareq: 250, setup: 10, capalast: 35, setuplast: 36, totalRequirement: 36, overtime: 35},
+    {workplace: 3, capareq: 350, setup: 2, capalast: 15, setuplast: 25, totalRequirement: 15, overtime: 5},
+    {workplace: 4, capareq: 140, setup: 17, capalast: 35, setuplast: 27, totalRequirement: 27, overtime: 18},
+    {workplace: 5, capareq: 358, setup: 20, capalast: 37, setuplast: 25, totalRequirement: 2, overtime: 5},
+  ];
   
   constructor(
     //private capacityService: CapacityPlanningService,
