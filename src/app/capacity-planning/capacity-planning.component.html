@@ -1,6 +1,6 @@
 <mat-card>
 
-    <p>Alle Zeitangaben werden in Minuten berechnet und angegeben</p>
+    <p>{{ "CAPACITY_PLANNING.INFO" | translate }}</p>
 
     <table mat-table [dataSource]="dataSource" class="mat-elevation-z8">
 
@@ -60,10 +60,7 @@
         <ng-container matColumnDef="secondShift">
             <th mat-header-cell *matHeaderCellDef> {{ "CAPACITY_PLANNING.SECONDSHIFT" | translate }} </th>
             <td mat-cell *matCellDef="let element"> 
-                <mat-checkbox
-                    name="shift"
-                    value="shift">
-                </mat-checkbox>
+                <mat-checkbox checked={{element.secondShift}} ></mat-checkbox>
             </td>
         </ng-container>
 

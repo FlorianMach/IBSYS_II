@@ -22,7 +22,8 @@
         "SETUPTIMELAST": "Set-Up Time Last Periode",
         "TOTALREQUIREMENT": "Total Requirement",
         "OVERTIME": "Overtime per Week",
-        "SECONDSHIFT": "Second Shift"
+        "SECONDSHIFT": "Second Shift",
+        "INFO": "All times are calculated and indicated in minutes"
     },
     "PROCUREMENT": {
         "NAME": "Procurement"

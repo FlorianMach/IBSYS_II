@@ -1,8 +1,6 @@
 import { NgModuleCompileResult } from '@angular/compiler/src/ng_module_compiler';
 import { Component, OnInit } from '@angular/core';
 import { XmlReaderService } from '../xml-reader/xml-reader.service';
-import { CapacityPlanningService } from './capacity-planning.service';
-import { Matrix } from 'ml-matrix';
 
 export interface Products {
   product: number;
@@ -10,44 +8,44 @@ export interface Products {
 }
 
 // Diese Daten müssen aus der Stücklistenauflösung resultieren
-const PRODUCTS: Products[] = [
-  {product: 1, quantity: 170},
-  {product: 2, quantity: 120},
-  {product: 3, quantity: 200},
-  {product: 4, quantity: 170},
-  {product: 5, quantity: 120},
-  {product: 6, quantity: 200},
-  {product: 7, quantity: 170},
-  {product: 8, quantity: 120},
-  {product: 9, quantity: 200},
-  {product: 10, quantity: 170},
-  {product: 11, quantity: 120},
-  {product: 12, quantity: 200},
-  {product: 13, quantity: 170},
-  {product: 14, quantity: 120},
-  {product: 15, quantity: 200},
-  {product: 16, quantity: 170},
-  {product: 17, quantity: 120},
-  {product: 18, quantity: 200},
-  {product: 19, quantity: 170},
-  {product: 20, quantity: 120},
-  {product: 26, quantity: 200},
-  {product: 29, quantity: 170},
-  {product: 30, quantity: 120},
-  {product: 31, quantity: 200},
-  {product: 49, quantity: 170},
-  {product: 50, quantity: 120},
-  {product: 51, quantity: 200},
-  {product: 54, quantity: 170},
-  {product: 55, quantity: 120},
+const PRODUCTS = [
+  {product: 1, quantity: 80},
+  {product: 2, quantity: 200},
+  {product: 3, quantity: 100},
+  {product: 4, quantity: 80},
+  {product: 5, quantity: 200},
+  {product: 6, quantity: 110},
+  {product: 7, quantity: 80},
+  {product: 8, quantity: 200},
+  {product: 9, quantity: 110},
+  {product: 10, quantity: 80},
+  {product: 11, quantity: 200},
+  {product: 12, quantity: 110},
+  {product: 13, quantity: 80},
+  {product: 14, quantity: 200},
+  {product: 15, quantity: 110},
+  {product: 16, quantity: 380},
+  {product: 17, quantity: 380},
+  {product: 18, quantity: 80},
+  {product: 19, quantity: 200},
+  {product: 20, quantity: 110},
+  {product: 26, quantity: 380},
+  {product: 29, quantity: 110},
+  {product: 30, quantity: 80},
+  {product: 31, quantity: 100},
+  {product: 49, quantity: 80},
+  {product: 50, quantity: 80},
+  {product: 51, quantity: 80},
+  {product: 54, quantity: 200},
+  {product: 55, quantity: 140},
   {product: 56, quantity: 200},
 ];
 
 // Daten der Arbeitsplätze - Wie lange für welches Produkt
-const PRODUCTIONPLANNING: {} = [
+const PRODUCTIONPLANNING = [
   {product: 1, w1: 0, w2: 0, w3: 0, w4: 6, w5: 0, w6: 0, w7: 0, w8: 0, w9: 0, w10: 0, w11: 0, w12: 0, w13: 0, w14: 0, w15: 0},
-  {product: 2, w1: 0, w2: 0, w3: 0, w4: 0, w5: 7, w6: 0, w7: 0, w8: 0, w9: 0, w10: 0, w11: 0, w12: 0, w13: 0, w14: 0, w15: 0},
-  {product: 3, w1: 0, w2: 0, w3: 0, w4: 0, w5: 7, w6: 0, w7: 0, w8: 0, w9: 0, w10: 0, w11: 0, w12: 0, w13: 0, w14: 0, w15: 0},
+  {product: 2, w1: 0, w2: 0, w3: 0, w4: 7, w5: 0, w6: 0, w7: 0, w8: 0, w9: 0, w10: 0, w11: 0, w12: 0, w13: 0, w14: 0, w15: 0},
+  {product: 3, w1: 0, w2: 0, w3: 0, w4: 7, w5: 0, w6: 0, w7: 0, w8: 0, w9: 0, w10: 0, w11: 0, w12: 0, w13: 0, w14: 0, w15: 0},
   {product: 4, w1: 0, w2: 0, w3: 0, w4: 0, w5: 0, w6: 0, w7: 0, w8: 0, w9: 0, w10: 4, w11: 3, w12: 0, w13: 0, w14: 0, w15: 0},
   {product: 5, w1: 0, w2: 0, w3: 0, w4: 0, w5: 0, w6: 0, w7: 0, w8: 0, w9: 0, w10: 4, w11: 3, w12: 0, w13: 0, w14: 0, w15: 0},
   {product: 6, w1: 0, w2: 0, w3: 0, w4: 0, w5: 0, w6: 0, w7: 0, w8: 0, w9: 0, w10: 4, w11: 3, w12: 0, w13: 0, w14: 0, w15: 0},
@@ -77,6 +75,7 @@ const PRODUCTIONPLANNING: {} = [
   {product: 56, w1: 0, w2: 0, w3: 6, w4: 0, w5: 0, w6: 0, w7: 0, w8: 0, w9: 0, w10: 0, w11: 0, w12: 0, w13: 0, w14: 0, w15: 0},
 ];
 
+
 @Component({
   selector: 'app-capacity-planning',
   templateUrl: './capacity-planning.component.html',
@@ -84,7 +83,7 @@ const PRODUCTIONPLANNING: {} = [
 })
 
 export class CapacityPlanningComponent implements OnInit {
-  data: any;
+
   displayedColumns: string[] = [
     'workplace', 
     'capacityRequirements', 
@@ -95,45 +94,76 @@ export class CapacityPlanningComponent implements OnInit {
     'overtime',
     'secondShift'];
 
-  dataSource = [
-    {workplace: 1, capareq: 170, setup: 20, capalast: 22, setuplast: 25, totalRequirement: 15, overtime: 5},
-    {workplace: 2, capareq: 250, setup: 10, capalast: 35, setuplast: 36, totalRequirement: 36, overtime: 35},
-    {workplace: 3, capareq: 350, setup: 2, capalast: 15, setuplast: 25, totalRequirement: 15, overtime: 5},
-    {workplace: 4, capareq: 140, setup: 17, capalast: 35, setuplast: 27, totalRequirement: 27, overtime: 18},
-    {workplace: 5, capareq: 358, setup: 20, capalast: 37, setuplast: 25, totalRequirement: 2, overtime: 5},
-  ];
+  dataSource = [];
   
   constructor(
-    //private capacityService: CapacityPlanningService,
   ) {}
 
   ngOnInit(): void {
-     capacityPlanning(PRODUCTS,PRODUCTIONPLANNING);
+    this.dataSource = this.capacityPlaning(PRODUCTS, PRODUCTIONPLANNING);  
+  }
+
+  capacityPlaning(product, productionplanning) {
+    var result = new Array();
+    var capacity;
+      
+    // Berechnung der Kapazität
+    capacity = this.capacityRequirements(product, productionplanning)
+
+    // Berechnung Set-Up
+
+
+    // Berechnung Capacity Last Period
+
+
+    //Berechnung Set-Up Last Period
+
+
+
+    for(var i = 0; i < capacity.length; ++i ){
+
+      result.push({
+        workplace: i+1,
+        capareq: capacity[i],
+        setup: 3,
+        capalast: 4,
+        setuplast: 5,
+        totalRequirement: 6,
+        overtime: 7,
+        secondShift: true      
+      })
+    }
+    return result;
+  }
+
+  capacityRequirements(product1, productionplanning1) {
+
+    var result = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+    var product = product1;
+    var productionplanning = productionplanning1;
+    console.log(result);
+    console.log(product[1].product);
+
+      for(var i = 0; i < productionplanning.length;++i){
+        if(product[i].product = productionplanning[i].product){
+          result[0] += product[i].quantity * productionplanning[i].w1
+          result[1] += product[i].quantity * productionplanning[i].w2
+          result[2] += product[i].quantity * productionplanning[i].w3
+          result[3] += product[i].quantity * productionplanning[i].w4
+          result[4] += product[i].quantity * productionplanning[i].w5
+          result[5] += product[i].quantity * productionplanning[i].w6
+          result[6] += product[i].quantity * productionplanning[i].w7
+          result[7] += product[i].quantity * productionplanning[i].w8
+          result[8] += product[i].quantity * productionplanning[i].w9
+          result[9] += product[i].quantity * productionplanning[i].w10
+          result[10] += product[i].quantity * productionplanning[i].w11
+          result[11] += product[i].quantity * productionplanning[i].w12
+          result[12] += product[i].quantity * productionplanning[i].w13
+          result[13] += product[i].quantity * productionplanning[i].w14
+          result[14] += product[i].quantity * productionplanning[i].w15
+        };
+      };
+    return result;
   }
 }
-
-function capacityPlanning(Product, Productplanning): number[] {
-
-  var result: number[];
-  var quantityMatrix;
-  var workplaceMatrix;
-
-  // Matrix für die Produktionsmengen je Produkt
-  for(var i :number = 0; i < Product.length; ++i ) {
-    quantityMatrix.push(Product[i].quantity)   
-  }
-
-  // Matrix für die Zeiten der Arbeitsplätze
-  for(var i2: number = 0; i2 < Productplanning.length; ++i2){
-    workplaceMatrix.push([Productplanning[i2].w1, Productplanning[i2].w2,  Productplanning[i2].w3,  
-      Productplanning[i2].w4, Productplanning[i2].w5,  Productplanning[i2].w6, 
-      Productplanning[i2].w7, Productplanning[i2].w8, Productplanning[i2].w9,
-      Productplanning[i2].w10,  Productplanning[i2].w11,  Productplanning[i2].w12,  
-      Productplanning[i2].w13,  Productplanning[i2].w14, Productplanning[i2].w15])
-  }
-  
-  // Matrixmultiplikation
-  result = quantityMatrix.mmul(workplaceMatrix);
-
-  return result
-};

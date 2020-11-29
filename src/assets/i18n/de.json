@@ -22,7 +22,8 @@
         "SETUPTIMELAST": "Rüstzeit Vorperiode",
         "TOTALREQUIREMENT": "Gesamtbedarf",
         "OVERTIME": "Überstunden pro Woche",
-        "SECONDSHIFT": "Zweite Schicht"
+        "SECONDSHIFT": "Zweite Schicht",
+        "INFO": "Alle Zeitangaben werden in Minuten berechnet und angegeben"
     },
     "PROCUREMENT": {
         "NAME": "Einkauf"
