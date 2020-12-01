@@ -27,4 +27,8 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
     );
     console.log(this.viewData);
   }
+
+  round(input: number): number {
+    return Math.round(input);
+  }
 }
