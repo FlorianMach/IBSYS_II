@@ -34,6 +34,7 @@ export class ResultComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+    console.log('its result data')
     this.xmlReaderService.subscribe((data) => {
       this.data = data;
     });

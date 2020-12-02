@@ -1,1 +1,55 @@
-<p>product-planning works!</p>
+<div style="height: 450px; overflow: scroll">
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th class="Theader" width="1%"></th>
+        <th class="Theader" width="10%">N</th>
+        <th class="Theader" width="10%">N+1</th>
+        <th class="Theader" width="10%">N+2</th>
+        <th class="Theader" width="10%">N+3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let a of mrp2data; let i = index">
+        <td style="background-color: #1da1f2; color: white">P{{ i + 1 }}</td>
+        <td>
+          <input
+            type="number"
+            [value]="a.n1"
+            [(ngModel)]="mrp2data[i].n1"
+            name="mrp2data"
+            (change)="onValueChanged($event)"
+            (keyup)="onValueChanged($event)"
+          />
+        </td>
+        <td>
+          <input
+            type="number"
+            [value]="a.n2"
+            [(ngModel)]="mrp2data[i].n2"
+            (change)="onValueChanged($event)"
+            (keyup)="onValueChanged($event)"
+          />
+        </td>
+        <td>
+          <input
+            type="number"
+            [value]="a.n3"
+            [(ngModel)]="mrp2data[i].n3"
+            (change)="onValueChanged($event)"
+            (keyup)="onValueChanged($event)"
+          />
+        </td>
+        <td>
+          <input
+            type="number"
+            [value]="a.n4"
+            [(ngModel)]="mrp2data[i].n4"
+            (change)="onValueChanged($event)"
+            (keyup)="onValueChanged($event)"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
