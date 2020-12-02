@@ -6,7 +6,13 @@
         "NAME": "Xml"
     },
     "PRODUCT_PLANNING": {
-        "NAME": "MRP II"
+        "NAME": "MRP II",
+        "WISH": {
+            "NAME": "Sales Wish"
+        },
+        "DIRECT": {
+            "NAME": "Direct Sales"
+        }
     },
     "MRP": {
         "NAME_P1": "MRP I - P1",
