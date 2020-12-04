@@ -1,16 +1,22 @@
-<div style="height: 450px; overflow: scroll">
+<div style="height: 450px; overflow:auto">
   <table class="styled-table" id="excelTable">
     <thead>
       <tr>
-        <th width="5%">Item<br />No.</th>
-        <th width="5%">Delivery<br />time</th>
-        <th width="5%">Devi-<br />ation</th>
-        <th width="10%">Discount<br />quantity</th>
-        <th width="15%">Initial<br />stock<br />in Per n</th>
-        <th width="30%" colspan="4">
-          Gross requirements<br />according the prod.progr.<br />n&emsp;n+1&emsp;n+2&emsp;n+3
+        <th width="7%">Item No.</th>
+        <th width="7%">Delivery time</th>
+        <th width="7%">Devi-ation</th>
+        <th width="10%">Discount quantity</th>
+        <th width="10%">Initial stock in Per n</th>
+        <th width="20%" colspan="4">
+          Gross requirements according the prod.progr.<br />
+          <div style="display: flex">
+            <p style="margin-left: 9%">n</p>
+            <p style="margin-left: 21%">n+1</p>
+            <p style="margin-left: 21%">n+2</p>
+            <p style="margin-left: 21%">n+3</p>
+          </div>
         </th>
-        <th width="20%">Amount</th>
+        <th width="10%">Amount</th>
         <th width="10%">Order<br />N/E</th>
       </tr>
     </thead>
@@ -20,16 +26,20 @@
         <td>1,8</td>
         <td>0,4</td>
         <td>300</td>
-        <td>
-          <input type="number" [(value)]="initialStock[0]" />
-        </td>
+        <!-- <td>1x</td>
+        <td>0x</td>
+        <td>0x</td> -->
+        <td>{{ mapInitialStockValue(21) }}</td>
         <td>
           {{
             nValues
               ? calculateGrossValue(
                   nValues[0]?.n1,
                   nValues[1]?.n1,
-                  nValues[2]?.n1
+                  nValues[2]?.n1,
+                  4,
+                  5,
+                  6
                 )
               : 0
           }}
@@ -40,7 +50,10 @@
               ? calculateGrossValue(
                   nValues[0]?.n2,
                   nValues[1]?.n2,
-                  nValues[2]?.n2
+                  nValues[2]?.n2,
+                  4,
+                  5,
+                  6
                 )
               : 0
           }}
@@ -51,7 +64,10 @@
               ? calculateGrossValue(
                   nValues[0]?.n3,
                   nValues[1]?.n3,
-                  nValues[2]?.n3
+                  nValues[2]?.n3,
+                  4,
+                  5,
+                  6
                 )
               : 0
           }}
@@ -62,7 +78,10 @@
               ? calculateGrossValue(
                   nValues[0]?.n4,
                   nValues[1]?.n4,
-                  nValues[2]?.n4
+                  nValues[2]?.n4,
+                  4,
+                  5,
+                  6
                 )
               : 0
           }}
@@ -72,17 +91,24 @@
         <td>{{ nValues && nValues[0]?.n3 ? nValues[0]?.n3 : 0 }}</td>
         <td>{{ nValues && nValues[0]?.n4 ? nValues[0]?.n4 : 0 }}</td> -->
         <td>
-          <input type="text" />
+          <input type="number" value="0" [(ngModel)]="orderE" name="orderN" />
         </td>
         <td style="display: flex">
           <input
             type="radio"
             id="orderN"
             name="order1"
-            value="orderN"
+            ([value])="(orderN)"
             checked="checked"
+            [(ngModel)]="orderE"
           />
-          <input type="radio" id="orderE" name="order1" value="orderE" />
+          <input
+            type="radio"
+            id="orderE"
+            name="order1"
+            ([value])="(orderE)"
+            [(ngModel)]="orderE"
+          />
         </td>
       </tr>
       <tr>
@@ -90,15 +116,74 @@
         <td>1,7</td>
         <td>0,4</td>
         <td>300</td>
+        <!-- <td>1x</td>
+        <td>0x</td>
+        <td>0x</td> -->
+
+        <td>{{ mapInitialStockValue(22) }}</td>
+
         <td>
-          <input type="number" [(value)]="initialStock[1]" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n1,
+                  nValues[1]?.n1,
+                  nValues[2]?.n1,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
         </td>
-        <td>{{ nValues && nValues[1]?.n1 ? nValues[1]?.n1 : 0 }}</td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n2,
+                  nValues[1]?.n2,
+                  nValues[2]?.n2,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n3,
+                  nValues[1]?.n3,
+                  nValues[2]?.n3,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n4,
+                  nValues[1]?.n4,
+                  nValues[2]?.n4,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <!-- <td>{{ nValues && nValues[1]?.n1 ? nValues[1]?.n1 : 0 }}</td>
         <td>{{ nValues && nValues[1]?.n2 ? nValues[1]?.n2 : 0 }}</td>
         <td>{{ nValues && nValues[1]?.n3 ? nValues[1]?.n3 : 0 }}</td>
-        <td>{{ nValues && nValues[1]?.n4 ? nValues[1]?.n4 : 0 }}</td>
+        <td>{{ nValues && nValues[1]?.n4 ? nValues[1]?.n4 : 0 }}</td> -->
         <td>
-          <input type="text" />
+          <input type="number" value="0" />
         </td>
         <td style="display: flex">
           <input
@@ -116,15 +201,72 @@
         <td>1,2</td>
         <td>0,2</td>
         <td>300</td>
+        <!-- <td></td>
+        <td></td>
+        <td>1x</td> -->
+        <td>{{ mapInitialStockValue(23) }}</td>
         <td>
-          <input type="number" [(value)]="initialStock[2]" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n1,
+                  nValues[1]?.n1,
+                  nValues[2]?.n1,
+                  1,
+                  1,
+                  1
+                )
+              : 0
+          }}
         </td>
-        <td>{{ nValues && nValues[2]?.n1 ? nValues[2]?.n1 : 0 }}</td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n2,
+                  nValues[1]?.n2,
+                  nValues[2]?.n2,
+                  1,
+                  1,
+                  1
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n3,
+                  nValues[1]?.n3,
+                  nValues[2]?.n3,
+                  1,
+                  1,
+                  1
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n4,
+                  nValues[1]?.n4,
+                  nValues[2]?.n4,
+                  1,
+                  1,
+                  1
+                )
+              : 0
+          }}
+        </td>
+        <!-- <td>{{ nValues && nValues[2]?.n1 ? nValues[2]?.n1 : 0 }}</td>
         <td>{{ nValues && nValues[2]?.n2 ? nValues[2]?.n2 : 0 }}</td>
         <td>{{ nValues && nValues[2]?.n3 ? nValues[2]?.n3 : 0 }}</td>
-        <td>{{ nValues && nValues[2]?.n4 ? nValues[2]?.n4 : 0 }}</td>
+        <td>{{ nValues && nValues[2]?.n4 ? nValues[2]?.n4 : 0 }}</td> -->
         <td>
-          <input type="text" />
+          <input type="number" value="0" />
         </td>
         <td style="display: flex">
           <input
@@ -142,15 +284,73 @@
         <td>3,2</td>
         <td>0,3</td>
         <td>6100</td>
+        <!-- <td>7x</td>
+        <td>7x</td>
+        <td>7x</td> -->
+        <td>{{ mapInitialStockValue(24) }}</td>
         <td>
-          <input type="number" [(value)]="initialStock[3]" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n1,
+                  nValues[1]?.n1,
+                  nValues[2]?.n1,
+                  7,
+                  7,
+                  7
+                )
+              : 0
+          }}
         </td>
-        <td>{{ nValues && nValues[3]?.n1 ? nValues[3]?.n1 : 0 }}</td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n2,
+                  nValues[1]?.n2,
+                  nValues[2]?.n2,
+                  7,
+                  7,
+                  7
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n3,
+                  nValues[1]?.n3,
+                  nValues[2]?.n3,
+                  7,
+                  7,
+                  7
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n4,
+                  nValues[1]?.n4,
+                  nValues[2]?.n4,
+                  7,
+                  7,
+                  7
+                )
+              : 0
+          }}
+        </td>
+
+        <!-- <td>{{ nValues && nValues[3]?.n1 ? nValues[3]?.n1 : 0 }}</td>
         <td>{{ nValues && nValues[3]?.n2 ? nValues[3]?.n2 : 0 }}</td>
         <td>{{ nValues && nValues[3]?.n3 ? nValues[3]?.n3 : 0 }}</td>
-        <td>{{ nValues && nValues[3]?.n4 ? nValues[3]?.n4 : 0 }}</td>
+        <td>{{ nValues && nValues[3]?.n4 ? nValues[3]?.n4 : 0 }}</td> -->
         <td>
-          <input type="text" />
+          <input type="number" value="0" />
         </td>
         <td style="display: flex">
           <input
@@ -168,15 +368,73 @@
         <td>0,9</td>
         <td>0,2</td>
         <td>3600</td>
+        <!-- <td>4x</td>
+        <td>4x</td>
+        <td>4x</td> -->
+        <td>{{ mapInitialStockValue(25) }}</td>
         <td>
-          <input type="number" [(value)]="initialStock[4]" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n1,
+                  nValues[1]?.n1,
+                  nValues[2]?.n1,
+                  4,
+                  4,
+                  4
+                )
+              : 0
+          }}
         </td>
-        <td>{{ nValues && nValues[4]?.n1 ? nValues[4]?.n1 : 0 }}</td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n2,
+                  nValues[1]?.n2,
+                  nValues[2]?.n2,
+                  4,
+                  4,
+                  4
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n3,
+                  nValues[1]?.n3,
+                  nValues[2]?.n3,
+                  4,
+                  4,
+                  4
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n4,
+                  nValues[1]?.n4,
+                  nValues[2]?.n4,
+                  4,
+                  4,
+                  4
+                )
+              : 0
+          }}
+          <!-- <td>{{ nValues && nValues[4]?.n1 ? nValues[4]?.n1 : 0 }}</td>
         <td>{{ nValues && nValues[4]?.n2 ? nValues[4]?.n2 : 0 }}</td>
         <td>{{ nValues && nValues[4]?.n3 ? nValues[4]?.n3 : 0 }}</td>
-        <td>{{ nValues && nValues[4]?.n4 ? nValues[4]?.n4 : 0 }}</td>
+        <td>{{ nValues && nValues[4]?.n4 ? nValues[4]?.n4 : 0 }}</td> -->
+        </td>
+
         <td>
-          <input type="text" />
+          <input type="number" value="0" />
         </td>
         <td style="display: flex">
           <input
@@ -194,15 +452,68 @@
         <td>0,9</td>
         <td>0,2</td>
         <td>1800</td>
+        <!-- <td>2x</td>
+        <td>2x</td>
+        <td>2x</td> -->
+        <td>{{ mapInitialStockValue(27) }}</td>
         <td>
-          <input type="number" [(value)]="initialStock[5]" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n1,
+                  nValues[1]?.n1,
+                  nValues[2]?.n1,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
         </td>
-        <td>d}</td>
-        <td>c</td>
-        <td>d</td>
-        <td>e</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n2,
+                  nValues[1]?.n2,
+                  nValues[2]?.n2,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n3,
+                  nValues[1]?.n3,
+                  nValues[2]?.n3,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n4,
+                  nValues[1]?.n4,
+                  nValues[2]?.n4,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          <input type="number" value="0" />
         </td>
         <td style="display: flex">
           <input
@@ -220,15 +531,68 @@
         <td>1,7</td>
         <td>0,4</td>
         <td>4500</td>
+        <!-- <td>4x</td>
+        <td>5x</td>
+        <td>6x</td> -->
+        <td>{{ mapInitialStockValue(28) }}</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n1,
+                  nValues[1]?.n1,
+                  nValues[2]?.n1,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
         </td>
-        <td>b</td>
-        <td>c</td>
-        <td>d</td>
-        <td>e</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n2,
+                  nValues[1]?.n2,
+                  nValues[2]?.n2,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n3,
+                  nValues[1]?.n3,
+                  nValues[2]?.n3,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n4,
+                  nValues[1]?.n4,
+                  nValues[2]?.n4,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          <input type="number" value="0" />
         </td>
         <td style="display: flex">
           <input
@@ -246,15 +610,68 @@
         <td>2,1</td>
         <td>0,5</td>
         <td>2700</td>
+        <!-- <td>4x</td>
+        <td>5x</td>
+        <td>6x</td> -->
+        <td>{{ mapInitialStockValue(32) }}</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n1,
+                  nValues[1]?.n1,
+                  nValues[2]?.n1,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
         </td>
-        <td>b</td>
-        <td>c</td>
-        <td>d</td>
-        <td>e</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n2,
+                  nValues[1]?.n2,
+                  nValues[2]?.n2,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n3,
+                  nValues[1]?.n3,
+                  nValues[2]?.n3,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n4,
+                  nValues[1]?.n4,
+                  nValues[2]?.n4,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          <input type="number" value="0" />
         </td>
         <td style="display: flex">
           <input
@@ -272,15 +689,68 @@
         <td>1,9</td>
         <td>0,5</td>
         <td>900</td>
+        <!-- <td>4x</td>
+        <td>5x</td>
+        <td>6x</td> -->
+        <td>{{ mapInitialStockValue(33) }}</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n1,
+                  nValues[1]?.n1,
+                  nValues[2]?.n1,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
         </td>
-        <td>b</td>
-        <td>c</td>
-        <td>d</td>
-        <td>e</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n2,
+                  nValues[1]?.n2,
+                  nValues[2]?.n2,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n3,
+                  nValues[1]?.n3,
+                  nValues[2]?.n3,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n4,
+                  nValues[1]?.n4,
+                  nValues[2]?.n4,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          <input type="number" value="0" />
         </td>
         <td style="display: flex">
           <input
@@ -298,15 +768,68 @@
         <td>1,6</td>
         <td>0,3</td>
         <td>22000</td>
+        <!-- <td>4x</td>
+        <td>5x</td>
+        <td>6x</td> -->
+        <td>{{ mapInitialStockValue(34) }}</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n1,
+                  nValues[1]?.n1,
+                  nValues[2]?.n1,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
         </td>
-        <td>b</td>
-        <td>c</td>
-        <td>d</td>
-        <td>e</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n2,
+                  nValues[1]?.n2,
+                  nValues[2]?.n2,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n3,
+                  nValues[1]?.n3,
+                  nValues[2]?.n3,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n4,
+                  nValues[1]?.n4,
+                  nValues[2]?.n4,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          <input type="number" value="0" />
         </td>
         <td style="display: flex">
           <input
@@ -324,15 +847,68 @@
         <td>2,2</td>
         <td>0,4</td>
         <td>3600</td>
+        <!-- <td>4x</td>
+        <td>5x</td>
+        <td>6x</td> -->
+        <td>{{ mapInitialStockValue(35) }}</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n1,
+                  nValues[1]?.n1,
+                  nValues[2]?.n1,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
         </td>
-        <td>b</td>
-        <td>c</td>
-        <td>d</td>
-        <td>e</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n2,
+                  nValues[1]?.n2,
+                  nValues[2]?.n2,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n3,
+                  nValues[1]?.n3,
+                  nValues[2]?.n3,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n4,
+                  nValues[1]?.n4,
+                  nValues[2]?.n4,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          <input type="number" value="0" />
         </td>
         <td style="display: flex">
           <input
@@ -350,15 +926,68 @@
         <td>1,2</td>
         <td>0,1</td>
         <td>900</td>
+        <!-- <td>4x</td>
+        <td>5x</td>
+        <td>6x</td> -->
+        <td>{{ mapInitialStockValue(36) }}</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n1,
+                  nValues[1]?.n1,
+                  nValues[2]?.n1,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
         </td>
-        <td>b</td>
-        <td>c</td>
-        <td>d</td>
-        <td>e</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n2,
+                  nValues[1]?.n2,
+                  nValues[2]?.n2,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n3,
+                  nValues[1]?.n3,
+                  nValues[2]?.n3,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n4,
+                  nValues[1]?.n4,
+                  nValues[2]?.n4,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          <input type="number" value="0" />
         </td>
         <td style="display: flex">
           <input
@@ -376,15 +1005,68 @@
         <td>1,5</td>
         <td>0,3</td>
         <td>900</td>
+        <!-- <td>4x</td>
+        <td>5x</td>
+        <td>6x</td> -->
+        <td>{{ mapInitialStockValue(37) }}</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n1,
+                  nValues[1]?.n1,
+                  nValues[2]?.n1,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
         </td>
-        <td>b</td>
-        <td>c</td>
-        <td>d</td>
-        <td>e</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n2,
+                  nValues[1]?.n2,
+                  nValues[2]?.n2,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n3,
+                  nValues[1]?.n3,
+                  nValues[2]?.n3,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n4,
+                  nValues[1]?.n4,
+                  nValues[2]?.n4,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          <input type="number" value="0" />
         </td>
         <td style="display: flex">
           <input
@@ -402,15 +1084,68 @@
         <td>1,7</td>
         <td>0,3</td>
         <td>300</td>
+        <!-- <td>4x</td>
+        <td>5x</td>
+        <td>6x</td> -->
+        <td>{{ mapInitialStockValue(38) }}</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n1,
+                  nValues[1]?.n1,
+                  nValues[2]?.n1,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
         </td>
-        <td>b</td>
-        <td>c</td>
-        <td>d</td>
-        <td>e</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n2,
+                  nValues[1]?.n2,
+                  nValues[2]?.n2,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n3,
+                  nValues[1]?.n3,
+                  nValues[2]?.n3,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n4,
+                  nValues[1]?.n4,
+                  nValues[2]?.n4,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          <input type="number" value="0" />
         </td>
         <td style="display: flex">
           <input
@@ -428,15 +1163,68 @@
         <td>1,5</td>
         <td>0,3</td>
         <td>1800</td>
+        <!-- <td>4x</td>
+        <td>5x</td>
+        <td>6x</td> -->
+        <td>{{ mapInitialStockValue(39) }}</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n1,
+                  nValues[1]?.n1,
+                  nValues[2]?.n1,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
         </td>
-        <td>b</td>
-        <td>c</td>
-        <td>d</td>
-        <td>e</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n2,
+                  nValues[1]?.n2,
+                  nValues[2]?.n2,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n3,
+                  nValues[1]?.n3,
+                  nValues[2]?.n3,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n4,
+                  nValues[1]?.n4,
+                  nValues[2]?.n4,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          <input type="number" value="0" />
         </td>
         <td style="display: flex">
           <input
@@ -454,15 +1242,68 @@
         <td>1,7</td>
         <td>0,2</td>
         <td>900</td>
+        <!-- <td>4x</td>
+        <td>5x</td>
+        <td>6x</td> -->
+        <td>{{ mapInitialStockValue(40) }}</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n1,
+                  nValues[1]?.n1,
+                  nValues[2]?.n1,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
         </td>
-        <td>b</td>
-        <td>c</td>
-        <td>d</td>
-        <td>e</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n2,
+                  nValues[1]?.n2,
+                  nValues[2]?.n2,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n3,
+                  nValues[1]?.n3,
+                  nValues[2]?.n3,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n4,
+                  nValues[1]?.n4,
+                  nValues[2]?.n4,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          <input type="number" value="0" />
         </td>
         <td style="display: flex">
           <input
@@ -480,15 +1321,68 @@
         <td>0,9</td>
         <td>0,2</td>
         <td>900</td>
+        <!-- <td>4x</td>
+        <td>5x</td>
+        <td>6x</td> -->
+        <td>{{ mapInitialStockValue(41) }}</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n1,
+                  nValues[1]?.n1,
+                  nValues[2]?.n1,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
         </td>
-        <td>b</td>
-        <td>c</td>
-        <td>d</td>
-        <td>e</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n2,
+                  nValues[1]?.n2,
+                  nValues[2]?.n2,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n3,
+                  nValues[1]?.n3,
+                  nValues[2]?.n3,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n4,
+                  nValues[1]?.n4,
+                  nValues[2]?.n4,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          <input type="number" value="0" />
         </td>
         <td style="display: flex">
           <input
@@ -506,15 +1400,68 @@
         <td>1,2</td>
         <td>0,3</td>
         <td>1800</td>
+        <!-- <td>4x</td>
+        <td>5x</td>
+        <td>6x</td> -->
+        <td>{{ mapInitialStockValue(42) }}</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n1,
+                  nValues[1]?.n1,
+                  nValues[2]?.n1,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
         </td>
-        <td>b</td>
-        <td>c</td>
-        <td>d</td>
-        <td>e</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n2,
+                  nValues[1]?.n2,
+                  nValues[2]?.n2,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n3,
+                  nValues[1]?.n3,
+                  nValues[2]?.n3,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n4,
+                  nValues[1]?.n4,
+                  nValues[2]?.n4,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          <input type="number" value="0" />
         </td>
         <td style="display: flex">
           <input
@@ -532,15 +1479,68 @@
         <td>2,0</td>
         <td>0,5</td>
         <td>2700</td>
+        <!-- <td>4x</td>
+        <td>5x</td>
+        <td>6x</td> -->
+        <td>{{ mapInitialStockValue(43) }}</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n1,
+                  nValues[1]?.n1,
+                  nValues[2]?.n1,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
         </td>
-        <td>b</td>
-        <td>c</td>
-        <td>d</td>
-        <td>e</td>
         <td>
-          <input type="text" />
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n2,
+                  nValues[1]?.n2,
+                  nValues[2]?.n2,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n3,
+                  nValues[1]?.n3,
+                  nValues[2]?.n3,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          {{
+            nValues
+              ? calculateGrossValue(
+                  nValues[0]?.n4,
+                  nValues[1]?.n4,
+                  nValues[2]?.n4,
+                  4,
+                  5,
+                  6
+                )
+              : 0
+          }}
+        </td>
+        <td>
+          <input type="number" value="0" />
         </td>
         <td style="display: flex">
           <input
@@ -553,20 +1553,20 @@
           <input type="radio" id="orderE" name="order11" value="orderE" />
         </td>
       </tr>
-      <tr>
+      <!-- <tr>
         <td>44</td>
         <td>1,0</td>
         <td>0,2</td>
         <td>900</td>
         <td>
-          <input type="text" />
+         <input type="number" value="0"/>
         </td>
         <td>b</td>
         <td>c</td>
         <td>d</td>
         <td>e</td>
         <td>
-          <input type="text" />
+         <input type="number" value="0"/>
         </td>
         <td style="display: flex">
           <input
@@ -585,14 +1585,14 @@
         <td>0,3</td>
         <td>900</td>
         <td>
-          <input type="text" />
+         <input type="number" value="0"/>
         </td>
         <td>b</td>
         <td>c</td>
         <td>d</td>
         <td>e</td>
         <td>
-          <input type="text" />
+         <input type="number" value="0"/>
         </td>
         <td style="display: flex">
           <input
@@ -611,14 +1611,14 @@
         <td>0,3</td>
         <td>900</td>
         <td>
-          <input type="text" />
+         <input type="number" value="0"/>
         </td>
         <td>b</td>
         <td>c</td>
         <td>d</td>
         <td>e</td>
         <td>
-          <input type="text" />
+         <input type="number" value="0"/>
         </td>
         <td style="display: flex">
           <input
@@ -637,14 +1637,14 @@
         <td>0,1</td>
         <td>900</td>
         <td>
-          <input type="text" />
+         <input type="number" value="0"/>
         </td>
         <td>b</td>
         <td>c</td>
         <td>d</td>
         <td>e</td>
         <td>
-          <input type="text" />
+         <input type="number" value="0"/>
         </td>
         <td style="display: flex">
           <input
@@ -663,14 +1663,14 @@
         <td>0,2</td>
         <td>1800</td>
         <td>
-          <input type="text" />
+         <input type="number" value="0"/>
         </td>
         <td>b</td>
         <td>c</td>
         <td>d</td>
         <td>e</td>
         <td>
-          <input type="text" />
+         <input type="number" value="0"/>
         </td>
         <td style="display: flex">
           <input
@@ -689,14 +1689,14 @@
         <td>0,4</td>
         <td>600</td>
         <td>
-          <input type="text" />
+         <input type="number" value="0"/>
         </td>
         <td>b</td>
         <td>c</td>
         <td>d</td>
         <td>e</td>
         <td>
-          <input type="text" />
+         <input type="number" value="0"/>
         </td>
         <td style="display: flex">
           <input
@@ -715,14 +1715,14 @@
         <td>0,2</td>
         <td>22000</td>
         <td>
-          <input type="text" />
+         <input type="number" value="0"/>
         </td>
         <td>b</td>
         <td>c</td>
         <td>d</td>
         <td>e</td>
         <td>
-          <input type="text" />
+         <input type="number" value="0"/>
         </td>
         <td style="display: flex">
           <input
@@ -741,14 +1741,14 @@
         <td>0,3</td>
         <td>600</td>
         <td>
-          <input type="text" />
+         <input type="number" value="0"/>
         </td>
         <td>b</td>
         <td>c</td>
         <td>d</td>
         <td>e</td>
         <td>
-          <input type="text" />
+         <input type="number" value="0"/>
         </td>
         <td style="display: flex">
           <input
@@ -767,14 +1767,14 @@
         <td>0,5</td>
         <td>22000</td>
         <td>
-          <input type="text" />
+         <input type="number" value="0"/>
         </td>
         <td>b</td>
         <td>c</td>
         <td>d</td>
         <td>e</td>
         <td>
-          <input type="text" />
+         <input type="number" value="0"/>
         </td>
         <td style="display: flex">
           <input
@@ -793,14 +1793,14 @@
         <td>0,2</td>
         <td>1800</td>
         <td>
-          <input type="text" />
+         <input type="number" value="0"/>
         </td>
         <td>b</td>
         <td>c</td>
         <td>d</td>
         <td>e</td>
         <td>
-          <input type="text" />
+         <input type="number" value="0"/>
         </td>
         <td style="display: flex">
           <input
@@ -812,7 +1812,7 @@
           />
           <input type="radio" id="orderE" name="order11" value="orderE" />
         </td>
-      </tr>
+      </tr> -->
     </tbody>
   </table>
 </div>
