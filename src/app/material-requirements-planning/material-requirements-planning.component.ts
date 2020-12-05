@@ -15,6 +15,15 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
   @Input() bom: any;
   @Input() salesOrderAmount: string;
 
+  displayedColumns = [
+    'id',
+    'requiredAmount',
+    'safetyStock',
+    'currentStock',
+    'ordersInWaitingQueue',
+    'workInProgress',
+    'result',
+  ];
   oldViewData: Array<ViewData>;
   viewData: Array<ViewData>;
   changeModeIsOff = true;

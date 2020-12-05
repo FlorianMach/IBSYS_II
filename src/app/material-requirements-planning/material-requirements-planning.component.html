@@ -1,72 +1,99 @@
-<p>material-requirements-planning works!</p>
+<h1>Material Requirements Planning</h1>
+<div style="display: flex; flex-direction: column">
+  <table mat-table [dataSource]="viewData" class="mat-elevation-z8">
+    <!--- Note that these columns can be defined in any order.
+          The actual rendered columns are set as a property on the row definition" -->
 
-<div style="width: 100%" style="display: flex">
-  <div style="flex-basis: 14.28%">Teil</div>
-  <div style="flex-basis: 14.28%">Verbindliche Aufträge / Vertriebswunsch</div>
-  <div style="flex-basis: 14.28%">
-    Geplanter Lagerbestand am Ende der Planperiode (Sicherheitsbestand)
-  </div>
-  <div style="flex-basis: 14.28%">Lagerbestand am Ende der Vorperiode</div>
-  <div style="flex-basis: 14.28%">Aufträge in der Warteschlange</div>
-  <div style="flex-basis: 14.28%">Aufträge in Bearbeitung</div>
-  <div style="flex-basis: 14.28%">
-    ProduktionsAufträge für die Kommende Periode
-  </div>
-</div>
+    <!-- Position Column -->
+    <ng-container matColumnDef="id">
+      <th mat-header-cell *matHeaderCellDef>Teil</th>
+      <td mat-cell *matCellDef="let element">
+        {{
+          convertToNumber(element.id) <= 3 ? "P" + element.id : "E" + element.id
+        }}
+      </td>
+    </ng-container>
 
-<div
-  *ngFor="let data of viewData; index as i"
-  style="width: 100%"
-  style="display: flex"
->
-  <div style="flex-basis: 14.28%">
-    {{ convertToNumber(data.id) <= 3 ? "P" + data.id : "E" + data.id }}
-  </div>
-  <div style="flex-basis: 14.28%">
-    {{ data.requiredAmount }}
-  </div>
-  <div style="flex-basis: 14.28%">
-    <input
-      type="number"
-      min="0"
-      step="1"
-      [value]="data.safetyStock"
-      [disabled]="changeModeIsOff"
-      [(ngModel)]="data.safetyStock"
-    />
-  </div>
-  <div style="flex-basis: 14.28%">
-    {{ data.currentStock }}
-  </div>
-  <div style="flex-basis: 14.28%">
-    {{ data.ordersInWaitingQueue }}
-  </div>
-  <div style="flex-basis: 14.28%">
-    {{ data.workInProgress }}
-  </div>
-  <div style="flex-basis: 14.28%">
-    {{ round(data.result) }}
-  </div>
-</div>
+    <!-- Name Column -->
+    <ng-container matColumnDef="requiredAmount">
+      <th mat-header-cell *matHeaderCellDef>
+        Verbindliche Aufträge / Vertriebswunsch
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.requiredAmount }}</td>
+    </ng-container>
 
-<div
-  style="
-    width: 100%;
-    display: flex;
-    margin-top: 0.5em;
-    justify-content: flex-end;
-  "
->
-  <button
-    *ngIf="!changeModeIsOff"
-    mat-stroked-button
-    color="accent"
-    (click)="discardChanges()"
-    style="margin-right: 0.5em"
+    <!-- Weight Column -->
+    <ng-container matColumnDef="safetyStock">
+      <th mat-header-cell *matHeaderCellDef>
+        Geplanter Lagerbestand <br />
+        am Ende der Planperiode (Sicherheitsbestand)
+      </th>
+      <td mat-cell *matCellDef="let element">
+        <mat-form-field>
+          <input
+            matInput
+            type="number"
+            min="0"
+            step="1"
+            [value]="element.safetyStock"
+            [disabled]="changeModeIsOff"
+            [(ngModel)]="element.safetyStock"
+          />
+        </mat-form-field>
+      </td>
+    </ng-container>
+
+    <!-- Symbol Column -->
+    <ng-container matColumnDef="currentStock">
+      <th mat-header-cell *matHeaderCellDef>
+        Lagerbestand am Ende der Vorperiode
+      </th>
+      <td mat-cell *matCellDef="let element">{{ element.currentStock }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="ordersInWaitingQueue">
+      <th mat-header-cell *matHeaderCellDef>Aufträge in der Warteschlange</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.ordersInWaitingQueue }}
+      </td>
+    </ng-container>
+
+    <ng-container matColumnDef="workInProgress">
+      <th mat-header-cell *matHeaderCellDef>Aufträge in Bearbeitung</th>
+      <td mat-cell *matCellDef="let element">{{ element.workInProgress }}</td>
+    </ng-container>
+
+    <ng-container matColumnDef="result">
+      <th mat-header-cell *matHeaderCellDef>
+        Produktionsaufträge <br />
+        für die Kommende Periode
+      </th>
+      <td mat-cell *matCellDef="let element">{{ round(element.result) }}</td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+  </table>
+
+  <div
+    style="
+      width: 100%;
+      display: flex;
+      margin-top: 0.5em;
+      justify-content: flex-end;
+    "
   >
-    Back
-  </button>
-  <button mat-stroked-button color="primary" (click)="commitChanges()">
-    {{ changeModeIsOff ? "Change" : "Commit" }}
-  </button>
+    <button
+      *ngIf="!changeModeIsOff"
+      mat-stroked-button
+      color="accent"
+      (click)="discardChanges()"
+      style="margin-right: 0.5em"
+    >
+      Back
+    </button>
+    <button mat-stroked-button color="primary" (click)="commitChanges()">
+      {{ changeModeIsOff ? "Change" : "Commit" }}
+    </button>
+  </div>
 </div>
