@@ -20,7 +20,7 @@
   style="display: flex"
 >
   <div style="flex-basis: 14.28%">
-    {{ data.id <= 3 ? "P" + data.id : "E" + data.id }}
+    {{ convertToNumber(data.id) <= 3 ? "P" + data.id : "E" + data.id }}
   </div>
   <div style="flex-basis: 14.28%">
     {{ data.requiredAmount }}

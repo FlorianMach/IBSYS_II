@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { workFlowMap } from '../shared/const/workflow';
 import { MaterialRequirementsPlanningService } from './material-requirements-planning.service';
+import { ViewData } from './model/view-data';
 
 @Component({
   selector: 'app-material-requirements-planning',
@@ -12,7 +13,8 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
   @Input() bom: any;
   @Input() salesOrderAmount: string;
 
-  viewData: Array<any>;
+  oldViewData: Array<ViewData>;
+  viewData: Array<ViewData>;
   changeModeIsOff = true;
 
   constructor(
@@ -28,7 +30,14 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
     return Math.round(input);
   }
 
+  convertToNumber(str: string): number {
+    return Number(str);
+  }
+
   discardChanges(): void {
+    this.viewData = this.createDeepCopyOf(this.oldViewData);
+    console.log('Discard');
+    console.log(this.oldViewData);
     this.toggleChangeMode();
   }
 
@@ -46,7 +55,7 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
         this.salesOrderAmount
       );
     }
-
+    this.oldViewData = this.createDeepCopyOf(this.viewData);
     this.toggleChangeMode();
   }
 
@@ -57,9 +66,17 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
       this.bom,
       this.salesOrderAmount
     );
+
+    this.oldViewData = this.createDeepCopyOf(this.viewData);
+    console.log('TEST');
+    console.log(this.viewData);
   }
 
   private toggleChangeMode(): void {
     this.changeModeIsOff = !this.changeModeIsOff;
+  }
+
+  private createDeepCopyOf(obj: any): any {
+    return JSON.parse(JSON.stringify(obj));
   }
 }
