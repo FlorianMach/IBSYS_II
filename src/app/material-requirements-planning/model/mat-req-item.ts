@@ -3,4 +3,5 @@ export interface MatReqItem {
   currentStock: number;
   ordersInWaitingQueue: number;
   workInProgress: number;
+  safetyStock?: number;
 }

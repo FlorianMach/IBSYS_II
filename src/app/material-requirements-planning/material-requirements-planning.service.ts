@@ -1,42 +1,82 @@
 import { Injectable } from '@angular/core';
 import { MatReqItem } from './model/mat-req-item';
+import { ViewData } from './model/view-data';
 
 @Injectable({
   providedIn: 'root',
 })
 export class MaterialRequirementsPlanningService {
   constructor() {}
+  /**
+   *
+   * @param oldViewData
+   * @param workFlowMap
+   * @param bom
+   * @param salesOrderAmount
+   */
+  public updateViewData(
+    oldViewData: Array<ViewData>,
+    bom: any,
+    salesOrderAmount: string
+  ) {
+    const mrpData: Array<MatReqItem> = [];
+    oldViewData.forEach((data) => {
+      mrpData.push({
+        item: data.id,
+        currentStock: Number(data.currentStock),
+        ordersInWaitingQueue: Number(data.ordersInWaitingQueue),
+        workInProgress: Number(data.workInProgress),
+        safetyStock: Number(data.safetyStock),
+      });
+    });
+    return this.createViewData(mrpData, bom, salesOrderAmount);
+  }
 
+  /**
+   *
+   * @param xmlData
+   * @param workFlowMap
+   * @param bom
+   * @param salesOrderAmount
+   */
   public getViewData(
     xmlData: string,
     workFlowMap: any,
     bom: any,
     salesOrderAmount: string
-  ): Array<any> {
-    const viewArray = [];
-
+  ): Array<ViewData> {
     const mrpData = this.getTransformedData(xmlData, workFlowMap);
+    return this.createViewData(mrpData, bom, salesOrderAmount);
+  }
+
+  private createViewData(
+    mrpData: Array<MatReqItem>,
+    bom: any,
+    salesOrderAmount: string
+  ): Array<ViewData> {
     const resultData = this.calcProductionAmount(
       mrpData,
       bom,
       salesOrderAmount
     );
 
+    const viewArray: Array<ViewData> = [];
+
     console.log(mrpData);
     console.log(resultData);
 
     for (let i = 0; i < resultData.length; ++i) {
       const curMrpInfo = mrpData.find((element) => {
-        return element.item === resultData[i].id.toString();
+        return Number(element.item) === resultData[i].id;
       });
       if (curMrpInfo) {
         viewArray.push({
           id: resultData[i].id,
           requiredAmount: resultData[i].data.requiredAmount,
           safetyStock: resultData[i].data.safetyStock,
-          currentStock: curMrpInfo.currentStock,
-          ordersInWaitingQueue: curMrpInfo.ordersInWaitingQueue,
-          workInProgress: curMrpInfo.workInProgress,
+          currentStock: curMrpInfo.currentStock.toString(),
+          ordersInWaitingQueue: curMrpInfo.ordersInWaitingQueue.toString(),
+          workInProgress: curMrpInfo.workInProgress.toString(),
           result: resultData[i].result,
         });
       }
@@ -194,6 +234,12 @@ export class MaterialRequirementsPlanningService {
     return resultArr;
   }
 
+  /**
+   *
+   * @param transformedData
+   * @param bom
+   * @param salesOrderAmount
+   */
   private calcProductionAmount(
     transformedData: Array<MatReqItem>,
     bom: any,
@@ -202,20 +248,20 @@ export class MaterialRequirementsPlanningService {
     const resultArr = [];
 
     let requiredAmount = Number(salesOrderAmount);
-
-    // TODO: safetyStock als Eingabe einlesen oder ausrechnen ...
-    let safetyStock = 100;
     this.traverseBom(
       bom,
       (node) => {
-        const currentItem = transformedData.find(
-          (material) => material.item === node.id.toString()
-        );
+        const currentItem = transformedData.find((material) => {
+          return Number(material.item) === node.id;
+        });
 
         if (node.parent) {
           requiredAmount = node.parent.result + node.parent.currentItem;
         }
-
+        console.log(currentItem);
+        const safetyStock = currentItem.safetyStock
+          ? currentItem.safetyStock
+          : 100;
         const result =
           requiredAmount +
           safetyStock -
@@ -243,7 +289,7 @@ export class MaterialRequirementsPlanningService {
       },
       (element, node) => {
         const currentItem = transformedData.find(
-          (material) => material.item === node.id.toString()
+          (material) => Number(material.item) === node.id
         );
         element.parent = node;
         element.parent.currentItem = currentItem.ordersInWaitingQueue;

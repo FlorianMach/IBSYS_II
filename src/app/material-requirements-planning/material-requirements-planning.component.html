@@ -14,7 +14,11 @@
   </div>
 </div>
 
-<div *ngFor="let data of viewData" style="width: 100%" style="display: flex">
+<div
+  *ngFor="let data of viewData; index as i"
+  style="width: 100%"
+  style="display: flex"
+>
   <div style="flex-basis: 14.28%">
     {{ data.id <= 3 ? "P" + data.id : "E" + data.id }}
   </div>
@@ -22,7 +26,11 @@
     {{ data.requiredAmount }}
   </div>
   <div style="flex-basis: 14.28%">
-    {{ data.safetyStock }}
+    <input
+      [value]="data.safetyStock"
+      [disabled]="changeModeIsOff"
+      [(ngModel)]="data.safetyStock"
+    />
   </div>
   <div style="flex-basis: 14.28%">
     {{ data.currentStock }}
@@ -36,4 +44,26 @@
   <div style="flex-basis: 14.28%">
     {{ round(data.result) }}
   </div>
+</div>
+
+<div
+  style="
+    width: 100%;
+    display: flex;
+    margin-top: 0.5em;
+    justify-content: flex-end;
+  "
+>
+  <button
+    *ngIf="!changeModeIsOff"
+    mat-stroked-button
+    color="accent"
+    (click)="discardChanges()"
+    style="margin-right: 0.5em"
+  >
+    Back
+  </button>
+  <button mat-stroked-button color="primary" (click)="commitChanges()">
+    {{ changeModeIsOff ? "Change" : "Commit" }}
+  </button>
 </div>
