@@ -7,6 +7,10 @@
     },
     "PRODUCT_PLANNING": {
         "NAME": "MRP II",
+        "PRODUCT": "Produkt",
+        "QUANTITY": "Menge",
+        "PRICE": "Preis",
+        "PENALTY": "Strafe",
         "WISH": {
             "NAME": "Vertriebswunsch"
         },

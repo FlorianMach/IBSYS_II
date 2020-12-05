@@ -7,6 +7,10 @@
     },
     "PRODUCT_PLANNING": {
         "NAME": "MRP II",
+        "PRODUCT": "Product",
+        "QUANTITY": "Quantity",
+        "PRICE": "Price",
+        "PENALTY": "Penalty",
         "WISH": {
             "NAME": "Sales Wish"
         },

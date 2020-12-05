@@ -9,6 +9,10 @@ import { ProductPlanningService } from './product-planning.service';
 })
 export class ProductPlanningComponent implements OnInit {
   data: any;
+  displayedColumns = ['product', 'quantity'];
+  dataSource = ELEMENT_DATA;
+  displayedColumns2 = ['product', 'quantity', 'price', 'penalty'];
+  dataSource2 = ELEMENT_DATA2;
 
   constructor(
     private productPlanningService: ProductPlanningService,
@@ -22,3 +26,27 @@ export class ProductPlanningComponent implements OnInit {
     });
   }
 }
+
+export interface SalesWish {
+  quantity: string;
+  product: string;
+}
+
+const ELEMENT_DATA: SalesWish[] = [
+  {product: 'P1', quantity: 'Hydrogen'},
+  {product: 'P2', quantity: 'Helium'},
+  {product: 'P3', quantity: 'Lithium'},
+];
+
+export interface DirectSales {
+  product: string;
+  quantity: string;
+  price: string;
+  penalty: string;
+}
+
+const ELEMENT_DATA2: DirectSales[] = [
+  {product: 'P1', quantity: 'Hydrogen2', price: '0.0', penalty: '100.10'},
+  {product: 'P2', quantity: 'Helium2', price: '0.0', penalty: '100.10'},
+  {product: 'P3', quantity: 'Lithium2', price: '0.0', penalty: '100.10'}
+]
