@@ -1,5 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { workFlowMap } from '../shared/const/workflow';
+import { WarningDialogComponent } from '../warning-dialog/warning-dialog.component';
 import { MaterialRequirementsPlanningService } from './material-requirements-planning.service';
 import { ViewData } from './model/view-data';
 
@@ -18,6 +20,7 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
   changeModeIsOff = true;
 
   constructor(
+    public dialog: MatDialog,
     private materialRequirementsPlanningService: MaterialRequirementsPlanningService
   ) {}
 
@@ -35,10 +38,13 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
   }
 
   discardChanges(): void {
-    this.viewData = this.createDeepCopyOf(this.oldViewData);
-    console.log('Discard');
-    console.log(this.oldViewData);
-    this.toggleChangeMode();
+    const dialogRef = this.dialog.open(WarningDialogComponent);
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.onDiscard();
+      }
+    });
   }
 
   commitChanges(): void {
@@ -56,6 +62,11 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
       );
     }
     this.oldViewData = this.createDeepCopyOf(this.viewData);
+    this.toggleChangeMode();
+  }
+
+  private onDiscard() {
+    this.viewData = this.createDeepCopyOf(this.oldViewData);
     this.toggleChangeMode();
   }
 
