@@ -53,4 +53,5 @@ export class ProcurementComponent implements OnInit {
     XLSX.utils.book_append_sheet(wb, ws, "sheet1")
     XLSX.writeFile(wb, this.fileName)
   }
+
 }
