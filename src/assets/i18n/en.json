@@ -30,7 +30,15 @@
         "DISCARD": "Discard"
     },
     "PROCUREMENT": {
-        "NAME": "Procurement"
+        "NAME": "Procurement",
+        "NUMBER": "Item No.",
+        "DELIVERY": "Delivery time",
+        "DEVIATION": "Deviation",
+        "DISCOUNT": "Discount quantity",
+        "STOCK": "Initial stock in Per n",
+        "REQUIREMENTS": "Gross requirements according the prod.progr.",
+        "AMOUNT": "Amount",
+        "ORDER": "Order"
     },
     "RESULT": {
         "XML": "Export Result XML",

@@ -3,7 +3,7 @@ import { MRP2PSNS } from '../Models';
 import { SharedService } from '../shared/shared.service';
 import { XmlReaderService } from '../xml-reader/xml-reader.service';
 import { ProcurementService } from './procurement.service';
-import * as XLSX from "xlsx"
+import * as XLSX from "xlsx";
 @Component({
   selector: 'app-procurement',
   templateUrl: './procurement.component.html',
@@ -11,10 +11,10 @@ import * as XLSX from "xlsx"
 })
 export class ProcurementComponent implements OnInit {
   data: any[] = [];
-  nValues: MRP2PSNS[] = []
-  initialStock: any[] = []
-  orderN = "orderN"
-  orderE = "orderE"
+  nValues: MRP2PSNS[] = [];
+  initialStock: any[] = [];
+  orderN = "orderN";
+  orderE = "orderE";
 
   constructor(
     private procurementService: ProcurementService,

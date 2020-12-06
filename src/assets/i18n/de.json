@@ -30,7 +30,15 @@
         "DISCARD": "Verwerfen"
     },
     "PROCUREMENT": {
-        "NAME": "Einkauf"
+        "NAME": "Einkauf",
+        "NUMBER": "Nr. Kaufteile",
+        "DELIVERY": "Lieferfrist",
+        "DEVIATION": "Abweichung",
+        "DISCOUNT": "Diskontmenge",
+        "STOCK": "Anfangsbestand in Per n",
+        "REQUIREMENTS": "Bruttobedarf gemäß Prod.progr.",
+        "AMOUNT": "Bestellmenge",
+        "ORDER": "Bestellung"
     },
     "RESULT": {
         "XML": "Exportiere Ergebnis XML",
