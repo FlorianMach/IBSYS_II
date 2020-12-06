@@ -29,9 +29,15 @@
 .stepper-button-wrapper {
   display: flex;
   justify-content: flex-end;
-  margin-top: auto;
+  height: 5%;
+  min-height: 43px;
 }
 
 .stepper-button-margin {
   margin: 0.25em;
+}
+
+.custom-content {
+  height: 95%;
+  overflow-y: auto;
 }

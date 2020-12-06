@@ -24,7 +24,7 @@
         <mat-step>
           <ng-template matStepLabel>{{ "XML.NAME" | translate }}</ng-template>
           <div class="stepper-content">
-            <app-xml-reader></app-xml-reader>
+            <app-xml-reader class="custom-content"></app-xml-reader>
             <div class="stepper-button-wrapper">
               <button
                 class="stepper-button-margin"
@@ -41,7 +41,7 @@
           <ng-template matStepLabel>{{
             "PRODUCT_PLANNING.NAME" | translate
           }}</ng-template>
-          <app-product-planning></app-product-planning>
+          <app-product-planning class="custom-content"></app-product-planning>
           <div class="stepper-button-wrapper">
             <button
               class="stepper-button-margin"
@@ -66,6 +66,7 @@
             "MRP.NAME_P1" | translate
           }}</ng-template>
           <app-material-requirements-planning
+            class="custom-content"
             *ngIf="xmlData"
             [data]="xmlData"
             [bom]="bomP1"
@@ -95,6 +96,7 @@
             "MRP.NAME_P2" | translate
           }}</ng-template>
           <app-material-requirements-planning
+            class="custom-content"
             *ngIf="xmlData"
             [data]="xmlData"
             [bom]="bomP2"
@@ -124,6 +126,7 @@
             "MRP.NAME_P3" | translate
           }}</ng-template>
           <app-material-requirements-planning
+            class="custom-content"
             *ngIf="xmlData"
             [data]="xmlData"
             [bom]="bomP3"
@@ -152,7 +155,7 @@
           <ng-template matStepLabel>{{
             "CAPACITY_PLANNING.NAME" | translate
           }}</ng-template>
-          <app-capacity-planning></app-capacity-planning>
+          <app-capacity-planning class="custom-content"></app-capacity-planning>
           <div class="stepper-button-wrapper">
             <button
               class="stepper-button-margin"
@@ -176,7 +179,7 @@
           <ng-template matStepLabel>{{
             "PROCUREMENT.NAME" | translate
           }}</ng-template>
-          <app-procurement></app-procurement>
+          <app-procurement class="custom-content"></app-procurement>
           <div class="stepper-button-wrapper">
             <button
               class="stepper-button-margin"
@@ -200,7 +203,7 @@
           <ng-template matStepLabel>{{
             "RESULT.NAME" | translate
           }}</ng-template>
-          <app-result></app-result>
+          <app-result class="custom-content"></app-result>
           <p>You are now done.</p>
           <div class="stepper-button-wrapper">
             <button
