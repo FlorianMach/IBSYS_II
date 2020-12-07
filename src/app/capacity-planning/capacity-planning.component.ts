@@ -41,27 +41,6 @@ const PRODUCTS = [
   {product: 56, quantity: 200},
 ];
 
-
-// Muss aus der XML gezogen werden (Daten aus der letzten Periode)
-const SETUPTIMELASTPERIOD = [
-  {w: 1, quantity: 5},
-  {w: 2, quantity: 7},
-  {w: 3, quantity: 4},
-  {w: 4, quantity: 3},
-  {w: 5, quantity: 0},
-  {w: 6, quantity: 4},
-  {w: 7, quantity: 37},
-  {w: 8, quantity: 21},
-  {w: 9, quantity: 13},
-  {w: 10, quantity: 7},
-  {w: 11, quantity: 11},
-  {w: 12, quantity: 7},
-  {w: 13, quantity: 6},
-  {w: 14, quantity: 0},
-  {w: 15, quantity: 3}
-];
-
-
 // Daten der Arbeitsplätze - Wie lange für welches Produkt
 const PRODUCTIONPLANNING = [
   {product: 1, w1: 0, w2: 0, w3: 0, w4: 6, w5: 0, w6: 0, w7: 0, w8: 0, w9: 0, w10: 0, w11: 0, w12: 0, w13: 0, w14: 0, w15: 0},
@@ -133,16 +112,23 @@ export class CapacityPlanningComponent implements OnInit {
     'overtime',
     'secondShift'];
 
-  dataSource = [];
+  dataSource: any[] = [];
+  setupEventLastPeriod: any[] = [];
+  data: any[] = [];
   
   constructor(
+    private xmlReaderService: XmlReaderService
   ) {}
 
   ngOnInit(): void {
-    this.dataSource = this.capacityPlaning(PRODUCTS, PRODUCTIONPLANNING);  
+    this.xmlReaderService.subscribe((data) => {
+      this.data = data
+      this.dataSource = this.capacityPlaning(PRODUCTS, PRODUCTIONPLANNING, this.data );  
+    });
+    
   }
 
-  capacityPlaning(product, productionplanning) {
+  capacityPlaning(product, productionplanning, data) {
     var result = new Array();
     var capacity;
     var setuptime;
@@ -150,12 +136,14 @@ export class CapacityPlanningComponent implements OnInit {
     var setUpLastPeriod;
     var overtime;
     var secondShift;
+    var setupevents;
       
     // Berechnung der Kapazität
     capacity = this.capacityRequirements(product, productionplanning)
 
     // Berechnung Set-Up
-    setuptime = this.calculateSetupTime(SETUPTIMELASTPERIOD, SETUPTIME)
+    setupevents = this.getSetupEvents(data)
+    setuptime = this.calculateSetupTime(setupevents, SETUPTIME)
 
     // Berechnung Capacity Last Period
     capacityLastPeriod = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -163,13 +151,11 @@ export class CapacityPlanningComponent implements OnInit {
     //Berechnung Set-Up Last Period
     setUpLastPeriod = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
-
     for(var i = 0; i < capacity.length; ++i ){
 
     if((capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5<0){
       overtime = 0;
     } else {overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5}
-
 
     if(overtime > 240) {
       overtime = 0;
@@ -193,11 +179,8 @@ export class CapacityPlanningComponent implements OnInit {
   capacityRequirements(product1, productionplanning1) {
 
     var result = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-
     var product = product1;
     var productionplanning = productionplanning1;
-    console.log(result);
-    console.log(product[1].product);
 
       for(var i = 0; i < productionplanning.length;++i){
         if(product[i].product = productionplanning[i].product){
@@ -221,15 +204,42 @@ export class CapacityPlanningComponent implements OnInit {
     return result;
   }
 
-  calculateSetupTime(lastPeriod, setUpTime ){
+  getSetupEvents(data){
+    
+    var result = new Array();
+    for(var i = 0; i < 15; ++i){
+      if(i < 4){
+        result.push({
+          w: data.results.idletimecosts.workplace[i]._attributes.id ,
+          quantity: data.results.idletimecosts.workplace[i]._attributes.setupevents
+      })}
+      else if(i === 4) {
+        console.log(i)
+        result.push({
+          w: "5",
+          quantity: "0"
+        })
+      } else if(i < 15 && i > 4 ) {
+        result.push({
+          w: data.results.idletimecosts.workplace[i-1]._attributes.id ,
+          quantity: data.results.idletimecosts.workplace[i-1]._attributes.setupevents
+        })
+      }
+    }
+    console.log(result)
+    return result;
+  }
+
+  calculateSetupTime(lastPeriod, setUpTime){
     var result = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    console.log(lastPeriod)
+    console.log(setUpTime)
     var lastPeriod = lastPeriod;
     var setUpTime = setUpTime;
 
     for(var i = 0; i< setUpTime.length; ++i){
           result[i] = lastPeriod[i].quantity * setUpTime[i].time;
     }
-
     return result;
   }
 }

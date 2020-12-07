@@ -27,9 +27,7 @@
         <!-- capacityRequirementsLastPeriod Column -->
         <ng-container matColumnDef="capacityRequirementsLastPeriod">
             <th mat-header-cell *matHeaderCellDef> {{ "CAPACITY_PLANNING.CAPACITYREQLAST" | translate }} </th>
-            <td mat-cell *matCellDef="let element">  
-                <input matInput type="number" value={{element.capalast}}>
-            </td>
+            <td mat-cell *matCellDef="let element"> {{element.capalast}}</td>
         </ng-container> 
 
         <!-- setupTimeLastPeriod Column -->
