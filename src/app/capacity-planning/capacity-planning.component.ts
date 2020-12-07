@@ -41,6 +41,27 @@ const PRODUCTS = [
   {product: 56, quantity: 200},
 ];
 
+
+// Muss aus der XML gezogen werden (Daten aus der letzten Periode)
+const SETUPTIMELASTPERIOD = [
+  {w: 1, quantity: 5},
+  {w: 2, quantity: 7},
+  {w: 3, quantity: 4},
+  {w: 4, quantity: 3},
+  {w: 5, quantity: 0},
+  {w: 6, quantity: 4},
+  {w: 7, quantity: 37},
+  {w: 8, quantity: 21},
+  {w: 9, quantity: 13},
+  {w: 10, quantity: 7},
+  {w: 11, quantity: 11},
+  {w: 12, quantity: 7},
+  {w: 13, quantity: 6},
+  {w: 14, quantity: 0},
+  {w: 15, quantity: 3}
+];
+
+
 // Daten der Arbeitsplätze - Wie lange für welches Produkt
 const PRODUCTIONPLANNING = [
   {product: 1, w1: 0, w2: 0, w3: 0, w4: 6, w5: 0, w6: 0, w7: 0, w8: 0, w9: 0, w10: 0, w11: 0, w12: 0, w13: 0, w14: 0, w15: 0},
@@ -75,6 +96,24 @@ const PRODUCTIONPLANNING = [
   {product: 56, w1: 0, w2: 0, w3: 6, w4: 0, w5: 0, w6: 0, w7: 0, w8: 0, w9: 0, w10: 0, w11: 0, w12: 0, w13: 0, w14: 0, w15: 0},
 ];
 
+// Durchschnittliche Rüstzeiten je Arbeitsplatz
+const SETUPTIME = [
+  {w: 1, time: 20},
+  {w: 2, time: 20},
+  {w: 3, time: 20},
+  {w: 4, time: 20},
+  {w: 5, time: 0},
+  {w: 6, time: 15},
+  {w: 7, time: 90},
+  {w: 8, time: 50},
+  {w: 9, time: 20},
+  {w: 10, time: 40},
+  {w: 11, time: 20},
+  {w: 12, time: 0},
+  {w: 13, time: 0},
+  {w: 14, time: 0},
+  {w: 15, time: 30}
+];
 
 @Component({
   selector: 'app-capacity-planning',
@@ -106,31 +145,46 @@ export class CapacityPlanningComponent implements OnInit {
   capacityPlaning(product, productionplanning) {
     var result = new Array();
     var capacity;
+    var setuptime;
+    var capacityLastPeriod;
+    var setUpLastPeriod;
+    var overtime;
+    var secondShift;
       
     // Berechnung der Kapazität
     capacity = this.capacityRequirements(product, productionplanning)
 
     // Berechnung Set-Up
-
+    setuptime = this.calculateSetupTime(SETUPTIMELASTPERIOD, SETUPTIME)
 
     // Berechnung Capacity Last Period
-
+    capacityLastPeriod = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
     //Berechnung Set-Up Last Period
-
+    setUpLastPeriod = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
 
     for(var i = 0; i < capacity.length; ++i ){
 
+    if((capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5<0){
+      overtime = 0;
+    } else {overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5}
+
+
+    if(overtime > 240) {
+      overtime = 0;
+      secondShift = "x"; 
+    } else { secondShift = " "; }
+
       result.push({
         workplace: i+1,
         capareq: capacity[i],
-        setup: 3,
-        capalast: 4,
-        setuplast: 5,
-        totalRequirement: 6,
-        overtime: 7,
-        secondShift: true      
+        setup: setuptime[i],
+        capalast: capacityLastPeriod[i],
+        setuplast: setUpLastPeriod[i],
+        totalRequirement: capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i],
+        overtime: overtime,
+        secondShift: secondShift     
       })
     }
     return result;
@@ -164,6 +218,18 @@ export class CapacityPlanningComponent implements OnInit {
           result[14] += product[i].quantity * productionplanning[i].w15
         };
       };
+    return result;
+  }
+
+  calculateSetupTime(lastPeriod, setUpTime ){
+    var result = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    var lastPeriod = lastPeriod;
+    var setUpTime = setUpTime;
+
+    for(var i = 0; i< setUpTime.length; ++i){
+          result[i] = lastPeriod[i].quantity * setUpTime[i].time;
+    }
+
     return result;
   }
 }
