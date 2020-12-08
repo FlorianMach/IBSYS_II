@@ -52,4 +52,25 @@
       </tr>
     </tbody>
   </table>
+  <div
+    style="
+      width: 100%;
+      display: flex;
+      margin-top: 0.5em;
+      justify-content: flex-end;
+    "
+  >
+    <button
+      *ngIf="!changeModeIsOff"
+      mat-stroked-button
+      color="accent"
+      (click)="discardChanges()"
+      style="margin-right: 0.5em"
+    >
+      Back
+    </button>
+    <button mat-stroked-button color="primary" (click)="commitChanges()">
+      {{ changeModeIsOff ? "Change" : "Commit" }}
+    </button>
+  </div>
 </div>

@@ -2,6 +2,11 @@ table {
   width: 100%;
 }
 
+.scrollable-table {
+  flex-grow: 1;
+  overflow: auto;
+}
+
 .styled-table {
   border-collapse: collapse;
   margin: 25px 0;
