@@ -1,4 +1,4 @@
-<div style="height: 450px">
+<div style="height: 500px">
   <table class="styled-table">
     <thead>
       <tr>
@@ -20,6 +20,7 @@
             name="mrp2data"
             (change)="onValueChanged($event)"
             (keyup)="onValueChanged($event)"
+            [readonly]="!editable"
           />
         </td>
         <td>
@@ -29,6 +30,7 @@
             [(ngModel)]="mrp2data[i].n2"
             (change)="onValueChanged($event)"
             (keyup)="onValueChanged($event)"
+            [readonly]="!editable"
           />
         </td>
         <td>
@@ -38,6 +40,7 @@
             [(ngModel)]="mrp2data[i].n3"
             (change)="onValueChanged($event)"
             (keyup)="onValueChanged($event)"
+            [readonly]="!editable"
           />
         </td>
         <td>
@@ -47,30 +50,21 @@
             [(ngModel)]="mrp2data[i].n4"
             (change)="onValueChanged($event)"
             (keyup)="onValueChanged($event)"
+            [readonly]="!editable"
           />
         </td>
       </tr>
     </tbody>
   </table>
-  <div
-    style="
-      width: 100%;
-      display: flex;
-      margin-top: 0.5em;
-      justify-content: flex-end;
-    "
-  >
-    <button
-      *ngIf="!changeModeIsOff"
-      mat-stroked-button
-      color="accent"
-      (click)="discardChanges()"
-      style="margin-right: 0.5em"
-    >
-      Back
-    </button>
-    <button mat-stroked-button color="primary" (click)="commitChanges()">
-      {{ changeModeIsOff ? "Change" : "Commit" }}
-    </button>
-  </div>
+</div>
+<div
+style="
+  width: 100%;
+  display: flex;
+  margin-top: 0.5em;
+  justify-content: flex-end;
+"
+>
+  <button *ngIf="change" (click)="edit()">Change</button>
+  <button *ngIf="commit"  (click)="save()">Commit</button>
 </div>

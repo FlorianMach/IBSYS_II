@@ -62,3 +62,13 @@ input:focus{
 .Theader{
     text-align: center;
 }
+
+button{
+    width: 70px;
+    height: 35px;
+    border-radius: 5px 5px 5px 5px;
+    color: white; 
+    background: #1da1f2; 
+    border: none; 
+    cursor: pointer
+}

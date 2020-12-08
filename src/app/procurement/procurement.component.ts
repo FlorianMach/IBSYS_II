@@ -20,8 +20,9 @@ export class ProcurementComponent implements OnInit {
     private procurementService: ProcurementService,
     private xmlReaderService: XmlReaderService,
     private SharedService: SharedService,
-  ) {} 
+  ) {
 
+  }
   ngOnInit(): void {
     this.xmlReaderService.subscribe((data) => {
       this.data = data;

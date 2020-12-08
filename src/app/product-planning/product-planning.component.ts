@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, Input, EventEmitter, OnInit, Output } from '@angular/core';
 import { MRP2PSNS } from '../Models';
 import { SharedService } from '../shared/shared.service';
 import { XmlReaderService } from '../xml-reader/xml-reader.service';
@@ -53,5 +53,22 @@ export class ProductPlanningComponent implements OnInit {
   onValueChanged(event) {
     // this.dataChanged.emit(this.mrp2data);
     this.SharedService.setDataOfMrp2data(this.mrp2data)
+  }
+
+  @Input() editable: boolean = false;
+
+  change: boolean = true;
+  commit: boolean = false;
+
+  edit() {
+   this.editable = true;
+   this.commit = true;
+   this.change = false;
+  }
+
+  save() {
+    this.editable = false;
+    this.commit = false;
+    this.change = true;
   }
 }
