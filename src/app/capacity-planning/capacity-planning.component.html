@@ -41,25 +41,19 @@
         <!-- totalRequirement Column -->
         <ng-container matColumnDef="totalRequirement">
             <th mat-header-cell *matHeaderCellDef> {{ "CAPACITY_PLANNING.TOTALREQUIREMENT" | translate }} </th>
-            <td mat-cell *matCellDef="let element">  
-                <input matInput type="number" value={{element.totalRequirement}}>
-            </td>
+            <td mat-cell *matCellDef="let element"> {{element.totalRequirement}} </td>
         </ng-container> 
 
         <!-- Overtime Column -->
         <ng-container matColumnDef="overtime">
             <th mat-header-cell *matHeaderCellDef> {{ "CAPACITY_PLANNING.OVERTIME" | translate }} </th>
-            <td mat-cell *matCellDef="let element">  
-                <input matInput type="number" value={{element.overtime}}>
-            </td>
+            <td mat-cell *matCellDef="let element"> {{element.overtime}} </td>
         </ng-container> 
 
         <!-- Second Shift Column -->
         <ng-container matColumnDef="secondShift">
             <th mat-header-cell *matHeaderCellDef> {{ "CAPACITY_PLANNING.SECONDSHIFT" | translate }} </th>
-            <td mat-cell *matCellDef="let element">
-                <input matInput type="text" value={{element.secondShift}}>
-            </td>
+            <td mat-cell *matCellDef="let element"> {{element.secondShift}} </td>
         </ng-container>
 
         <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

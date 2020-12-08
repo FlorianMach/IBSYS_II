@@ -146,7 +146,7 @@ export class CapacityPlanningComponent implements OnInit {
     setuptime = this.calculateSetupTime(setupevents, SETUPTIME)
 
     // Berechnung Capacity Last Period
-    capacityLastPeriod = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+    capacityLastPeriod = this.getcapacitylastPeriod(data)
 
     //Berechnung Set-Up Last Period
     setUpLastPeriod = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -214,7 +214,6 @@ export class CapacityPlanningComponent implements OnInit {
           quantity: data.results.idletimecosts.workplace[i]._attributes.setupevents
       })}
       else if(i === 4) {
-        console.log(i)
         result.push({
           w: "5",
           quantity: "0"
@@ -226,19 +225,38 @@ export class CapacityPlanningComponent implements OnInit {
         })
       }
     }
-    console.log(result)
     return result;
   }
 
   calculateSetupTime(lastPeriod, setUpTime){
     var result = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
-    console.log(lastPeriod)
-    console.log(setUpTime)
     var lastPeriod = lastPeriod;
     var setUpTime = setUpTime;
 
     for(var i = 0; i< setUpTime.length; ++i){
           result[i] = lastPeriod[i].quantity * setUpTime[i].time;
+    }
+    return result;
+  }
+
+  getcapacitylastPeriod(data){
+    var result = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+    for(var i = 0; i < data.results.waitinglistworkstations.workplace.length; ++i){
+      if(i < 4){
+        result[i] += parseInt(data.results.waitinglistworkstations.workplace[i]._attributes.timeneed)
+      }
+      else if(i === 4) {
+        result[i] = 0
+      }
+      else if(i < 15 && i > 4 ) {
+        result[i-1] += parseInt(data.results.waitinglistworkstations.workplace[i]._attributes.timeneed)
+      }
+    }
+
+    for(var i = 0; i < data.results.ordersinwork.workplace.length; ++i){
+      var id = data.results.ordersinwork.workplace[i]._attributes.id
+      result[id-1] += parseInt(data.results.ordersinwork.workplace[i]._attributes.timeneed)
     }
     return result;
   }
