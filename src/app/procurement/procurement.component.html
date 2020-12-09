@@ -94,8 +94,8 @@
           <input type="number" value="0" [readonly]="!editable"/>
         </td>
         <td style="display: flex">
-          <input type="radio" id="orderN" name="order1" ([value])="(orderN)" [disabled]="!editable"/>
-          <input type="radio" id="orderE" name="order1" ([value])="(orderE)" [disabled]="!editable"/>
+          <input type="radio" id="orderN" name="order1" ([value])="(orderN)" (click)="disable(this)" [disabled]="!editable"/>
+          <input type="radio" id="orderE" name="order1" ([value])="(orderE)" (click)="disable(this)" [disabled]="!editable"/>
         </td>
       </tr>
       <tr>

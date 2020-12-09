@@ -71,10 +71,10 @@ export class ProcurementComponent implements OnInit {
     this.commit = false;
     this.change = true;
   }
+  
+  radio: boolean = true;
 
-  /*
   disable(radio) {
-    radio.checked = false;
+      radio.checked = false;
   }
-  */
 }
