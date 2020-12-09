@@ -4,7 +4,9 @@ import { ResultService } from './result.service';
 import { saveAs } from 'file-saver';
 import * as FileSaver from 'file-saver';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { MatTable } from '@angular/material/table';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { SplitDialogComponent } from '../split-dialog/split-dialog.component';
 
 @Component({
   selector: 'app-result',
@@ -14,24 +16,36 @@ import { MatTable } from '@angular/material/table';
 export class ResultComponent implements OnInit {
   @ViewChild('table') table: MatTable<Production>;
   data: any;
-  displayedColumns = ['article', 'quantity', 'price', 'penalty'];
-  dataSource = ELEMENT_DATA;
-  displayedColumns2 = ['article', 'quantity', 'modus'];
-  dataSource2 = ELEMENT_DATA_SECOND;
-  displayedColumns3 = ['article', 'quantity'];
-  dataSource3 = ELEMENT_DATA_THIRD;
-  displayedColumns4 = ['station', 'shift', 'overtime'];
-  dataSource4 = ELEMENT_DATA_FOURTH;
+
+  displayedColumns;
+  dataSource;
+  displayedColumns2;
+  dataSource2;
+  displayedColumns3;
+  dataSource3;
+  dataSource32;
+  displayedColumns4;
+  dataSource4;
 
   constructor(
     private resultService: ResultService,
-    private xmlReaderService: XmlReaderService
+    private xmlReaderService: XmlReaderService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.xmlReaderService.subscribe((data) => {
       this.data = data;
     });
+    this.displayedColumns = ['article', 'quantity', 'price', 'penalty'];
+    this.dataSource = ELEMENT_DATA;
+    this.displayedColumns2 = ['article', 'quantity', 'modus'];
+    this.dataSource2 = ELEMENT_DATA_SECOND;
+    this.displayedColumns3 = ['article', 'quantity', 'split'];
+    this.dataSource3 = JSON.parse(JSON.stringify(ELEMENT_DATA_THIRD));
+    this.dataSource32 = new MatTableDataSource(this.dataSource3);
+    this.displayedColumns4 = ['station', 'shift', 'overtime'];
+    this.dataSource4 = ELEMENT_DATA_FOURTH;
   }
 
   dropTable(event: CdkDragDrop<Production[]>) {
@@ -40,8 +54,37 @@ export class ResultComponent implements OnInit {
     this.table.renderRows();
   }
 
+  openDialog(index: any, article: string, quantity: string): void {
+    const dialogRef = this.dialog.open(SplitDialogComponent, {
+      data: {
+        article: article,
+        quantity: quantity,
+        rest1: 0,
+        rest2: 0
+      }
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+      if (result) {
+        this.addSplittedArticle(index, article, quantity, result);
+      }
+    });
+  }
+
+  addSplittedArticle(index: number, article: string, quantity: string, result: number) {
+    this.dataSource3[index].quantity = String((Number(quantity) - result));
+    this.dataSource3.push({article: article, quantity: result.toString()});
+    this.dataSource32._updateChangeSubscription();
+  }
+
+  resetTable() {
+    this.dataSource3 = [];
+    this.dataSource3 = JSON.parse(JSON.stringify(ELEMENT_DATA_THIRD));
+    this.dataSource32 = new MatTableDataSource(this.dataSource3);
+  }
+  
   exportXml() {
-    var xmlString = "<input>" + this.selldirectXml(ELEMENT_DATA) + this.orderlistXml(ELEMENT_DATA_SECOND) + this.productionlistXml(ELEMENT_DATA_THIRD) + this.workingtimeXml(ELEMENT_DATA_FOURTH) + "</input>";
+    var xmlString = "<input>" + this.selldirectXml(ELEMENT_DATA) + this.orderlistXml(ELEMENT_DATA_SECOND) + this.productionlistXml(this.dataSource3) + this.workingtimeXml(ELEMENT_DATA_FOURTH) + "</input>";
     let blob = new Blob([xmlString], {type: 'text/xml'});
     /*
     let url = URL.createObjectURL(blob);
@@ -126,15 +169,15 @@ export interface Production {
 }
 
 const ELEMENT_DATA_THIRD: Production[] = [
-  {article: '1', quantity: 'Hydrogen3'},
-  {article: '2', quantity: 'Helium'},
-  {article: '3', quantity: 'Lithium'},
-  {article: '4', quantity: 'Beryllium'},
-  {article: '5', quantity: 'Boron'},
-  {article: '6', quantity: 'Carbon'},
-  {article: '7', quantity: 'Nitrogen'},
-  {article: '8', quantity: 'Oxygen'},
-  {article: '9', quantity: 'Fluorine'},
+  {article: '1', quantity: '100'},
+  {article: '2', quantity: '200'},
+  {article: '3', quantity: '300'},
+  {article: '4', quantity: '400'},
+  {article: '5', quantity: '500'},
+  {article: '6', quantity: '600'},
+  {article: '7', quantity: '700'},
+  {article: '8', quantity: '800'},
+  {article: '9', quantity: '900'},
 ];
 
 export interface WorkingTime {

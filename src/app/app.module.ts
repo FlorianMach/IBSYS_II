@@ -9,9 +9,10 @@ import { FeatureModule } from './shared/feature/feature.module';
 import { I18nModule } from './shared/i18n/i18n.module';
 import { MaterialModule } from './shared/material/material.module';
 import { WarningDialogComponent } from './warning-dialog/warning-dialog.component';
+import { SplitDialogComponent } from './split-dialog/split-dialog.component';
 
 @NgModule({
-  declarations: [AppComponent, WarningDialogComponent],
+  declarations: [AppComponent, SplitDialogComponent, WarningDialogComponent],
   imports: [
     AppRoutingModule,
     BrowserAnimationsModule,

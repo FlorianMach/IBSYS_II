@@ -1,0 +1,20 @@
+<h1 mat-dialog-title>Split Quantity Article No. {{data.article}}</h1>
+
+<!--
+    <div mat-dialog-content>
+        <ng-container class="slider-wrapper">
+            <mat-slider tickInterval="10" min="1" max="{{quantity - 1}}" (input)="pitch($event)"></mat-slider>
+        </ng-container>
+    </div>
+    <div mat-dialog-content>{{rest1}}</div>
+    <div mat-dialog-content>{{rest2}}</div>
+-->
+
+<div mat-dialog-content>
+    <input matInput type="number" value="{{data.rest1}}" (change)="calculate($event)" [(ngModel)]="data.rest1">
+</div>
+<div mat-dialog-content>{{data.rest2}}</div>
+<div mat-dialog-actions>
+  <button mat-button mat-dialog-close (click)="onNoClick()">Discard</button>
+  <button mat-button mat-dialog-close [mat-dialog-close]="data.rest1">Split</button>
+</div>
