@@ -2,13 +2,13 @@
   <table class="styled-table" id="excelTable">
     <thead>
       <tr>
-        <th width="7%">Item No.</th>
-        <th width="7%">Delivery time</th>
-        <th width="7%">Deviation</th>
-        <th width="10%">Discount quantity</th>
-        <th width="10%">Initial stock in Per n</th>
+        <th width="7%">{{ "PROCUREMENT.NUMBER" | translate }}</th>
+        <th width="7%">{{ "PROCUREMENT.DELIVERY" | translate }}</th>
+        <th width="7%">{{ "PROCUREMENT.DEVIATION" | translate }}</th>
+        <th width="10%">{{ "PROCUREMENT.DISCOUNT" | translate }}</th>
+        <th width="10%">{{ "PROCUREMENT.STOCK" | translate }}</th>
         <th width="20%" colspan="4">
-          Gross requirements according the prod.progr.<br />
+          {{ "PROCUREMENT.REQUIREMENTS" | translate }}<br />
           <div style="display: flex">
             <p style="margin-left: 9%">n</p>
             <p style="margin-left: 21%">n+1</p>
@@ -16,8 +16,8 @@
             <p style="margin-left: 21%">n+3</p>
           </div>
         </th>
-        <th width="10%">Amount</th>
-        <th width="10%">Order<br />N/E</th>
+        <th width="10%">{{ "PROCUREMENT.AMOUNT" | translate }}</th>
+        <th width="10%">{{ "PROCUREMENT.ORDER" | translate }}<br />N/E</th>
       </tr>
     </thead>
     <tbody>
@@ -2128,7 +2128,7 @@
           <input type="number" value="0" [readonly]="!editable"/>
         </td>
         <td style="display: flex">
-          <input type="radio" id="orderN" name="order30" value="orderN" (click)="disable" [disabled]="!editable"/>
+          <input type="radio" id="orderN" name="order30" value="orderN" [disabled]="!editable"/>
           <input type="radio" id="orderE" name="order30" value="orderE" [disabled]="!editable"/>
         </td>
       </tr>
