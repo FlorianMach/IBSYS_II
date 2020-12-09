@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { MRP2PSNS } from '../Models';
 import { SharedService } from '../shared/shared.service';
 import { XmlReaderService } from '../xml-reader/xml-reader.service';
 import { ProcurementService } from './procurement.service';
 import * as XLSX from "xlsx";
+import { Button } from 'protractor';
 @Component({
   selector: 'app-procurement',
   templateUrl: './procurement.component.html',
@@ -54,4 +55,24 @@ export class ProcurementComponent implements OnInit {
     XLSX.writeFile(wb, this.fileName)
   }
 
+  @Input() editable: boolean = false;
+
+  change: boolean = true;
+  commit: boolean = false;
+
+  edit() {
+   this.editable = true;
+   this.commit = true;
+   this.change = false;
+  }
+
+  save() {
+    this.editable = false;
+    this.commit = false;
+    this.change = true;
+  }
+
+  disable(radio) {
+    radio.checked = false;
+  }
 }
