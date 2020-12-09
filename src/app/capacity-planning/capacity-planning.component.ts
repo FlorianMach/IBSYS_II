@@ -115,6 +115,7 @@ export class CapacityPlanningComponent implements OnInit {
   dataSource: any[] = [];
   setupEventLastPeriod: any[] = [];
   data: any[] = [];
+  public toggleButton: boolean = false;
   
   constructor(
     private xmlReaderService: XmlReaderService
@@ -127,6 +128,14 @@ export class CapacityPlanningComponent implements OnInit {
     });
     
   }
+  
+  enable(){
+    this.toggleButton = false
+ }
+
+ disable(){
+    this.toggleButton = true
+ }
 
   capacityPlaning(product, productionplanning, data) {
     var result = new Array();
@@ -260,4 +269,7 @@ export class CapacityPlanningComponent implements OnInit {
     }
     return result;
   }
+
+
+
 }

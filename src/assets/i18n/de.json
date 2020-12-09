@@ -14,6 +14,7 @@
         "NAME_P3": "MRP I - P3"
     },
     "CAPACITY_PLANNING": {
+        "HEADLINE": "Kapazitätsplanung",
         "NAME": "Kapazitätsplanung",
         "WORKPLACE": "Arbeitsplatz",
         "CAPACITYREQ": "Kapazitätsbedarf",

@@ -14,7 +14,8 @@
         "NAME_P3": "MRP I - P3"
     },
     "CAPACITY_PLANNING": {
-        "NAME": "Capacity planning",
+        "HEADLINE": "Capacity Planning",
+        "NAME": "Capacity Planning",
         "WORKPLACE": "Workplace",
         "CAPACITYREQ": "Capacity Requirements",
         "SETUPTIME": "Set-Up Time",
