@@ -4,6 +4,7 @@ import { SharedService } from '../shared/shared.service';
 import { XmlReaderService } from '../xml-reader/xml-reader.service';
 import { ProductPlanningService } from './product-planning.service';
 
+
 @Component({
   selector: 'app-product-planning',
   templateUrl: './product-planning.component.html',
@@ -15,6 +16,7 @@ export class ProductPlanningComponent implements OnInit {
   mrp2data: MRP2PSNS[];
   displayedColumns2 = ['product', 'quantity', 'price', 'penalty'];
   dataSource2 = ELEMENT_DATA2;
+
   constructor(
     private productPlanningService: ProductPlanningService,
     private xmlReaderService: XmlReaderService,
@@ -45,6 +47,7 @@ export class ProductPlanningComponent implements OnInit {
       // }
     ];
   }
+  
 
   ngOnInit(): void {
     this.xmlReaderService.subscribe((data) => {
@@ -74,7 +77,6 @@ export class ProductPlanningComponent implements OnInit {
     this.change = true;
   }
 }
-
 export interface DirectSales {
   product: string;
   quantity: string;
@@ -87,3 +89,4 @@ const ELEMENT_DATA2: DirectSales[] = [
   {product: 'P2', quantity: 'Helium2', price: '0.0', penalty: '100.10'},
   {product: 'P3', quantity: 'Lithium2', price: '0.0', penalty: '100.10'}
 ]
+

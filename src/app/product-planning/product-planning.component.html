@@ -75,25 +75,55 @@
          <!-- Product Column -->
          <ng-container matColumnDef="product">
              <th mat-header-cell *matHeaderCellDef> {{ "PRODUCT_PLANNING.PRODUCT" | translate }} </th>
-             <td mat-cell *matCellDef="let element"> {{element.product}} </td>
+             <td mat-cell *matCellDef="let element">{{element.product}}</td>
          </ng-container>
 
           <!-- Quantity Column -->
           <ng-container matColumnDef="quantity">
              <th mat-header-cell *matHeaderCellDef> {{ "PRODUCT_PLANNING.QUANTITY" | translate }} </th>
-             <td mat-cell *matCellDef="let element"> {{element.quantity}} </td>
+             <td mat-cell *matCellDef="let element">
+              <mat-form-field>
+                <input
+                  matInput
+                  type="number"
+                  min="0"
+                  value="0"
+                  [readonly]="!editable"
+                />
+              </mat-form-field>
+            </td>
            </ng-container>
 
             <!-- Price Column -->
             <ng-container matColumnDef="price">
              <th mat-header-cell *matHeaderCellDef> {{ "PRODUCT_PLANNING.PRICE" | translate }} </th>
-             <td mat-cell *matCellDef="let element"> {{element.price}} </td>
+             <td mat-cell *matCellDef="let element">
+              <mat-form-field>
+                <input
+                  matInput
+                  type="number"
+                  min="0"
+                  value="0"
+                  [readonly]="!editable"
+                />
+              </mat-form-field>
+            </td>
            </ng-container>
 
             <!-- Penalty Column -->
             <ng-container matColumnDef="penalty">
              <th mat-header-cell *matHeaderCellDef> {{ "PRODUCT_PLANNING.PENALTY" | translate }} </th>
-             <td mat-cell *matCellDef="let element"> {{element.penalty}} </td>
+             <td mat-cell *matCellDef="let element">
+              <mat-form-field>
+                <input
+                  matInput
+                  type="number"
+                  min="0"
+                  value="0"
+                  [readonly]="!editable"
+                />
+              </mat-form-field>
+            </td>
 
              <tr mat-header-row *matHeaderRowDef="displayedColumns2; sticky: true"></tr>
              <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
@@ -114,5 +144,5 @@ style="
 "
 >
   <button *ngIf="change" (click)="edit()">Change</button>
-  <button *ngIf="commit"  (click)="save()">Commit</button>
+  <button *ngIf="commit"  Style="color:white; background:#1da1f2" (click)="save()">Commit</button>
 </div>
