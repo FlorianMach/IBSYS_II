@@ -6,7 +6,17 @@
         "NAME": "Xml"
     },
     "PRODUCT_PLANNING": {
-        "NAME": "MRP II"
+        "NAME": "MRP II",
+        "PRODUCT": "Produkt",
+        "QUANTITY": "Menge",
+        "PRICE": "Preis",
+        "PENALTY": "Strafe",
+        "WISH": {
+            "NAME": "Vertriebswunsch"
+        },
+        "DIRECT": {
+            "NAME": "Direktvertrieb"
+        }
     },
     "MRP": {
         "NAME_P1": "MRP I - P1",
