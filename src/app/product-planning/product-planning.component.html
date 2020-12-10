@@ -86,9 +86,9 @@
                 <input
                   matInput
                   type="number"
-                  min="0"
-                  value="0"
-                  [readonly]="!editable"
+                  [value]="element.quantity"
+                  [(ngModel)]="element.quantity"
+                  [disabled]="!editable"
                 />
               </mat-form-field>
             </td>
@@ -103,8 +103,9 @@
                   matInput
                   type="number"
                   min="0"
-                  value="0"
-                  [readonly]="!editable"
+                  [value]="element.price"
+                  [(ngModel)]="element.price"
+                  [disabled]="!editable"
                 />
               </mat-form-field>
             </td>
@@ -119,8 +120,9 @@
                   matInput
                   type="number"
                   min="0"
-                  value="0"
-                  [readonly]="!editable"
+                  [value]="element.penalty"
+                  [(ngModel)]="element.penalty"
+                  [disabled]="!editable"
                 />
               </mat-form-field>
             </td>

@@ -6,6 +6,7 @@ import { MatTabsModule } from '@angular/material/tabs';
 import { I18nModule } from '../shared/i18n/i18n.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
+import { MatFormFieldModule } from '@angular/material/form-field';
 
 @NgModule({
   declarations: [ProductPlanningComponent],
@@ -15,7 +16,9 @@ import { MatTableModule } from '@angular/material/table';
     MatTabsModule,
     I18nModule,
     MatInputModule,
-    MatTableModule],
+    MatTableModule,
+    MatFormFieldModule
+],
   exports: [ProductPlanningComponent],
 })
 export class ProductPlanningModule { }

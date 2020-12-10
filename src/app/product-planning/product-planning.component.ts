@@ -4,12 +4,25 @@ import { SharedService } from '../shared/shared.service';
 import { XmlReaderService } from '../xml-reader/xml-reader.service';
 import { ProductPlanningService } from './product-planning.service';
 
+export interface DirectSales {
+  product: string;
+  quantity: string;
+  price: string;
+  penalty: string;
+}
+
+const ELEMENT_DATA2: DirectSales[] = [
+  {product: 'P1', quantity: '0', price: '0', penalty: '0'},
+  {product: 'P2', quantity: '0', price: '0', penalty: '0'},
+  {product: 'P3', quantity: '0', price: '0', penalty: '0'}
+]
 
 @Component({
   selector: 'app-product-planning',
   templateUrl: './product-planning.component.html',
   styleUrls: ['./product-planning.component.scss'],
 })
+
 export class ProductPlanningComponent implements OnInit {
   @Output() dataChanged: EventEmitter<MRP2PSNS[]> = new EventEmitter();
   data: any;
@@ -53,6 +66,7 @@ export class ProductPlanningComponent implements OnInit {
     this.xmlReaderService.subscribe((data) => {
       this.data = data;
       console.log(this.data);
+      console.log(this.dataSource2);
     });
   }
   onValueChanged(event) {
@@ -75,18 +89,8 @@ export class ProductPlanningComponent implements OnInit {
     this.editable = false;
     this.commit = false;
     this.change = true;
+    console.log(this.dataSource2);
   }
 }
-export interface DirectSales {
-  product: string;
-  quantity: string;
-  price: string;
-  penalty: string;
-}
 
-const ELEMENT_DATA2: DirectSales[] = [
-  {product: 'P1', quantity: 'Hydrogen2', price: '0.0', penalty: '100.10'},
-  {product: 'P2', quantity: 'Helium2', price: '0.0', penalty: '100.10'},
-  {product: 'P3', quantity: 'Lithium2', price: '0.0', penalty: '100.10'}
-]
 
