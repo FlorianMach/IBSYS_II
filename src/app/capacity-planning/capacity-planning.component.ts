@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { XmlReaderService } from '../xml-reader/xml-reader.service';
 
 export interface Products {
@@ -277,48 +277,49 @@ export class CapacityPlanningComponent implements OnInit {
   // Neue Berechnung der Tabelle, nachdem Änderungen vorgenommen werden
   updateTable(){
     this.toggleButton = !this.toggleButton
-    
-    var capacity:any[] = [];
-    var setuptime:any[] = [];
-    var capacityLastPeriod:any[] = [];
-    var setUpLastPeriod:any[] = [];
-    var overtime;
-    var secondShift;
 
-    for(var i=0; i < this.viewData.length; ++i){
-      capacity[i] = this.viewData[i].capareq
-      setuptime[i] = this.viewData[i].setup
-      capacityLastPeriod[i] = this.viewData[i].capalast
-      setUpLastPeriod[i] = this.viewData[i].setuplast
-    }
-
-    this.viewData.length = 0;
-
-    for(var i = 0; i < capacity.length; ++i ){
-
-      if((capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5<0){
-        overtime = 0;
-      } else {overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5}
-  
-      if(overtime > 240) {
-        overtime = 0;
-        secondShift = "x"; 
-      } else { secondShift = " "; }
-
-      this.viewData.push({
-        workplace: i+1,
-        capareq: capacity[i],
-        setup: setuptime[i],
-        capalast: capacityLastPeriod[i],
-        setuplast: setUpLastPeriod[i],
-        totalRequirement: capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i],
-        overtime: overtime,
-        secondShift: secondShift     
-      })
-      
-    }
-    console.log(this.oldViewData)
     console.log(this.viewData)
-  }
+    
+  //   var capacity:any[] = [];
+  //   var setuptime:any[] = [];
+  //   var capacityLastPeriod:any[] = [];
+  //   var setUpLastPeriod:any[] = [];
+  //   var overtime;
+  //   var secondShift;
 
+  //   for(var i=0; i < this.viewData.length; ++i){
+  //     capacity[i] = this.viewData[i].capareq
+  //     setuptime[i] = this.viewData[i].setup
+  //     capacityLastPeriod[i] = this.viewData[i].capalast
+  //     setUpLastPeriod[i] = this.viewData[i].setuplast
+  //   }
+
+  //   this.viewData.length = 0;
+
+  //   for(var i = 0; i < capacity.length; ++i ){
+
+  //     if((capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5<0){
+  //       overtime = 0;
+  //     } else {overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5}
+  
+  //     if(overtime > 240) {
+  //       overtime = 0;
+  //       secondShift = "x"; 
+  //     } else { secondShift = " "; }
+
+  //     this.viewData.push({
+  //       workplace: i+1,
+  //       capareq: capacity[i],
+  //       setup: setuptime[i],
+  //       capalast: capacityLastPeriod[i],
+  //       setuplast: setUpLastPeriod[i],
+  //       totalRequirement: capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i],
+  //       overtime: overtime,
+  //       secondShift: secondShift     
+  //     })
+      
+  //   }
+  //   console.log(this.oldViewData)
+  //   console.log(this.viewData)
+  }
 }
