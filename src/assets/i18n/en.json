@@ -24,7 +24,9 @@
         "TOTALREQUIREMENT": "Total Requirement",
         "OVERTIME": "Overtime per Week",
         "SECONDSHIFT": "Second Shift",
-        "INFO": "All times are calculated and indicated in minutes"
+        "INFO": "All times are calculated and indicated in minutes",
+        "CHANGEMODE": "Changemode on/off",
+        "UPDATE": "Update"
     },
     "PROCUREMENT": {
         "NAME": "Procurement"

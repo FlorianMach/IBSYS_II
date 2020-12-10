@@ -24,7 +24,9 @@
         "TOTALREQUIREMENT": "Gesamtbedarf",
         "OVERTIME": "Überstunden pro Woche",
         "SECONDSHIFT": "Zweite Schicht",
-        "INFO": "Alle Zeitangaben werden in Minuten berechnet und angegeben"
+        "INFO": "Alle Zeitangaben werden in Minuten berechnet und angegeben",
+        "CHANGEMODE": "Änderungsmodus an/aus",
+        "UPDATE": "Aktualisieren"
     },
     "PROCUREMENT": {
         "NAME": "Einkauf"

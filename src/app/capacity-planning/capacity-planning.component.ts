@@ -1,5 +1,4 @@
-import { NgModuleCompileResult } from '@angular/compiler/src/ng_module_compiler';
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { XmlReaderService } from '../xml-reader/xml-reader.service';
 
 export interface Products {
@@ -112,10 +111,11 @@ export class CapacityPlanningComponent implements OnInit {
     'overtime',
     'secondShift'];
 
-  dataSource: any[] = [];
+  viewData: Array<any>;
+  oldViewData: Array<any>;
   setupEventLastPeriod: any[] = [];
-  data: any[] = [];
-  public toggleButton: boolean = false;
+  xmlData: any[] = [];
+  toggleButton: boolean = true;
   
   constructor(
     private xmlReaderService: XmlReaderService
@@ -123,20 +123,15 @@ export class CapacityPlanningComponent implements OnInit {
 
   ngOnInit(): void {
     this.xmlReaderService.subscribe((data) => {
-      this.data = data
-      this.dataSource = this.capacityPlaning(PRODUCTS, PRODUCTIONPLANNING, this.data );  
+      this.xmlData = data
+      this.viewData = this.capacityPlaning(PRODUCTS, PRODUCTIONPLANNING, this.xmlData ); 
+      this.oldViewData = this.viewData;
+      
+      console.log 
     });
     
   }
   
-  enable(){
-    this.toggleButton = false
- }
-
- disable(){
-    this.toggleButton = true
- }
-
   capacityPlaning(product, productionplanning, data) {
     var result = new Array();
     var capacity;
@@ -160,6 +155,7 @@ export class CapacityPlanningComponent implements OnInit {
     //Berechnung Set-Up Last Period
     setUpLastPeriod = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
+    // Zusammenbauen des Arrays für die Tabelle
     for(var i = 0; i < capacity.length; ++i ){
 
     if((capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5<0){
@@ -185,6 +181,7 @@ export class CapacityPlanningComponent implements OnInit {
     return result;
   }
 
+  // Funktion für die Berechnung der benötigten Kapazität pro Arbeitsplatz
   capacityRequirements(product1, productionplanning1) {
 
     var result = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
@@ -213,6 +210,7 @@ export class CapacityPlanningComponent implements OnInit {
     return result;
   }
 
+  // Funktion, um Rüst-Daten aus der XML-Datei zu lesen
   getSetupEvents(data){
     
     var result = new Array();
@@ -237,6 +235,7 @@ export class CapacityPlanningComponent implements OnInit {
     return result;
   }
 
+  // Berechnung der Rüstzeit pro Arbeitsplatz
   calculateSetupTime(lastPeriod, setUpTime){
     var result = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
     var lastPeriod = lastPeriod;
@@ -248,6 +247,7 @@ export class CapacityPlanningComponent implements OnInit {
     return result;
   }
 
+  // Berechnung der benötigten Zeit für die letzte Periode
   getcapacitylastPeriod(data){
     var result = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
 
@@ -270,6 +270,55 @@ export class CapacityPlanningComponent implements OnInit {
     return result;
   }
 
+  enable(){
+    this.toggleButton = !this.toggleButton
+  }
 
+  // Neue Berechnung der Tabelle, nachdem Änderungen vorgenommen werden
+  updateTable(){
+    this.toggleButton = !this.toggleButton
+    
+    var capacity:any[] = [];
+    var setuptime:any[] = [];
+    var capacityLastPeriod:any[] = [];
+    var setUpLastPeriod:any[] = [];
+    var overtime;
+    var secondShift;
+
+    for(var i=0; i < this.viewData.length; ++i){
+      capacity[i] = this.viewData[i].capareq
+      setuptime[i] = this.viewData[i].setup
+      capacityLastPeriod[i] = this.viewData[i].capalast
+      setUpLastPeriod[i] = this.viewData[i].setuplast
+    }
+
+    this.viewData.length = 0;
+
+    for(var i = 0; i < capacity.length; ++i ){
+
+      if((capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5<0){
+        overtime = 0;
+      } else {overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5}
+  
+      if(overtime > 240) {
+        overtime = 0;
+        secondShift = "x"; 
+      } else { secondShift = " "; }
+
+      this.viewData.push({
+        workplace: i+1,
+        capareq: capacity[i],
+        setup: setuptime[i],
+        capalast: capacityLastPeriod[i],
+        setuplast: setUpLastPeriod[i],
+        totalRequirement: capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i],
+        overtime: overtime,
+        secondShift: secondShift     
+      })
+      
+    }
+    console.log(this.oldViewData)
+    console.log(this.viewData)
+  }
 
 }
