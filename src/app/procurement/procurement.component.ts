@@ -5,6 +5,7 @@ import { XmlReaderService } from '../xml-reader/xml-reader.service';
 import { ProcurementService } from './procurement.service';
 import * as XLSX from "xlsx";
 import { Button } from 'protractor';
+
 @Component({
   selector: 'app-procurement',
   templateUrl: './procurement.component.html',
@@ -70,6 +71,7 @@ export class ProcurementComponent implements OnInit {
     this.editable = false;
     this.commit = false;
     this.change = true;
+    console.log(this.nValues);
   }
   
   radio: boolean = true;

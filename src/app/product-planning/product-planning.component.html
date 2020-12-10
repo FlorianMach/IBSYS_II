@@ -27,7 +27,7 @@
             name="mrp2data"
             (change)="onValueChanged($event)"
             (keyup)="onValueChanged($event)"
-            [readonly]="!editable"
+            [disabled]="!editable"
           />
         </td>
         <td>
@@ -37,7 +37,7 @@
             [(ngModel)]="mrp2data[i].n2"
             (change)="onValueChanged($event)"
             (keyup)="onValueChanged($event)"
-            [readonly]="!editable"
+            [disabled]="!editable"
           />
         </td>
         <td>
@@ -47,7 +47,7 @@
             [(ngModel)]="mrp2data[i].n3"
             (change)="onValueChanged($event)"
             (keyup)="onValueChanged($event)"
-            [readonly]="!editable"
+            [disabled]="!editable"
           />
         </td>
         <td>
@@ -57,7 +57,7 @@
             [(ngModel)]="mrp2data[i].n4"
             (change)="onValueChanged($event)"
             (keyup)="onValueChanged($event)"
-            [readonly]="!editable"
+            [disabled]="!editable"
           />
         </td>
       </tr>
