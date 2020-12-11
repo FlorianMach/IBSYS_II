@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { XmlReaderService } from '../xml-reader/xml-reader.service';
+import { CapacityPlanningService } from './capacity-planning.service';
 
 export interface Products {
   product: number;
@@ -118,6 +119,7 @@ export class CapacityPlanningComponent implements OnInit {
   toggleButton: boolean = true;
   
   constructor(
+    private CapacityPlanningService: CapacityPlanningService,
     private xmlReaderService: XmlReaderService
   ) {}
 
@@ -153,16 +155,44 @@ export class CapacityPlanningComponent implements OnInit {
 
     // Zusammenbauen des Arrays für die Tabelle
     for(var i = 0; i < capacity.length; ++i ){
-
-    if((capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5<0){
-      overtime = 0;
-    } else {overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5}
-
-    if(overtime > 240) {
-      overtime = 0;
-      secondShift = "x"; 
-    } else { secondShift = " "; }
-
+      if(i===4){
+        overtime = 0;
+        secondShift = 0;
+      } else if((capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5<0){
+        overtime = 0;
+        secondShift = 1;
+      } else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>8400){
+        if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-9600/5>0){
+          overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-8400)/5;
+          secondShift = 4;
+        } else {
+          overtime = 0;
+          secondShift = 4;
+        }
+      }
+      else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>6000){
+        if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-7200>0){
+          overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-6000)/5;
+          secondShift = 3;
+        } else {
+          overtime = 0;
+          secondShift = 3;
+        }
+      } else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>3600) {
+        if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-4800>0){
+          overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-3600)/5;
+          secondShift = 2;
+        } else {
+          overtime = 0;
+          secondShift = 2;
+        }
+      } else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>1200){
+        if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400>0) {
+          overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5;
+          secondShift = 1;
+        }
+      }
+      
       result.push({
         workplace: i+1,
         capareq: capacity[i],
@@ -293,14 +323,43 @@ export class CapacityPlanningComponent implements OnInit {
 
     for(var i = 0; i < capacity.length; ++i ){
 
-      if((capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5<0){
+      if(i===4){
         overtime = 0;
-      } else {overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5}
-  
-      if(overtime > 240) {
+        secondShift = 0;
+      } else if((capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5<0){
         overtime = 0;
-        secondShift = "x"; 
-      } else { secondShift = " "; }
+        secondShift = 1;
+      } else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>8400){
+        if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-9600/5>0){
+          overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-8400)/5;
+          secondShift = 4;
+        } else {
+          overtime = 0;
+          secondShift = 4;
+        }
+      }
+      else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>6000){
+        if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-7200>0){
+          overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-6000)/5;
+          secondShift = 3;
+        } else {
+          overtime = 0;
+          secondShift = 3;
+        }
+      } else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>3600) {
+        if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-4800>0){
+          overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-3600)/5;
+          secondShift = 2;
+        } else {
+          overtime = 0;
+          secondShift = 2;
+        }
+      } else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>1200){
+        if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400>0) {
+          overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5;
+          secondShift = 1;
+        }
+      }
 
       this.viewData.push({
         workplace: i+1,
@@ -312,6 +371,7 @@ export class CapacityPlanningComponent implements OnInit {
         overtime: overtime,
         secondShift: secondShift     
       })
+      this.CapacityPlanningService.next(this.viewData)
     }
   }
 
@@ -319,6 +379,7 @@ export class CapacityPlanningComponent implements OnInit {
     this.toggleButton = !this.toggleButton
     this.viewData = [];
     this.viewData = this.oldViewData;
+    this.CapacityPlanningService.next(this.viewData)
   }
 
   private createDeepCopyOf(obj: any): any {
