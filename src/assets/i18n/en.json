@@ -16,6 +16,10 @@
         },
         "DIRECT": {
             "NAME": "Direct Sales"
+        },
+        "BUTTON":{
+            "CHANGE": "Change",
+            "COMMIT": "Commit"
         }
     },
     "MRP": {
@@ -48,7 +52,11 @@
         "STOCK": "Initial stock in Per n",
         "REQUIREMENTS": "Gross requirements according the prod.progr.",
         "AMOUNT": "Amount",
-        "ORDER": "Order"
+        "ORDER": "Order",
+        "BUTTON":{
+            "CHANGE": "Change",
+            "COMMIT": "Commit"
+        }
     },
     "RESULT": {
         "XML": "Export Result XML",

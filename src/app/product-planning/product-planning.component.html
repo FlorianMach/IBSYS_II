@@ -145,6 +145,6 @@ style="
   justify-content: flex-end;
 "
 >
-  <button *ngIf="change" (click)="edit()">Change</button>
-  <button *ngIf="commit"  style="color:white; background:#1da1f2" (click)="save()">Commit</button>
+  <button *ngIf="change" (click)="edit()">{{ "PRODUCT_PLANNING.BUTTON.CHANGE" | translate }}</button>
+  <button *ngIf="commit"  style="color:white; background:#1da1f2" (click)="save()">{{ "PRODUCT_PLANNING.BUTTON.COMMIT" | translate }}</button>
 </div>

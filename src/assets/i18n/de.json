@@ -16,6 +16,10 @@
         },
         "DIRECT": {
             "NAME": "Direktvertrieb"
+        },
+        "BUTTON":{
+            "CHANGE": "Ändern",
+            "COMMIT": "Sichern"
         }
     },
     "MRP": {
@@ -48,7 +52,11 @@
         "STOCK": "Anfangsbestand in Per n",
         "REQUIREMENTS": "Bruttobedarf gemäß Prod.progr.",
         "AMOUNT": "Bestellmenge",
-        "ORDER": "Bestellung"
+        "ORDER": "Bestellung",
+        "BUTTON":{
+            "CHANGE": "Ändern",
+            "COMMIT": "Sichern"
+        }
     },
     "RESULT": {
         "XML": "Exportiere Ergebnis XML",

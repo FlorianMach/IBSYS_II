@@ -5,6 +5,8 @@ import { XmlReaderService } from '../xml-reader/xml-reader.service';
 import { ProcurementService } from './procurement.service';
 import * as XLSX from "xlsx";
 import { Button } from 'protractor';
+import { checkServerIdentity } from 'tls';
+import { isNgTemplate } from '@angular/compiler';
 
 @Component({
   selector: 'app-procurement',
@@ -17,6 +19,7 @@ export class ProcurementComponent implements OnInit {
   initialStock: any[] = [];
   orderN = "orderN";
   orderE = "orderE";
+  orderO ="orderO";
 
   constructor(
     private procurementService: ProcurementService,
@@ -73,10 +76,35 @@ export class ProcurementComponent implements OnInit {
     this.change = true;
     console.log(this.nValues);
   }
-  
-  radio: boolean = true;
 
-  disable(radio) {
-      radio.checked = false;
+  /*
+  check1=false;
+  check2=false;
+  onlyOneValue(e)
+  {
+    if (e.target.id == "orderN") {
+      this.check1= true;
+      this.check2 = false;
+    }
+    else  if (e.target.id == "orderE") {
+      this.check1= true;
+      this.check2 = false;
+    }
+  }
+  */
+ 
+  /*
+  onlyOneValue(a){ 
+    if (a.checked && a.value=="orderN"){
+      a.orderE = false;
+     }
+     if (e.target.id =="orderE" && e.orderN == true) { 
+      e.orderN = false;
+     }
+  }
+  */
+
+  onlyOneValue(){
+
   }
 }

@@ -94,8 +94,13 @@
           <input type="number" value="0" [disabled]="!editable"/>
         </td>
         <td style="display: flex">
-          <input type="checkbox" id="orderN" name="order1" ([value])="(orderN)" (click)="disable(this)" [disabled]="!editable"/>
-          <input type="checkbox" id="orderE" name="order1" ([value])="(orderE)" (click)="disable(this)" [disabled]="!editable"/>
+         
+           
+              <input type="checkbox" id="orderN" name="order1" ([value])="(orderN)" [disabled]="!editable"/>
+           
+              <input type="checkbox" id="orderE" name="order1" ([value])="(orderE)" [disabled]="!editable"/>
+
+         
         </td>
       </tr>
       <tr>
@@ -2144,6 +2149,6 @@ style="
   justify-content: flex-end;
 "
 >
-  <button *ngIf="change" (click)="edit()">Change</button>
-  <button *ngIf="commit" style="color:white; background:#1da1f2" (click)="save()">Commit</button>
+  <button *ngIf="change" (click)="edit()">{{ "PROCUREMENT.BUTTON.CHANGE" | translate }}</button>
+  <button *ngIf="commit" style="color:white; background:#1da1f2" (click)="save()">{{ "PROCUREMENT.BUTTON.COMMIT" | translate }}</button>
 </div>
