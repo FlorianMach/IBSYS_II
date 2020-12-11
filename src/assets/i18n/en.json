@@ -26,7 +26,8 @@
         "SECONDSHIFT": "Second Shift",
         "INFO": "All times are calculated and indicated in minutes",
         "CHANGEMODE": "Changemode on/off",
-        "UPDATE": "Update"
+        "UPDATE": "Update",
+        "DISCARD": "Discard"
     },
     "PROCUREMENT": {
         "NAME": "Procurement"

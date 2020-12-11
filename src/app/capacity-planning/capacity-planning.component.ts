@@ -114,7 +114,7 @@ export class CapacityPlanningComponent implements OnInit {
   viewData: Array<any>;
   oldViewData: Array<any>;
   setupEventLastPeriod: any[] = [];
-  xmlData: any[] = [];
+
   toggleButton: boolean = true;
   
   constructor(
@@ -123,13 +123,9 @@ export class CapacityPlanningComponent implements OnInit {
 
   ngOnInit(): void {
     this.xmlReaderService.subscribe((data) => {
-      this.xmlData = data
-      this.viewData = this.capacityPlaning(PRODUCTS, PRODUCTIONPLANNING, this.xmlData ); 
-      this.oldViewData = this.viewData;
-      
-      console.log 
+      this.viewData = this.capacityPlaning(PRODUCTS, PRODUCTIONPLANNING, data); 
+      this.oldViewData = this.createDeepCopyOf(this.viewData);
     });
-    
   }
   
   capacityPlaning(product, productionplanning, data) {
@@ -276,50 +272,56 @@ export class CapacityPlanningComponent implements OnInit {
 
   // Neue Berechnung der Tabelle, nachdem Änderungen vorgenommen werden
   updateTable(){
+
     this.toggleButton = !this.toggleButton
-
     console.log(this.viewData)
-    
-  //   var capacity:any[] = [];
-  //   var setuptime:any[] = [];
-  //   var capacityLastPeriod:any[] = [];
-  //   var setUpLastPeriod:any[] = [];
-  //   var overtime;
-  //   var secondShift;
+    var capacity:any[] = [];
+    var setuptime:any[] = [];
+    var capacityLastPeriod:any[] = [];
+    var setUpLastPeriod:any[] = [];
+    var overtime;
+    var secondShift;
 
-  //   for(var i=0; i < this.viewData.length; ++i){
-  //     capacity[i] = this.viewData[i].capareq
-  //     setuptime[i] = this.viewData[i].setup
-  //     capacityLastPeriod[i] = this.viewData[i].capalast
-  //     setUpLastPeriod[i] = this.viewData[i].setuplast
-  //   }
+    for(var i=0; i < this.viewData.length; ++i){
+      capacity[i] = this.viewData[i].capareq
+      setuptime[i] = this.viewData[i].setup
+      capacityLastPeriod[i] = this.viewData[i].capalast
+      setUpLastPeriod[i] = this.viewData[i].setuplast
+    }
 
-  //   this.viewData.length = 0;
+    this.viewData = [];
 
-  //   for(var i = 0; i < capacity.length; ++i ){
+    for(var i = 0; i < capacity.length; ++i ){
 
-  //     if((capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5<0){
-  //       overtime = 0;
-  //     } else {overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5}
+      if((capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5<0){
+        overtime = 0;
+      } else {overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5}
   
-  //     if(overtime > 240) {
-  //       overtime = 0;
-  //       secondShift = "x"; 
-  //     } else { secondShift = " "; }
+      if(overtime > 240) {
+        overtime = 0;
+        secondShift = "x"; 
+      } else { secondShift = " "; }
 
-  //     this.viewData.push({
-  //       workplace: i+1,
-  //       capareq: capacity[i],
-  //       setup: setuptime[i],
-  //       capalast: capacityLastPeriod[i],
-  //       setuplast: setUpLastPeriod[i],
-  //       totalRequirement: capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i],
-  //       overtime: overtime,
-  //       secondShift: secondShift     
-  //     })
-      
-  //   }
-  //   console.log(this.oldViewData)
-  //   console.log(this.viewData)
+      this.viewData.push({
+        workplace: i+1,
+        capareq: capacity[i],
+        setup: setuptime[i],
+        capalast: capacityLastPeriod[i],
+        setuplast: setUpLastPeriod[i],
+        totalRequirement: capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i],
+        overtime: overtime,
+        secondShift: secondShift     
+      })
+    }
+  }
+
+  discardChanges(){
+    this.toggleButton = !this.toggleButton
+    this.viewData = [];
+    this.viewData = this.oldViewData;
+  }
+
+  private createDeepCopyOf(obj: any): any {
+    return JSON.parse(JSON.stringify(obj));
   }
 }

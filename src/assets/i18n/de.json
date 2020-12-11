@@ -26,7 +26,8 @@
         "SECONDSHIFT": "Zweite Schicht",
         "INFO": "Alle Zeitangaben werden in Minuten berechnet und angegeben",
         "CHANGEMODE": "Änderungsmodus an/aus",
-        "UPDATE": "Aktualisieren"
+        "UPDATE": "Aktualisieren",
+        "DISCARD": "Verwerfen"
     },
     "PROCUREMENT": {
         "NAME": "Einkauf"
