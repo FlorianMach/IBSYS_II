@@ -8,11 +8,12 @@
                 width: 100%;
                 display: flex;
                 margin-top: 0.5em;
+                margin-bottom: 0.5em;
                 justify-content: flex-end;"> 
             
-            <button mat-flat-button color="secondary" [disabled]="toggleButton" (click)="discardChanges()" type="button">{{ "CAPACITY_PLANNING.DISCARD"| translate }}</button>      
-            <button mat-flat-button color="secondary" [disabled]="toggleButton" (click)="updateTable()" type="button">{{ "CAPACITY_PLANNING.UPDATE"| translate }}</button>
-            <button mat-flat-button color="primary" [disabled]="!toggleButton" (click)="enable()" type="button">{{ "CAPACITY_PLANNING.CHANGEMODE"| translate }}</button>
+            <button mat-flat-button color="warn" style="margin-right:8px" [disabled]="toggleButton" (click)="discardChanges()" type="button">{{ "CAPACITY_PLANNING.DISCARD"| translate }}</button>      
+            <button mat-flat-button color="secondary" style="margin-right:8px" [disabled]="toggleButton" (click)="updateTable()" type="button">{{ "CAPACITY_PLANNING.UPDATE"| translate }}</button>
+            <button mat-flat-button color="primary" style="margin-right:8px" [disabled]="!toggleButton" (click)="enable()" type="button">{{ "CAPACITY_PLANNING.CHANGEMODE"| translate }}</button>
     
         </div>
 
