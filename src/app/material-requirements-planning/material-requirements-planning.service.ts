@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, combineLatest } from 'rxjs';
 import { MatReqItem } from './model/mat-req-item';
 import { ViewData } from './model/view-data';
 
@@ -7,6 +8,61 @@ import { ViewData } from './model/view-data';
 })
 export class MaterialRequirementsPlanningService {
   constructor() {}
+
+  private mrp2SubjectP1 = new BehaviorSubject<any>([]);
+  private mrp2SubjectP2 = new BehaviorSubject<any>([]);
+  private mrp2SubjectP3 = new BehaviorSubject<any>([]);
+
+  private next(product: string, viewData: Array<ViewData>) {
+    if (product === 'P1') {
+      this.nextP1(viewData);
+    }
+    if (product === 'P2') {
+      this.nextP2(viewData);
+    }
+    if (product === 'P3') {
+      this.nextP3(viewData);
+    }
+  }
+
+  private nextP1(viewData: Array<ViewData>): void {
+    this.mrp2SubjectP1.next(this.transformOutputData(viewData));
+  }
+  private nextP2(viewData: Array<ViewData>): void {
+    this.mrp2SubjectP2.next(this.transformOutputData(viewData));
+  }
+  private nextP3(viewData: Array<ViewData>): void {
+    this.mrp2SubjectP3.next(this.transformOutputData(viewData));
+  }
+
+  public subscribe(cb: (data) => void) {
+    combineLatest([
+      this.mrp2SubjectP1,
+      this.mrp2SubjectP2,
+      this.mrp2SubjectP3,
+    ]).subscribe((data) => {
+      console.log('combine');
+      console.log(data);
+      cb(data);
+    });
+  }
+
+  public transformOutputData(viewData: Array<ViewData>): Array<any> {
+    const result = [];
+
+    viewData.forEach((element) => {
+      const newData = {
+        product: Number(element.id),
+        quantity: Number(element.result),
+      };
+
+      result.push(newData);
+    });
+    console.log('NEXT');
+    console.log(result);
+    return result;
+  }
+
   /**
    *
    * @param oldViewData
@@ -15,6 +71,7 @@ export class MaterialRequirementsPlanningService {
    * @param salesOrderAmount
    */
   public updateViewData(
+    product: string,
     oldViewData: Array<ViewData>,
     bom: any,
     salesOrderAmount: string
@@ -29,7 +86,9 @@ export class MaterialRequirementsPlanningService {
         safetyStock: Number(data.safetyStock),
       });
     });
-    return this.createViewData(mrpData, bom, salesOrderAmount);
+    const viewData = this.createViewData(mrpData, bom, salesOrderAmount);
+    this.next(product, viewData);
+    return viewData;
   }
 
   /**
@@ -40,13 +99,16 @@ export class MaterialRequirementsPlanningService {
    * @param salesOrderAmount
    */
   public getViewData(
+    product: string,
     xmlData: string,
     workFlowMap: any,
     bom: any,
     salesOrderAmount: string
   ): Array<ViewData> {
     const mrpData = this.getTransformedData(xmlData, workFlowMap);
-    return this.createViewData(mrpData, bom, salesOrderAmount);
+    const viewData = this.createViewData(mrpData, bom, salesOrderAmount);
+    this.next(product, viewData);
+    return viewData;
   }
 
   private createViewData(

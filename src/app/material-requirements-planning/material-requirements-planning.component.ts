@@ -11,6 +11,7 @@ import { ViewData } from './model/view-data';
   styleUrls: ['./material-requirements-planning.component.scss'],
 })
 export class MaterialRequirementsPlanningComponent implements OnInit {
+  @Input() product: any;
   @Input() data: any;
   @Input() bom: any;
   @Input() salesOrderAmount: string;
@@ -65,6 +66,7 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
         console.log(`${data.id} = ${data.safetyStock}`);
       });
       this.viewData = this.materialRequirementsPlanningService.updateViewData(
+        this.product,
         this.viewData,
         this.bom,
         this.salesOrderAmount
@@ -81,6 +83,7 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
 
   private createViewData(): void {
     this.viewData = this.materialRequirementsPlanningService.getViewData(
+      this.product,
       this.data,
       workFlowMap,
       this.bom,
