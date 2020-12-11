@@ -48,6 +48,18 @@
                 "QUANTITY": "Quantity"
             }
         },
+        "SPLIT": {
+            "NAME": "Batch Size Splitting",
+            "DISCARD": "Discard",
+            "SPLIT": "Split",
+            "DIALOG": {
+                "HEADER": "Batch Size Splitting Article No. ",
+                "INSTRUCTION": "Please adjust your preferred batch size.",
+                "BATCH1": "Batch 1: ",
+                "BATCH2": "Batch 2: "
+            },
+            "RESET": "Reset Table"
+        },
         "PURCHASE": {
             "NAME": "Purchase Orders",
             "ARTICLE": "Article",

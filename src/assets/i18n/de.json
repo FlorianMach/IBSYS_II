@@ -48,6 +48,18 @@
                 "QUANTITY": "Menge"
             }
         },
+        "SPLIT": {
+            "NAME": "Losgrößen Splitting",
+            "DISCARD": "Verwerfen",
+            "SPLIT": "Split",
+            "DIALOG": {
+                "HEADER": "Losgrößen Splitting Artikel Nr. ",
+                "INSTRUCTION": "Bitte passen Sie auf Ihre bevorzugten Losgrößen an.",
+                "BATCH1": "Los 1: ",
+                "BATCH2": "Los 2: "
+            },
+            "RESET": "Tabelle Zurücksetzen"
+        },
         "PURCHASE": {
             "NAME": "Einkaufsaufträge",
             "ARTICLE": "Artikel",
