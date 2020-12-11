@@ -14,7 +14,20 @@
         "NAME_P3": "MRP I - P3"
     },
     "CAPACITY_PLANNING": {
-        "NAME": "Kapazitätsplanung"
+        "HEADLINE": "Kapazitätsplanung",
+        "NAME": "Kapazitätsplanung",
+        "WORKPLACE": "Arbeitsplatz",
+        "CAPACITYREQ": "Kapazitätsbedarf",
+        "SETUPTIME": "Rüstzeit",
+        "CAPACITYREQLAST": "Kapazitätsbedarf Vorperiode",
+        "SETUPTIMELAST": "Rüstzeit Vorperiode",
+        "TOTALREQUIREMENT": "Gesamtbedarf",
+        "OVERTIME": "Überstunden pro Woche",
+        "SECONDSHIFT": "Zweite Schicht",
+        "INFO": "Alle Zeitangaben werden in Minuten berechnet und angegeben",
+        "CHANGEMODE": "Änderungsmodus an/aus",
+        "UPDATE": "Aktualisieren",
+        "DISCARD": "Verwerfen"
     },
     "PROCUREMENT": {
         "NAME": "Einkauf"
