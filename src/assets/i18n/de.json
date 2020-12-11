@@ -12,12 +12,12 @@
         "PRICE": "Preis",
         "PENALTY": "Strafe",
         "WISH": {
-            "NAME": "Vertriebswunsch"
+            "NAME": "Produktionsplan"
         },
         "DIRECT": {
             "NAME": "Direktvertrieb"
         },
-        "BUTTON":{
+        "BUTTON": {
             "CHANGE": "Ändern",
             "COMMIT": "Sichern"
         }
@@ -53,7 +53,7 @@
         "REQUIREMENTS": "Bruttobedarf gemäß Prod.progr.",
         "AMOUNT": "Bestellmenge",
         "ORDER": "Bestellung",
-        "BUTTON":{
+        "BUTTON": {
             "CHANGE": "Ändern",
             "COMMIT": "Sichern"
         }
