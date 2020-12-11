@@ -90,6 +90,7 @@ export class ProductPlanningComponent implements OnInit {
     this.commit = false;
     this.change = true;
     this.SharedService.setDataOfMrp2data(this.mrp2data);
+    this.SharedService.nextDirectSales(this.dataSource2);
     console.log(this.dataSource2);
   }
 }
