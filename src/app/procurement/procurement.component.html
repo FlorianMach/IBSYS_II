@@ -106,6 +106,7 @@
             ([value])="(orderN)"
             [disabled]="!editable"
             [(ngModel)]="outputData.item21.orderN"
+            (change)="onlyOneValue($event)"
           />
 
           <input
@@ -115,6 +116,7 @@
             ([value])="(orderE)"
             [disabled]="!editable"
             [(ngModel)]="outputData.item21.orderE"
+            (change)="onlyOneValue($event)"
           />
 
           {{ outputData.item21 | json }}
@@ -192,7 +194,11 @@
         <td>{{ nValues && nValues[1]?.n3 ? nValues[1]?.n3 : 0 }}</td>
         <td>{{ nValues && nValues[1]?.n4 ? nValues[1]?.n4 : 0 }}</td> -->
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item22.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -201,6 +207,8 @@
             name="order2"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item22.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -208,6 +216,8 @@
             name="order2"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item22.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -281,7 +291,11 @@
         <td>{{ nValues && nValues[2]?.n3 ? nValues[2]?.n3 : 0 }}</td>
         <td>{{ nValues && nValues[2]?.n4 ? nValues[2]?.n4 : 0 }}</td> -->
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item23.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -290,6 +304,8 @@
             name="order3"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item23.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -297,6 +313,8 @@
             name="order3"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item23.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -371,7 +389,11 @@
         <td>{{ nValues && nValues[3]?.n3 ? nValues[3]?.n3 : 0 }}</td>
         <td>{{ nValues && nValues[3]?.n4 ? nValues[3]?.n4 : 0 }}</td> -->
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item24.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -380,6 +402,8 @@
             name="order4"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item24.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -387,6 +411,8 @@
             name="order4"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item24.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -461,7 +487,11 @@
         </td>
 
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item25.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -470,6 +500,8 @@
             name="order5"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item25.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -477,6 +509,8 @@
             name="order5"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item25.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -546,7 +580,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item27.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -555,6 +593,8 @@
             name="order6"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item27.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -562,6 +602,8 @@
             name="order6"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item27.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -631,7 +673,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item28.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -640,6 +686,8 @@
             name="order7"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item28.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -647,6 +695,8 @@
             name="order7"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item28.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -716,7 +766,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item32.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -725,6 +779,8 @@
             name="order8"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item32.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -732,6 +788,8 @@
             name="order8"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item32.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -801,7 +859,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item33.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -810,6 +872,8 @@
             name="order9"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item33.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -817,6 +881,8 @@
             name="order9"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item33.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -886,7 +952,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item34.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -895,6 +965,8 @@
             name="order10"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item34.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -902,6 +974,8 @@
             name="order10"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item34.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -971,7 +1045,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item35.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -980,6 +1058,8 @@
             name="order11"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item35.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -987,6 +1067,8 @@
             name="order11"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item35.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -1056,7 +1138,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item36.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -1065,6 +1151,8 @@
             name="order12"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item36.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -1072,6 +1160,8 @@
             name="order12"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item36.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -1141,7 +1231,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item37.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -1150,6 +1244,8 @@
             name="order13"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item37.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -1157,6 +1253,8 @@
             name="order13"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item37.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -1226,7 +1324,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item38.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -1235,6 +1337,8 @@
             name="order14"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item38.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -1242,6 +1346,8 @@
             name="order14"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item38.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -1311,7 +1417,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item39.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -1320,6 +1430,8 @@
             name="order15"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item39.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -1327,6 +1439,8 @@
             name="order15"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item39.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -1396,7 +1510,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item40.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -1405,6 +1523,8 @@
             name="order16"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item40.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -1412,6 +1532,8 @@
             name="order16"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item40.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -1481,7 +1603,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item41.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -1490,6 +1616,8 @@
             name="order17"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item41.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -1497,6 +1625,8 @@
             name="order17"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item41.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -1566,7 +1696,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item42.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -1575,6 +1709,8 @@
             name="order18"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item42.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -1582,6 +1718,8 @@
             name="order18"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item42.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -1651,7 +1789,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item43.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -1660,6 +1802,8 @@
             name="order19"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item43.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -1667,6 +1811,8 @@
             name="order19"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item43.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -1733,7 +1879,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item44.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -1742,6 +1892,8 @@
             name="order20"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item44.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -1749,6 +1901,8 @@
             name="order20"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item44.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -1815,7 +1969,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item45.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -1824,6 +1982,8 @@
             name="order21"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item45.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -1831,6 +1991,8 @@
             name="order21"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item45.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -1897,7 +2059,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item46.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -1906,6 +2072,8 @@
             name="order23"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item46.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -1913,6 +2081,8 @@
             name="order23"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item46.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -1979,7 +2149,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item47.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -1988,6 +2162,8 @@
             name="order24"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item47.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -1995,6 +2171,8 @@
             name="order24"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item47.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -2061,7 +2239,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item48.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -2070,6 +2252,8 @@
             name="order25"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item48.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -2077,6 +2261,8 @@
             name="order25"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item48.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -2143,7 +2329,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item52.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -2152,6 +2342,8 @@
             name="order26"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item52.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -2159,6 +2351,8 @@
             name="order26"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item52.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -2225,7 +2419,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item53.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -2234,6 +2432,8 @@
             name="order27"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item53.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -2241,6 +2441,8 @@
             name="order27"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item53.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -2307,7 +2509,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item57.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -2316,6 +2522,8 @@
             name="order28"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item57.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -2323,6 +2531,8 @@
             name="order28"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item57.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -2389,7 +2599,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item58.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -2398,6 +2612,8 @@
             name="order29"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item58.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -2405,6 +2621,8 @@
             name="order29"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item58.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
@@ -2471,7 +2689,11 @@
           }}
         </td>
         <td>
-          <input type="number" value="0" [disabled]="!editable" />
+          <input 
+            type="number" 
+            value="0" 
+            [disabled]="!editable" 
+            [(ngModel)]="outputData.item59.amount"/>
         </td>
         <td style="display: flex">
           <input
@@ -2480,6 +2702,8 @@
             name="order30"
             value="orderN"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item59.orderN"
+            (change)="onlyOneValue($event)"
           />
           <input
             type="checkbox"
@@ -2487,6 +2711,8 @@
             name="order30"
             value="orderE"
             [disabled]="!editable"
+            [(ngModel)]="outputData.item59.orderE"
+            (change)="onlyOneValue($event)"
           />
         </td>
       </tr>
