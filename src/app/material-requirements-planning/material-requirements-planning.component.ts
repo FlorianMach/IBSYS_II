@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { workFlowMap } from '../shared/const/workflow';
+import { SharedService } from '../shared/shared.service';
 import { WarningDialogComponent } from '../warning-dialog/warning-dialog.component';
 import { MaterialRequirementsPlanningService } from './material-requirements-planning.service';
 import { ViewData } from './model/view-data';
@@ -11,6 +12,7 @@ import { ViewData } from './model/view-data';
   styleUrls: ['./material-requirements-planning.component.scss'],
 })
 export class MaterialRequirementsPlanningComponent implements OnInit {
+  @Input() product: any;
   @Input() data: any;
   @Input() bom: any;
   @Input() salesOrderAmount: string;
@@ -30,12 +32,17 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
 
   constructor(
     public dialog: MatDialog,
-    private materialRequirementsPlanningService: MaterialRequirementsPlanningService
+    private materialRequirementsPlanningService: MaterialRequirementsPlanningService,
+    private mrp2Data: SharedService
   ) {}
 
   ngOnInit(): void {
     this.createViewData();
     console.log(this.viewData);
+    this.mrp2Data.subject.subscribe((data) => {
+      console.log('Produktionsplanung');
+      console.log(data);
+    });
   }
 
   round(input: number): number {
@@ -65,6 +72,7 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
         console.log(`${data.id} = ${data.safetyStock}`);
       });
       this.viewData = this.materialRequirementsPlanningService.updateViewData(
+        this.product,
         this.viewData,
         this.bom,
         this.salesOrderAmount
@@ -81,6 +89,7 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
 
   private createViewData(): void {
     this.viewData = this.materialRequirementsPlanningService.getViewData(
+      this.product,
       this.data,
       workFlowMap,
       this.bom,

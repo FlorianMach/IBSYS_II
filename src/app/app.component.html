@@ -71,6 +71,7 @@
           <app-material-requirements-planning
             class="custom-content"
             *ngIf="xmlData"
+            [product]="'P1'"
             [data]="xmlData"
             [bom]="bomP1"
             [salesOrderAmount]="xmlData.results.forecast._attributes.p1"
@@ -101,6 +102,7 @@
           <app-material-requirements-planning
             class="custom-content"
             *ngIf="xmlData"
+            [product]="'P2'"
             [data]="xmlData"
             [bom]="bomP2"
             [salesOrderAmount]="xmlData.results.forecast._attributes.p2"
@@ -131,6 +133,7 @@
           <app-material-requirements-planning
             class="custom-content"
             *ngIf="xmlData"
+            [product]="'P3'"
             [data]="xmlData"
             [bom]="bomP3"
             [salesOrderAmount]="xmlData.results.forecast._attributes.p3"

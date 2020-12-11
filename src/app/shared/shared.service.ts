@@ -3,17 +3,28 @@ import { Subject } from 'rxjs';
 import { MRP2PSNS } from '../Models';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SharedService {
-  MRP2Value: MRP2PSNS
+  MRP2Value: MRP2PSNS;
   subject = new Subject<MRP2PSNS[]>();
-  constructor() { }
+  directSales = new Subject<any>();
+  constructor() {}
   setDataOfMrp2data(value) {
     // this.MRP2Value = value
-    this.subject.next(value)
+    this.subject.next(value);
   }
   gtetDataOfMrp2data() {
-    return this.subject
+    return this.subject;
+  }
+
+  nextDirectSales(directSales) {
+    this.directSales.next(directSales);
+  }
+
+  subscribeDirectSalesData(cb: (data) => void) {
+    this.directSales.subscribe((data) => {
+      cb(data);
+    });
   }
 }

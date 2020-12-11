@@ -12,12 +12,12 @@
         "PRICE": "Price",
         "PENALTY": "Penalty",
         "WISH": {
-            "NAME": "Sales Wish"
+            "NAME": "Product program"
         },
         "DIRECT": {
             "NAME": "Direct Sales"
         },
-        "BUTTON":{
+        "BUTTON": {
             "CHANGE": "Change",
             "COMMIT": "Commit"
         }
@@ -53,7 +53,7 @@
         "REQUIREMENTS": "Gross requirements according the prod.progr.",
         "AMOUNT": "Amount",
         "ORDER": "Order",
-        "BUTTON":{
+        "BUTTON": {
             "CHANGE": "Change",
             "COMMIT": "Commit"
         }
