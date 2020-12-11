@@ -7,6 +7,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatTableModule } from '@angular/material/table';
+import { MatSliderModule } from '@angular/material/slider';
 
 @NgModule({
   declarations: [],
@@ -19,6 +20,7 @@ import { MatTableModule } from '@angular/material/table';
     MatToolbarModule,
     MatDialogModule,
     MatTableModule,
+    MatSliderModule,
   ],
   exports: [
     MatFormFieldModule,
@@ -29,6 +31,7 @@ import { MatTableModule } from '@angular/material/table';
     MatToolbarModule,
     MatDialogModule,
     MatTableModule,
+    MatSliderModule,
   ],
 })
 export class MaterialModule {}

@@ -33,7 +33,34 @@
         "NAME": "Procurement"
     },
     "RESULT": {
-        "NAME": "Result"
+        "XML": "Export Result XML",
+        "NAME": "Result",
+        "PRODUCTION": {
+            "CAPACITIES": {
+                "NAME": "Production Capacities",
+                "STATION": "Workplace",
+                "SHIFT": "# Shifts",
+                "OVERTIME": "Overtime"
+            },
+            "ORDERS": {
+                "NAME": "Productions Orders",
+                "ARTICLE": "Article",
+                "QUANTITY": "Quantity"
+            }
+        },
+        "PURCHASE": {
+            "NAME": "Purchase Orders",
+            "ARTICLE": "Article",
+            "QUANTITY": "Quantity",
+            "MODUS": "Mode"
+        },
+        "DIRECTSALES": {
+            "NAME": "Direct Sales",
+            "ARTICLE": "Article",
+            "QUANTITY": "Quantity",
+            "PRICE": "Price",
+            "PENALTY": "Penalty"
+        }
     },
     "UTIL": {
         "BUTTON": {
