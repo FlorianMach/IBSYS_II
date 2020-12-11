@@ -1,1 +1,150 @@
-<p>product-planning works!</p>
+<div class="result-content-wrapper">
+
+    <mat-tab-group dynamicHeight>
+
+<!-- Sales Wish Tab -->
+<mat-tab>
+<ng-template mat-tab-label> {{ "PRODUCT_PLANNING.WISH.NAME" | translate }} </ng-template>
+<div>
+  <table class="styled-table">
+    <thead>
+      <tr>
+        <th class="Theader" width="1%"></th>
+        <th class="Theader" width="10%">N</th>
+        <th class="Theader" width="10%">N+1</th>
+        <th class="Theader" width="10%">N+2</th>
+        <th class="Theader" width="10%">N+3</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let a of mrp2data; let i = index">
+        <td style="background-color: #1da1f2; color: white">P{{ i + 1 }}</td>
+        <td>
+          <input
+            type="number"
+            [value]="a.n1"
+            [(ngModel)]="mrp2data[i].n1"
+            name="mrp2data"
+            (change)="onValueChanged($event)"
+            (keyup)="onValueChanged($event)"
+            [disabled]="!editable"
+          />
+        </td>
+        <td>
+          <input
+            type="number"
+            [value]="a.n2"
+            [(ngModel)]="mrp2data[i].n2"
+            (change)="onValueChanged($event)"
+            (keyup)="onValueChanged($event)"
+            [disabled]="!editable"
+          />
+        </td>
+        <td>
+          <input
+            type="number"
+            [value]="a.n3"
+            [(ngModel)]="mrp2data[i].n3"
+            (change)="onValueChanged($event)"
+            (keyup)="onValueChanged($event)"
+            [disabled]="!editable"
+          />
+        </td>
+        <td>
+          <input
+            type="number"
+            [value]="a.n4"
+            [(ngModel)]="mrp2data[i].n4"
+            (change)="onValueChanged($event)"
+            (keyup)="onValueChanged($event)"
+            [disabled]="!editable"
+          />
+        </td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+</mat-tab>
+
+<!-- Direct Sales Tab -->
+<mat-tab>
+ <ng-template mat-tab-label> {{ "PRODUCT_PLANNING.DIRECT.NAME" | translate }} </ng-template>
+ <div class="example-container mat-elevation-z8">
+     <table mat-table [dataSource]="dataSource2">
+
+         <!-- Product Column -->
+         <ng-container matColumnDef="product">
+             <th mat-header-cell *matHeaderCellDef> {{ "PRODUCT_PLANNING.PRODUCT" | translate }} </th>
+             <td mat-cell *matCellDef="let element">{{element.product}}</td>
+         </ng-container>
+
+          <!-- Quantity Column -->
+          <ng-container matColumnDef="quantity">
+             <th mat-header-cell *matHeaderCellDef> {{ "PRODUCT_PLANNING.QUANTITY" | translate }} </th>
+             <td mat-cell *matCellDef="let element">
+              <mat-form-field>
+                <input
+                  matInput
+                  type="number"
+                  [value]="element.quantity"
+                  [(ngModel)]="element.quantity"
+                  [disabled]="!editable"
+                />
+              </mat-form-field>
+            </td>
+           </ng-container>
+
+            <!-- Price Column -->
+            <ng-container matColumnDef="price">
+             <th mat-header-cell *matHeaderCellDef> {{ "PRODUCT_PLANNING.PRICE" | translate }} </th>
+             <td mat-cell *matCellDef="let element">
+              <mat-form-field>
+                <input
+                  matInput
+                  type="number"
+                  min="0"
+                  [value]="element.price"
+                  [(ngModel)]="element.price"
+                  [disabled]="!editable"
+                />
+              </mat-form-field>
+            </td>
+           </ng-container>
+
+            <!-- Penalty Column -->
+            <ng-container matColumnDef="penalty">
+             <th mat-header-cell *matHeaderCellDef> {{ "PRODUCT_PLANNING.PENALTY" | translate }} </th>
+             <td mat-cell *matCellDef="let element">
+              <mat-form-field>
+                <input
+                  matInput
+                  type="number"
+                  min="0"
+                  [value]="element.penalty"
+                  [(ngModel)]="element.penalty"
+                  [disabled]="!editable"
+                />
+              </mat-form-field>
+            </td>
+
+             <tr mat-header-row *matHeaderRowDef="displayedColumns2; sticky: true"></tr>
+             <tr mat-row *matRowDef="let row; columns: displayedColumns2;"></tr>
+           </ng-container>
+     </table>
+ </div>
+</mat-tab>
+
+</mat-tab-group>
+
+</div>
+<div
+style="
+  width: 100%;
+  display: flex;
+  margin-top: 0.5em;
+  justify-content: flex-end;
+"
+>
+  <button *ngIf="change" (click)="edit()">{{ "PRODUCT_PLANNING.BUTTON.CHANGE" | translate }}</button>
+  <button *ngIf="commit"  style="color:white; background:#1da1f2" (click)="save()">{{ "PRODUCT_PLANNING.BUTTON.COMMIT" | translate }}</button>
+</div>

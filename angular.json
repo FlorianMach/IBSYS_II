@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "IbsysII-Grp3"
+  "defaultProject": "IbsysII-Grp3",
+  "cli": {
+    "analytics": false
+  }
 }

@@ -14,6 +14,7 @@ import { SplitDialogComponent } from './split-dialog/split-dialog.component';
 @NgModule({
   declarations: [AppComponent, SplitDialogComponent, WarningDialogComponent],
   imports: [
+
     AppRoutingModule,
     BrowserAnimationsModule,
     BrowserModule,
@@ -23,8 +24,7 @@ import { SplitDialogComponent } from './split-dialog/split-dialog.component';
     I18nModule,
 
   ],
-  exports: [],
   providers: [],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

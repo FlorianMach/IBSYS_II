@@ -41,7 +41,10 @@
           <ng-template matStepLabel>{{
             "PRODUCT_PLANNING.NAME" | translate
           }}</ng-template>
-          <app-product-planning class="custom-content"></app-product-planning>
+          <app-product-planning
+            (dataChanged)="onProductDataChanged($event)"
+            class="custom-content"
+          ></app-product-planning>
           <div class="stepper-button-wrapper">
             <button
               class="stepper-button-margin"
@@ -194,9 +197,19 @@
               mat-flat-button
               color="primary"
               matStepperNext
+              (click)="callProcurmentData()"
             >
               {{ "UTIL.BUTTON.NEXT" | translate }}
             </button>
+            <!-- <a
+              class="stepper-button-margin"
+              mat-flat-button
+              color="primary"
+              matStepperNext
+              href="{{ callProcurmentData() }}"
+              target="_blank"
+            >
+              {{ "UTIL.BUTTON.NEXT" | translate }}</a> -->
           </div>
         </mat-step>
         <mat-step>

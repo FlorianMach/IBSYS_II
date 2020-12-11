@@ -6,7 +6,21 @@
         "NAME": "Xml"
     },
     "PRODUCT_PLANNING": {
-        "NAME": "MRP II"
+        "NAME": "MRP II",
+        "PRODUCT": "Product",
+        "QUANTITY": "Quantity",
+        "PRICE": "Price",
+        "PENALTY": "Penalty",
+        "WISH": {
+            "NAME": "Sales Wish"
+        },
+        "DIRECT": {
+            "NAME": "Direct Sales"
+        },
+        "BUTTON":{
+            "CHANGE": "Change",
+            "COMMIT": "Commit"
+        }
     },
     "MRP": {
         "NAME_P1": "MRP I - P1",
@@ -30,7 +44,19 @@
         "DISCARD": "Discard"
     },
     "PROCUREMENT": {
-        "NAME": "Procurement"
+        "NAME": "Procurement",
+        "NUMBER": "Item No.",
+        "DELIVERY": "Delivery time",
+        "DEVIATION": "Deviation",
+        "DISCOUNT": "Discount quantity",
+        "STOCK": "Initial stock in Per n",
+        "REQUIREMENTS": "Gross requirements according the prod.progr.",
+        "AMOUNT": "Amount",
+        "ORDER": "Order",
+        "BUTTON":{
+            "CHANGE": "Change",
+            "COMMIT": "Commit"
+        }
     },
     "RESULT": {
         "XML": "Export Result XML",
