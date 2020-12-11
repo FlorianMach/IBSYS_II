@@ -3,45 +3,6 @@ import { MaterialRequirementsPlanningService } from '../material-requirements-pl
 import { XmlReaderService } from '../xml-reader/xml-reader.service';
 import { CapacityPlanningService } from './capacity-planning.service';
 
-export interface Products {
-  product: number;
-  quantity: number;
-}
-
-// Diese Daten müssen aus der Stücklistenauflösung resultieren
-const PRODUCTS = [
-  { product: 1, quantity: 80 },
-  { product: 2, quantity: 200 },
-  { product: 3, quantity: 100 },
-  { product: 4, quantity: 80 },
-  { product: 5, quantity: 200 },
-  { product: 6, quantity: 110 },
-  { product: 7, quantity: 80 },
-  { product: 8, quantity: 200 },
-  { product: 9, quantity: 110 },
-  { product: 10, quantity: 80 },
-  { product: 11, quantity: 200 },
-  { product: 12, quantity: 110 },
-  { product: 13, quantity: 80 },
-  { product: 14, quantity: 200 },
-  { product: 15, quantity: 110 },
-  { product: 16, quantity: 380 },
-  { product: 17, quantity: 380 },
-  { product: 18, quantity: 80 },
-  { product: 19, quantity: 200 },
-  { product: 20, quantity: 110 },
-  { product: 26, quantity: 380 },
-  { product: 29, quantity: 110 },
-  { product: 30, quantity: 80 },
-  { product: 31, quantity: 100 },
-  { product: 49, quantity: 80 },
-  { product: 50, quantity: 80 },
-  { product: 51, quantity: 80 },
-  { product: 54, quantity: 200 },
-  { product: 55, quantity: 140 },
-  { product: 56, quantity: 200 },
-];
-
 // Daten der Arbeitsplätze - Wie lange für welches Produkt
 const PRODUCTIONPLANNING = [
   {
@@ -625,10 +586,11 @@ export class CapacityPlanningComponent implements OnInit {
   viewData: Array<any>;
   oldViewData: Array<any>;
   setupEventLastPeriod: any[] = [];
+  counter:number = 0;
 
   toggleButton: boolean = true;
   xmlData;
-  mrp2Data: Array<Products> = [];
+  mrp2Data: Array<any> = [];
 
   constructor(
     private CapacityPlanningService: CapacityPlanningService,
@@ -644,7 +606,9 @@ export class CapacityPlanningComponent implements OnInit {
         PRODUCTIONPLANNING,
         data
       );
-      this.oldViewData = this.createDeepCopyOf(this.viewData);
+      this.oldViewData = this.createDeepCopyOf(this.capacityPlaning(this.mrp2Data,
+        PRODUCTIONPLANNING,
+        data))
     });
 
     this.materialRequirementsPlanningService.subscribe((data) => {
@@ -658,7 +622,6 @@ export class CapacityPlanningComponent implements OnInit {
           PRODUCTIONPLANNING,
           this.xmlData
         );
-        this.oldViewData = this.createDeepCopyOf(this.viewData);
       }
     });
   }
@@ -694,8 +657,7 @@ export class CapacityPlanningComponent implements OnInit {
 
   capacityPlaning(product, productionplanning, data) {
     var result = new Array();
-    console.log('MRP2 Data');
-    console.log(product);
+    
 
     if (product && product.length != 0) {
       var capacity;
@@ -766,13 +728,14 @@ export class CapacityPlanningComponent implements OnInit {
             capareq: capacity[i],
             setup: setuptime[i],
             capalast: capacityLastPeriod[i],
-            setuplast: setUpLastPeriod[i],
+            setuplast: 0,
             totalRequirement: capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i],
             overtime: overtime,
             secondShift: secondShift     
           })
         }
       }
+    this.CapacityPlanningService.nextCapacityData(result)
     return result;
     }
   }
@@ -881,7 +844,6 @@ export class CapacityPlanningComponent implements OnInit {
   // Neue Berechnung der Tabelle, nachdem Änderungen vorgenommen werden
   updateTable() {
     this.toggleButton = !this.toggleButton;
-    console.log(this.viewData);
     var capacity: any[] = [];
     var setuptime: any[] = [];
     var capacityLastPeriod: any[] = [];
@@ -952,7 +914,6 @@ export class CapacityPlanningComponent implements OnInit {
         overtime: overtime,
         secondShift: secondShift     
       })
-      this.CapacityPlanningService.next(this.viewData)
     }
   }
 
@@ -960,7 +921,6 @@ export class CapacityPlanningComponent implements OnInit {
     this.toggleButton = !this.toggleButton;
     this.viewData = [];
     this.viewData = this.oldViewData;
-    this.CapacityPlanningService.next(this.viewData)
   }
 
   private createDeepCopyOf(obj: any): any {

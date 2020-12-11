@@ -10,13 +10,18 @@ export class CapacityPlanningService {
 
   public capacityPlanningSubject = new Subject<any>();
 
-  public next(viewData: Array<any>) {
+  nextCapacityData(value) {
+    this.capacityPlanningSubject.next(value);
+  }
 
+  subscribeDataOfCapacity(cb: (data) => void) {
+    this.capacityPlanningSubject.subscribe((data) => {
+      cb(data);
+    });
   }
 
   public transformOutputData(viewData): Array<any> {
     let result = new Array<any>();
-    let shift;
 
     // Daten in die Struktur bringen, wie Simon die will 
     for(var i = 0; i < result.length; ++i){
