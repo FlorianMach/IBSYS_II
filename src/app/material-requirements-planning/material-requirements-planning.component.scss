@@ -1,0 +1,23 @@
+.app-content-flex-box {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
+
+.scrollable-table {
+  flex-grow: 1;
+  overflow: auto;
+}
+
+table {
+  width: 100%;
+}
+
+th.mat-header-cell {
+  text-align: center;
+}
+
+td {
+  text-align: center;
+}

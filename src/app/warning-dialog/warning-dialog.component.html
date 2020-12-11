@@ -1,0 +1,10 @@
+<h1 mat-dialog-title>Warning</h1>
+<div mat-dialog-content>
+  <p>Do you really want to proceed? All current changes will be lost!</p>
+</div>
+<div mat-dialog-actions align="end">
+  <button mat-button color="accent" (click)="onNoClick()">Hold on</button>
+  <button mat-button color="primary" [mat-dialog-close]="true" cdkFocusInitial>
+    Proceed
+  </button>
+</div>
