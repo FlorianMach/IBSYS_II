@@ -55,7 +55,7 @@
                 <td mat-cell *matCellDef="let element">  
                     <mat-form-field>
                         <div style="text-align:center;">
-                            <input matInput [disabled]='toggleButton' type="number" value={{element.setuplast}}>
+                            <input matInput [(ngModel)]="element.setuplast" [disabled]='toggleButton'  type="number" value={{element.setuplast}}>
                         </div>
                     </mat-form-field>
                 </td>

@@ -1,45 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MaterialRequirementsPlanningService } from '../material-requirements-planning/material-requirements-planning.service';
 import { XmlReaderService } from '../xml-reader/xml-reader.service';
-
-export interface Products {
-  product: number;
-  quantity: number;
-}
-
-// Diese Daten müssen aus der Stücklistenauflösung resultieren
-const PRODUCTS = [
-  { product: 1, quantity: 80 },
-  { product: 2, quantity: 200 },
-  { product: 3, quantity: 100 },
-  { product: 4, quantity: 80 },
-  { product: 5, quantity: 200 },
-  { product: 6, quantity: 110 },
-  { product: 7, quantity: 80 },
-  { product: 8, quantity: 200 },
-  { product: 9, quantity: 110 },
-  { product: 10, quantity: 80 },
-  { product: 11, quantity: 200 },
-  { product: 12, quantity: 110 },
-  { product: 13, quantity: 80 },
-  { product: 14, quantity: 200 },
-  { product: 15, quantity: 110 },
-  { product: 16, quantity: 380 },
-  { product: 17, quantity: 380 },
-  { product: 18, quantity: 80 },
-  { product: 19, quantity: 200 },
-  { product: 20, quantity: 110 },
-  { product: 26, quantity: 380 },
-  { product: 29, quantity: 110 },
-  { product: 30, quantity: 80 },
-  { product: 31, quantity: 100 },
-  { product: 49, quantity: 80 },
-  { product: 50, quantity: 80 },
-  { product: 51, quantity: 80 },
-  { product: 54, quantity: 200 },
-  { product: 55, quantity: 140 },
-  { product: 56, quantity: 200 },
-];
+import { CapacityPlanningService } from './capacity-planning.service';
 
 // Daten der Arbeitsplätze - Wie lange für welches Produkt
 const PRODUCTIONPLANNING = [
@@ -624,12 +586,14 @@ export class CapacityPlanningComponent implements OnInit {
   viewData: Array<any>;
   oldViewData: Array<any>;
   setupEventLastPeriod: any[] = [];
+  counter:number = 0;
 
   toggleButton: boolean = true;
   xmlData;
-  mrp2Data: Array<Products> = [];
+  mrp2Data: Array<any> = [];
 
   constructor(
+    private CapacityPlanningService: CapacityPlanningService,
     private xmlReaderService: XmlReaderService,
     private materialRequirementsPlanningService: MaterialRequirementsPlanningService
   ) {}
@@ -642,7 +606,9 @@ export class CapacityPlanningComponent implements OnInit {
         PRODUCTIONPLANNING,
         data
       );
-      this.oldViewData = this.createDeepCopyOf(this.viewData);
+      this.oldViewData = this.createDeepCopyOf(this.capacityPlaning(this.mrp2Data,
+        PRODUCTIONPLANNING,
+        data))
     });
 
     this.materialRequirementsPlanningService.subscribe((data) => {
@@ -656,7 +622,6 @@ export class CapacityPlanningComponent implements OnInit {
           PRODUCTIONPLANNING,
           this.xmlData
         );
-        this.oldViewData = this.createDeepCopyOf(this.viewData);
       }
     });
   }
@@ -677,6 +642,7 @@ export class CapacityPlanningComponent implements OnInit {
       }
     });
 
+    
     // data from P3
     data[2].forEach((element, index) => {
       if (result.find((x) => x.product === element.product)) {
@@ -691,8 +657,8 @@ export class CapacityPlanningComponent implements OnInit {
 
   capacityPlaning(product, productionplanning, data) {
     var result = new Array();
-    console.log('MRP2 Data');
-    console.log(product);
+    
+
     if (product && product.length != 0) {
       var capacity;
       var setuptime;
@@ -717,50 +683,61 @@ export class CapacityPlanningComponent implements OnInit {
 
       // Zusammenbauen des Arrays für die Tabelle
       for (var i = 0; i < capacity.length; ++i) {
-        if (
-          (capacity[i] +
-            setuptime[i] +
-            capacityLastPeriod[i] +
-            setUpLastPeriod[i] -
-            2400) /
-            5 <
-          0
-        ) {
-          overtime = 0;
-        } else {
-          overtime =
-            (capacity[i] +
-              setuptime[i] +
-              capacityLastPeriod[i] +
-              setUpLastPeriod[i] -
-              2400) /
-            5;
+        // Zusammenbauen des Arrays für die Tabelle
+        for(var i = 0; i < capacity.length; ++i ){
+          if(i===4){
+            overtime = 0;
+            secondShift = 0;
+          } else if((capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5<0){
+            overtime = 0;
+            secondShift = 1;
+          } else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>8400){
+            if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-9600/5>0){
+              overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-8400)/5;
+              secondShift = 4;
+            } else {
+              overtime = 0;
+              secondShift = 4;
+            }
+          }
+          else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>6000){
+            if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-7200>0){
+              overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-6000)/5;
+              secondShift = 3;
+            } else {
+              overtime = 0;
+              secondShift = 3;
+            }
+          } else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>3600) {
+            if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-4800>0){
+              overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-3600)/5;
+              secondShift = 2;
+            } else {
+              overtime = 0;
+              secondShift = 2;
+            }
+          } else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>1200){
+            if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400>0) {
+              overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5;
+              secondShift = 1;
+            }
+          }
+          
+          result.push({
+            workplace: i+1,
+            capareq: capacity[i],
+            setup: setuptime[i],
+            capalast: capacityLastPeriod[i],
+            setuplast: 0,
+            totalRequirement: capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i],
+            overtime: overtime,
+            secondShift: secondShift     
+          })
         }
-
-        if (overtime > 240) {
-          overtime = 0;
-          secondShift = 'x';
-        } else {
-          secondShift = ' ';
-        }
-
-        result.push({
-          workplace: i + 1,
-          capareq: capacity[i],
-          setup: setuptime[i],
-          capalast: capacityLastPeriod[i],
-          setuplast: setUpLastPeriod[i],
-          totalRequirement:
-            capacity[i] +
-            setuptime[i] +
-            capacityLastPeriod[i] +
-            setUpLastPeriod[i],
-          overtime: overtime,
-          secondShift: secondShift,
-        });
       }
-    }
+    this.CapacityPlanningService.nextCapacityData(result)
     return result;
+    }
   }
 
   // Funktion für die Berechnung der benötigten Kapazität pro Arbeitsplatz
@@ -867,7 +844,6 @@ export class CapacityPlanningComponent implements OnInit {
   // Neue Berechnung der Tabelle, nachdem Änderungen vorgenommen werden
   updateTable() {
     this.toggleButton = !this.toggleButton;
-    console.log(this.viewData);
     var capacity: any[] = [];
     var setuptime: any[] = [];
     var capacityLastPeriod: any[] = [];
@@ -884,32 +860,44 @@ export class CapacityPlanningComponent implements OnInit {
 
     this.viewData = [];
 
-    for (var i = 0; i < capacity.length; ++i) {
-      if (
-        (capacity[i] +
-          setuptime[i] +
-          capacityLastPeriod[i] +
-          setUpLastPeriod[i] -
-          2400) /
-          5 <
-        0
-      ) {
-        overtime = 0;
-      } else {
-        overtime =
-          (capacity[i] +
-            setuptime[i] +
-            capacityLastPeriod[i] +
-            setUpLastPeriod[i] -
-            2400) /
-          5;
-      }
+    for(var i = 0; i < capacity.length; ++i ){
 
-      if (overtime > 240) {
+      if(i===4){
         overtime = 0;
-        secondShift = 'x';
-      } else {
-        secondShift = ' ';
+        secondShift = 0;
+      } else if((capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5<0){
+        overtime = 0;
+        secondShift = 1;
+      } else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>8400){
+        if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-9600/5>0){
+          overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-8400)/5;
+          secondShift = 4;
+        } else {
+          overtime = 0;
+          secondShift = 4;
+        }
+      }
+      else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>6000){
+        if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-7200>0){
+          overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-6000)/5;
+          secondShift = 3;
+        } else {
+          overtime = 0;
+          secondShift = 3;
+        }
+      } else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>3600) {
+        if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-4800>0){
+          overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-3600)/5;
+          secondShift = 2;
+        } else {
+          overtime = 0;
+          secondShift = 2;
+        }
+      } else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>1200){
+        if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400>0) {
+          overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5;
+          secondShift = 1;
+        }
       }
 
       this.viewData.push({
@@ -924,8 +912,8 @@ export class CapacityPlanningComponent implements OnInit {
           capacityLastPeriod[i] +
           setUpLastPeriod[i],
         overtime: overtime,
-        secondShift: secondShift,
-      });
+        secondShift: secondShift     
+      })
     }
   }
 
