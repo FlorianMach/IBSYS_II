@@ -3,7 +3,9 @@
         "LANGUAGE": "Language"
     },
     "XML": {
-        "NAME": "Xml"
+        "NAME": "Xml",
+        "FILE_NAME": "File: ",
+        "PLEASE_UPLOAD": "Please upload results"
     },
     "PRODUCT_PLANNING": {
         "NAME": "MRP II",

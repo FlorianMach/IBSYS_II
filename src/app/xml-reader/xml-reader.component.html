@@ -1,14 +1,32 @@
-<div style="background-color: blue;">
-    <div class="test">
-        <img src="../../assets/icon_Upload.png">
-    </div>
-    <input type="file" (change)="uploadFile($event)" class="xmlreader" #file/>
-    <!-- <div class="xmlreaderdiv">
-        <div class="test" (click)="file.click()">
-            <img src="../../assets/icon_Upload.png">
-        </div>  
-        <div class="test" (click)="file.click()">
-            <input type="file" (change)="uploadFile($event)" class="xmlreader" #file/>
-        </div>
-    </div> -->
+<div
+  style="
+    height: 100%;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  "
+>
+  <div
+    style="
+      background-color: #1da1f2;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      border-radius: 15px;
+      width: 50%;
+    "
+  >
+    <img src="../../assets/icon_Upload.png" />
+
+    <input type="file" (change)="uploadFile($event)" class="xmlreader" />
+  </div>
+  <div>
+    {{
+      fileName
+        ? ("XML.FILE_NAME" | translate) + fileName
+        : ("XML.PLEASE_UPLOAD" | translate)
+    }}
+  </div>
 </div>
