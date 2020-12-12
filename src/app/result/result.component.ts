@@ -11,6 +11,7 @@ import { SharedService } from '../shared/shared.service';
 import { MaterialRequirementsPlanningService } from '../material-requirements-planning/material-requirements-planning.service';
 import { CapacityPlanningService } from '../capacity-planning/capacity-planning.service';
 import { ProcurementService } from '../procurement/procurement.service';
+import { connect } from 'http2';
 
 @Component({
   selector: 'app-result',
@@ -61,17 +62,17 @@ export class ResultComponent implements OnInit {
       this.mrp1Data = this.createMrpData(data);
     });
     this.capacityService.subscribeDataOfCapacity((data) => {
-      this.capacity = data;
+      this.dataSource4 = data;
     });
     this.displayedColumns = ['article', 'quantity', 'price', 'penalty'];
-    this.dataSource = ELEMENT_DATA;
+    //this.dataSource = ELEMENT_DATA;
     this.displayedColumns2 = ['article', 'quantity', 'modus'];
     this.dataSource2 = ELEMENT_DATA_SECOND;
     this.displayedColumns3 = ['article', 'quantity', 'split'];
     this.dataSource3 = JSON.parse(JSON.stringify(ELEMENT_DATA_THIRD));
     this.dataSource32 = new MatTableDataSource(this.dataSource3);
     this.displayedColumns4 = ['station', 'shift', 'overtime'];
-    this.dataSource4 = ELEMENT_DATA_FOURTH;
+    //this.dataSource4 = this.capacity;
   }
 
   private createMrpData(data) {
@@ -145,7 +146,8 @@ export class ResultComponent implements OnInit {
   exportXml() {
     var xmlString =
       '<input>' +
-      this.selldirectXml(ELEMENT_DATA) +
+      '<qualitycontrol type="no" losequantity="0" delay="0" />'+
+      this.selldirectXml(this.dataSource) +
       this.orderlistXml(ELEMENT_DATA_SECOND) +
       this.productionlistXml(this.dataSource3) +
       this.workingtimeXml(ELEMENT_DATA_FOURTH) +
@@ -160,8 +162,9 @@ export class ResultComponent implements OnInit {
   }
 
   selldirectXml(data: SellDirect[]): string {
-    var xmlString = '<selldirect>';
-    for (var i = 0; i < data.length; i++) {
+  
+      var xmlString = '<selldirect>';
+      for (var i = 0; i < data.length; i++) {
       xmlString =
         xmlString +
         '<item article="' +
@@ -173,6 +176,7 @@ export class ResultComponent implements OnInit {
         '" penalty="' +
         data[i].penalty +
         '" />';
+      
     }
     xmlString = xmlString + '</selldirect>';
     return xmlString;
