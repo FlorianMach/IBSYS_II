@@ -111,7 +111,8 @@
                 "HEADER": "Batch Size Splitting Article No.",
                 "INSTRUCTION": "Please adjust to your preferred batch size combination.",
                 "DISCARD": "Discard",
-                "SPLIT": "Split"
+                "SPLIT": "Split",
+                "WARNING": "Please enter a valid batch size combination."
             }
         }
     },

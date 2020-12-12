@@ -105,13 +105,14 @@
         },
         "SPLIT": {
             "NAME": "Losgrößen Splitting",
-            "SPLIT": "Split",
+            "SPLIT": "Teilen",
             "RESET": "Tabelle zurücksetzen",
             "DIALOG": {
                 "HEADER": "Losgrößen Splitting Artikel Nr.",
                 "INSTRUCTION": "Bitte stellen Sie auf Ihre gewünschte Losgrößen Kombination ein.",
                 "DISCARD": "Verwerfen",
-                "SPLIT": "Split"
+                "SPLIT": "Teilen",
+                "WARNING": "Bitte geben Sie eine gültige Losgrößen-Kombination an."
             }
         }
     },

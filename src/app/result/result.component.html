@@ -1,4 +1,7 @@
 <div class="result-content-wrapper">
+  <div class="button-export" (click)="exportXml()">
+    <button mat-raised-button> {{ "RESULT.XML" | translate }} </button>
+  </div>
 <mat-tab-group dynamicHeight>
     <!-- Direct Sales Tab -->
     <mat-tab>
@@ -65,7 +68,7 @@
     </mat-tab>
     <mat-tab>
         <ng-template mat-tab-label> {{ "RESULT.PRODUCTION.ORDERS.NAME" | translate }} </ng-template>
-        <div class="example-container mat-elevation-z8">
+        <div class="draggable-table">
             <table mat-table #table [dataSource]="dataSource32" class="mat-elevation-z8" cdkDropList [cdkDropListData]="dataSource32" (cdkDropListDropped)="dropTable($event)">           
           
               <!-- Article Column -->
@@ -130,8 +133,5 @@
           </div>
       </mat-tab>
   </mat-tab-group>
-  <div class="button-export" (click)="exportXml()">
-    <button mat-raised-button> {{ "RESULT.XML" | translate }} </button>
-  </div>
 </div>
   
