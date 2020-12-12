@@ -170,5 +170,11 @@ export class ProcurementComponent implements OnInit {
     else if(e.target.id == "orderE" && e.target.name == "order29"){this.outputData.item58.orderN = false;this.outputData.item58.orderE = true;}
     else if(e.target.id == "orderE" && e.target.name == "order30"){this.outputData.item59.orderN = false;this.outputData.item59.orderE = true;}
   
+    /*
+    if(e.checked = true && e.target.id == "orderN"){
+      this.outputData.item21.orderN = false;
+    }
+    */
+    
   }
 }
