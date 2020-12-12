@@ -54,14 +54,14 @@ export class ResultComponent implements OnInit {
       this.data = data;
     });
     this.mrp2Service.subscribeDirectSalesData((data) => {
-      this.mrp2Data = data;
+      this.mrp2Data = data; 
     });
     this.mrp1Service.subscribe((data) => {
 
       this.mrp1Data = this.createMrpData(data);
     });
     this.capacityService.subscribeDataOfCapacity((data) => {
-      this.capacity = data; console.log("888888888888888888888888888888888");console.log(this.capacity); console.log("888888888888888888888888888888888")
+      this.capacity = data;
     });
     this.displayedColumns = ['article', 'quantity', 'price', 'penalty'];
     this.dataSource = ELEMENT_DATA;
