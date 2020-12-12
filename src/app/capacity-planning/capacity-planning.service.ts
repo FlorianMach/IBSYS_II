@@ -15,8 +15,9 @@ export class CapacityPlanningService {
   }
 
   subscribeDataOfCapacity(cb: (data) => void) {
+    
     this.capacityPlanningSubject.subscribe((data) => {
-      cb(data);
+      this.transformOutputData(cb(data));
     });
   }
 
