@@ -1,10 +1,14 @@
-<div>
-    <div class="xmlreaderdiv" >
+<div style="background-color: blue;">
+    <div class="test">
+        <img src="../../assets/icon_Upload.png">
+    </div>
+    <input type="file" (change)="uploadFile($event)" class="xmlreader" #file/>
+    <!-- <div class="xmlreaderdiv">
         <div class="test" (click)="file.click()">
             <img src="../../assets/icon_Upload.png">
         </div>  
-        <div class="test">
+        <div class="test" (click)="file.click()">
             <input type="file" (change)="uploadFile($event)" class="xmlreader" #file/>
         </div>
-    </div>
+    </div> -->
 </div>
