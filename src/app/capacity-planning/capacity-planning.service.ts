@@ -28,7 +28,7 @@ export class CapacityPlanningService {
     for(var i = 0; i < viewData.length; ++i){
       result.push({
         station: String(viewData[i].workplace),
-        shift: String(viewData[i].shift),
+        shift: String(viewData[i].secondShift),
         overtime: String(viewData[i].overtime)
       })
     }
