@@ -13,7 +13,7 @@ export class MaterialRequirementsPlanningService {
   private mrp2SubjectP2 = new BehaviorSubject<any>([]);
   private mrp2SubjectP3 = new BehaviorSubject<any>([]);
 
-  private next(product: string, viewData: Array<ViewData>) {
+  public next(product: string, viewData: Array<ViewData>) {
     if (product === 'P1') {
       this.nextP1(viewData);
     }
@@ -41,9 +41,7 @@ export class MaterialRequirementsPlanningService {
       this.mrp2SubjectP2,
       this.mrp2SubjectP3,
     ]).subscribe((data) => {
-      console.log('combine');
-      console.log(data);
-      cb(data);
+      cb(JSON.parse(JSON.stringify(data)));
     });
   }
 
@@ -87,7 +85,6 @@ export class MaterialRequirementsPlanningService {
       });
     });
     const viewData = this.createViewData(mrpData, bom, salesOrderAmount);
-    this.next(product, viewData);
     return viewData;
   }
 
@@ -107,7 +104,8 @@ export class MaterialRequirementsPlanningService {
   ): Array<ViewData> {
     const mrpData = this.getTransformedData(xmlData, workFlowMap);
     const viewData = this.createViewData(mrpData, bom, salesOrderAmount);
-    this.next(product, viewData);
+    console.log('getViewData');
+    console.log(viewData);
     return viewData;
   }
 

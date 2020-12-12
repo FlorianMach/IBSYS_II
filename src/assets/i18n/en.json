@@ -25,7 +25,21 @@
     "MRP": {
         "NAME_P1": "MRP I - P1",
         "NAME_P2": "MRP I - P2",
-        "NAME_P3": "MRP I - P3"
+        "NAME_P3": "MRP I - P3",
+        "TITLE": "Material Requirements Planning (in-house production)",
+        "TABLE_HEAD": {
+            "SALES_ORDERS": "Sales orders",
+            "SAFETY_STOCK": "Planned safety stock at the following period",
+            "WAREHOUSE_STOCK": "Warehouse stock at the end of passed period",
+            "ORDERS_IN_WAITING_QUEUE": "Orders in waiting queue",
+            "WORK_IN_PROGRESS": "Work in progress",
+            "PRODUCTION_ORDERS": "Production orders for the following period"
+        },
+        "BUTTON": {
+            "CHANGE": "Change",
+            "DISCARD_CHANGES": "Discard",
+            "COMMIT_CHANGES": "Commit"
+        }
     },
     "CAPACITY_PLANNING": {
         "HEADLINE": "Capacity Planning",
