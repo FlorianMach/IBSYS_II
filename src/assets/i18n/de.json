@@ -102,6 +102,17 @@
             "QUANTITY": "Menge",
             "PRICE": "Preis",
             "PENALTY": "Strafe"
+        },
+        "SPLIT": {
+            "NAME": "Losgrößen Splitting",
+            "SPLIT": "Split",
+            "RESET": "Tabelle zurücksetzen",
+            "DIALOG": {
+                "HEADER": "Losgrößen Splitting Artikel Nr.",
+                "INSTRUCTION": "Bitte stellen Sie auf Ihre gewünschte Losgrößen Kombination ein.",
+                "DISCARD": "Verwerfen",
+                "SPLIT": "Split"
+            }
         }
     },
     "UTIL": {

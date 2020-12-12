@@ -1,4 +1,4 @@
-<h1 mat-dialog-title>Split Quantity Article No. {{data.article}}</h1>
+<h1 mat-dialog-title>{{"RESULT.SPLIT.DIALOG.HEADER" | translate}} {{data.article}}</h1>
 
 <!--
     <div mat-dialog-content>
@@ -11,10 +11,13 @@
 -->
 
 <div mat-dialog-content>
-    <input matInput type="number" value="{{data.rest1}}" (change)="calculate($event)" [(ngModel)]="data.rest1">
+    <h3>{{"RESULT.SPLIT.DIALOG.INSTRUCTION" | translate}}</h3>
+    <mat-form-field appearance="fill">
+        <input matInput type="number" value="{{data.rest1}}" (change)="calculate($event)" [(ngModel)]="data.rest1">
+    </mat-form-field>
 </div>
 <div mat-dialog-content>{{data.rest2}}</div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)="onNoClick()">Discard</button>
-  <button mat-button mat-dialog-close [mat-dialog-close]="data.rest1">Split</button>
+  <button mat-button mat-dialog-close (click)="onNoClick()">{{"RESULT.SPLIT.DIALOG.DISCARD" | translate}}</button>
+  <button mat-button mat-dialog-close [mat-dialog-close]="data.rest1">{{"RESULT.SPLIT.DIALOG.SPLIT" | translate}}</button>
 </div>

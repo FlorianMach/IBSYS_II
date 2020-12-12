@@ -102,6 +102,17 @@
             "QUANTITY": "Quantity",
             "PRICE": "Price",
             "PENALTY": "Penalty"
+        },
+        "SPLIT": {
+            "NAME": "Batch Size Splitting",
+            "SPLIT": "Split",
+            "RESET": "Reset Table",
+            "DIALOG": {
+                "HEADER": "Batch Size Splitting Article No.",
+                "INSTRUCTION": "Please adjust to your preferred batch size combination.",
+                "DISCARD": "Discard",
+                "SPLIT": "Split"
+            }
         }
     },
     "UTIL": {

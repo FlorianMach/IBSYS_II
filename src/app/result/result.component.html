@@ -82,9 +82,9 @@
 
               <!-- Split Column -->
               <ng-container matColumnDef="split">
-                <th mat-header-cell *matHeaderCellDef> Split </th>
+                <th mat-header-cell *matHeaderCellDef> {{"RESULT.SPLIT.NAME" | translate}} </th>
                 <td mat-cell *matCellDef="let element">
-                  <button mat-button (click)="openDialog(dataSource32.filteredData.indexOf(element), element.article, element.quantity)">Launch dialog</button>
+                  <button mat-button (click)="openDialog(dataSource32.filteredData.indexOf(element), element.article, element.quantity)">{{"RESULT.SPLIT.SPLIT" | translate}}</button>
                 </td>
               </ng-container>
 
@@ -98,7 +98,7 @@
             </table>
           </div>
           <div class="button-reset" (click)="resetTable()">
-            <button mat-raised-button>Reset Table</button>
+            <button mat-raised-button>{{ "RESULT.SPLIT.RESET" | translate}}</button>
           </div>
       </mat-tab>
       <mat-tab>
