@@ -32,7 +32,7 @@
           am Ende der Planperiode (Sicherheitsbestand)
         </th>
         <td mat-cell *matCellDef="let element">
-          <mat-form-field>
+          <mat-form-field *ngIf="element.id > 3">
             <input
               matInput
               type="number"
@@ -40,6 +40,17 @@
               step="1"
               [value]="element.safetyStock"
               [disabled]="changeModeIsOff"
+              [(ngModel)]="element.safetyStock"
+            />
+          </mat-form-field>
+          <mat-form-field *ngIf="element.id <= 3">
+            <input
+              matInput
+              type="number"
+              min="0"
+              step="1"
+              [value]="element.safetyStock"
+              disabled
               [(ngModel)]="element.safetyStock"
             />
           </mat-form-field>
