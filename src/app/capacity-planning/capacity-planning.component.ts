@@ -586,7 +586,7 @@ export class CapacityPlanningComponent implements OnInit {
   viewData: Array<any>;
   oldViewData: Array<any>;
   setupEventLastPeriod: any[] = [];
-  counter:number = 0;
+  counter: number = 0;
 
   toggleButton: boolean = true;
   xmlData;
@@ -601,14 +601,14 @@ export class CapacityPlanningComponent implements OnInit {
   ngOnInit(): void {
     this.xmlReaderService.subscribe((data) => {
       this.xmlData = data;
-      this.viewData = this.capacityPlaning(
-        this.mrp2Data,
-        PRODUCTIONPLANNING,
-        data
-      );
-      this.oldViewData = this.createDeepCopyOf(this.capacityPlaning(this.mrp2Data,
-        PRODUCTIONPLANNING,
-        data))
+      // this.viewData = this.capacityPlaning(
+      //   this.mrp2Data,
+      //   PRODUCTIONPLANNING,
+      //   data
+      // );
+      // this.oldViewData = this.createDeepCopyOf(this.capacityPlaning(this.mrp2Data,
+      //   PRODUCTIONPLANNING,
+      //   data))
     });
 
     this.materialRequirementsPlanningService.subscribe((data) => {
@@ -622,6 +622,7 @@ export class CapacityPlanningComponent implements OnInit {
           PRODUCTIONPLANNING,
           this.xmlData
         );
+        this.oldViewData = this.createDeepCopyOf(this.viewData);
       }
     });
   }
@@ -642,7 +643,6 @@ export class CapacityPlanningComponent implements OnInit {
       }
     });
 
-    
     // data from P3
     data[2].forEach((element, index) => {
       if (result.find((x) => x.product === element.product)) {
@@ -657,7 +657,6 @@ export class CapacityPlanningComponent implements OnInit {
 
   capacityPlaning(product, productionplanning, data) {
     var result = new Array();
-    
 
     if (product && product.length != 0) {
       var capacity;
@@ -684,59 +683,146 @@ export class CapacityPlanningComponent implements OnInit {
       // Zusammenbauen des Arrays für die Tabelle
       for (var i = 0; i < capacity.length; ++i) {
         // Zusammenbauen des Arrays für die Tabelle
-        for(var i = 0; i < capacity.length; ++i ){
-          if(i===4){
+        for (var i = 0; i < capacity.length; ++i) {
+          if (i === 4) {
             overtime = 0;
             secondShift = 0;
-          } else if((capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5<0){
+          } else if (
+            (capacity[i] +
+              setuptime[i] +
+              capacityLastPeriod[i] +
+              setUpLastPeriod[i] -
+              2400) /
+              5 <
+            0
+          ) {
             overtime = 0;
             secondShift = 1;
-          } else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>8400){
-            if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-9600/5>0){
-              overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-8400)/5;
+          } else if (
+            capacity[i] +
+              setuptime[i] +
+              capacityLastPeriod[i] +
+              setUpLastPeriod[i] >
+            8400
+          ) {
+            if (
+              capacity[i] +
+                setuptime[i] +
+                capacityLastPeriod[i] +
+                setUpLastPeriod[i] -
+                9600 / 5 >
+              0
+            ) {
+              overtime =
+                (capacity[i] +
+                  setuptime[i] +
+                  capacityLastPeriod[i] +
+                  setUpLastPeriod[i] -
+                  8400) /
+                5;
               secondShift = 4;
             } else {
               overtime = 0;
               secondShift = 4;
             }
-          }
-          else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>6000){
-            if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-7200>0){
-              overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-6000)/5;
+          } else if (
+            capacity[i] +
+              setuptime[i] +
+              capacityLastPeriod[i] +
+              setUpLastPeriod[i] >
+            6000
+          ) {
+            if (
+              capacity[i] +
+                setuptime[i] +
+                capacityLastPeriod[i] +
+                setUpLastPeriod[i] -
+                7200 >
+              0
+            ) {
+              overtime =
+                (capacity[i] +
+                  setuptime[i] +
+                  capacityLastPeriod[i] +
+                  setUpLastPeriod[i] -
+                  6000) /
+                5;
               secondShift = 3;
             } else {
               overtime = 0;
               secondShift = 3;
             }
-          } else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>3600) {
-            if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-4800>0){
-              overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-3600)/5;
+          } else if (
+            capacity[i] +
+              setuptime[i] +
+              capacityLastPeriod[i] +
+              setUpLastPeriod[i] >
+            3600
+          ) {
+            if (
+              capacity[i] +
+                setuptime[i] +
+                capacityLastPeriod[i] +
+                setUpLastPeriod[i] -
+                4800 >
+              0
+            ) {
+              overtime =
+                (capacity[i] +
+                  setuptime[i] +
+                  capacityLastPeriod[i] +
+                  setUpLastPeriod[i] -
+                  3600) /
+                5;
               secondShift = 2;
             } else {
               overtime = 0;
               secondShift = 2;
             }
-          } else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>1200){
-            if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400>0) {
-              overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5;
+          } else if (
+            capacity[i] +
+              setuptime[i] +
+              capacityLastPeriod[i] +
+              setUpLastPeriod[i] >
+            1200
+          ) {
+            if (
+              capacity[i] +
+                setuptime[i] +
+                capacityLastPeriod[i] +
+                setUpLastPeriod[i] -
+                2400 >
+              0
+            ) {
+              overtime =
+                (capacity[i] +
+                  setuptime[i] +
+                  capacityLastPeriod[i] +
+                  setUpLastPeriod[i] -
+                  2400) /
+                5;
               secondShift = 1;
             }
           }
-          
+
           result.push({
-            workplace: i+1,
+            workplace: i + 1,
             capareq: capacity[i],
             setup: setuptime[i],
             capalast: capacityLastPeriod[i],
             setuplast: 0,
-            totalRequirement: capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i],
+            totalRequirement:
+              capacity[i] +
+              setuptime[i] +
+              capacityLastPeriod[i] +
+              setUpLastPeriod[i],
             overtime: overtime,
-            secondShift: secondShift     
-          })
+            secondShift: secondShift,
+          });
         }
       }
-    this.CapacityPlanningService.nextCapacityData(result)
-    return result;
+      this.CapacityPlanningService.nextCapacityData(result);
+      return result;
     }
   }
 
@@ -860,42 +946,124 @@ export class CapacityPlanningComponent implements OnInit {
 
     this.viewData = [];
 
-    for(var i = 0; i < capacity.length; ++i ){
-
-      if(i===4){
+    for (var i = 0; i < capacity.length; ++i) {
+      if (i === 4) {
         overtime = 0;
         secondShift = 0;
-      } else if((capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5<0){
+      } else if (
+        (capacity[i] +
+          setuptime[i] +
+          capacityLastPeriod[i] +
+          setUpLastPeriod[i] -
+          2400) /
+          5 <
+        0
+      ) {
         overtime = 0;
         secondShift = 1;
-      } else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>8400){
-        if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-9600/5>0){
-          overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-8400)/5;
+      } else if (
+        capacity[i] +
+          setuptime[i] +
+          capacityLastPeriod[i] +
+          setUpLastPeriod[i] >
+        8400
+      ) {
+        if (
+          capacity[i] +
+            setuptime[i] +
+            capacityLastPeriod[i] +
+            setUpLastPeriod[i] -
+            9600 / 5 >
+          0
+        ) {
+          overtime =
+            (capacity[i] +
+              setuptime[i] +
+              capacityLastPeriod[i] +
+              setUpLastPeriod[i] -
+              8400) /
+            5;
           secondShift = 4;
         } else {
           overtime = 0;
           secondShift = 4;
         }
-      }
-      else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>6000){
-        if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-7200>0){
-          overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-6000)/5;
+      } else if (
+        capacity[i] +
+          setuptime[i] +
+          capacityLastPeriod[i] +
+          setUpLastPeriod[i] >
+        6000
+      ) {
+        if (
+          capacity[i] +
+            setuptime[i] +
+            capacityLastPeriod[i] +
+            setUpLastPeriod[i] -
+            7200 >
+          0
+        ) {
+          overtime =
+            (capacity[i] +
+              setuptime[i] +
+              capacityLastPeriod[i] +
+              setUpLastPeriod[i] -
+              6000) /
+            5;
           secondShift = 3;
         } else {
           overtime = 0;
           secondShift = 3;
         }
-      } else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>3600) {
-        if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-4800>0){
-          overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-3600)/5;
+      } else if (
+        capacity[i] +
+          setuptime[i] +
+          capacityLastPeriod[i] +
+          setUpLastPeriod[i] >
+        3600
+      ) {
+        if (
+          capacity[i] +
+            setuptime[i] +
+            capacityLastPeriod[i] +
+            setUpLastPeriod[i] -
+            4800 >
+          0
+        ) {
+          overtime =
+            (capacity[i] +
+              setuptime[i] +
+              capacityLastPeriod[i] +
+              setUpLastPeriod[i] -
+              3600) /
+            5;
           secondShift = 2;
         } else {
           overtime = 0;
           secondShift = 2;
         }
-      } else if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]>1200){
-        if(capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400>0) {
-          overtime = (capacity[i]+setuptime[i]+capacityLastPeriod[i]+setUpLastPeriod[i]-2400)/5;
+      } else if (
+        capacity[i] +
+          setuptime[i] +
+          capacityLastPeriod[i] +
+          setUpLastPeriod[i] >
+        1200
+      ) {
+        if (
+          capacity[i] +
+            setuptime[i] +
+            capacityLastPeriod[i] +
+            setUpLastPeriod[i] -
+            2400 >
+          0
+        ) {
+          overtime =
+            (capacity[i] +
+              setuptime[i] +
+              capacityLastPeriod[i] +
+              setUpLastPeriod[i] -
+              2400) /
+            5;
           secondShift = 1;
         }
       }
@@ -912,15 +1080,15 @@ export class CapacityPlanningComponent implements OnInit {
           capacityLastPeriod[i] +
           setUpLastPeriod[i],
         overtime: overtime,
-        secondShift: secondShift     
-      })
+        secondShift: secondShift,
+      });
     }
   }
 
   discardChanges() {
     this.toggleButton = !this.toggleButton;
     this.viewData = [];
-    this.viewData = this.oldViewData;
+    this.viewData = this.createDeepCopyOf(this.oldViewData);
   }
 
   private createDeepCopyOf(obj: any): any {
