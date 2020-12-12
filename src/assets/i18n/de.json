@@ -25,7 +25,21 @@
     "MRP": {
         "NAME_P1": "MRP I - P1",
         "NAME_P2": "MRP I - P2",
-        "NAME_P3": "MRP I - P3"
+        "NAME_P3": "MRP I - P3",
+        "TITLE": "Materialbedarfsplanung (Eigenfertigung)",
+        "TABLE_HEAD": {
+            "SALES_ORDERS": "Verbindliche Aufträge / Vertriebswunsch",
+            "SAFETY_STOCK": "Geplanter Lagerbestand am Ende der Planperiode (Sicherheitsbestand)",
+            "WAREHOUSE_STOCK": "Lagerbestand am Ende der Vorperiode",
+            "ORDERS_IN_WAITING_QUEUE": "Aufträge in der Warteschlange",
+            "WORK_IN_PROGRESS": "Aufträge in Bearbeitung",
+            "PRODUCTION_ORDERS": "Produktionsaufträge für die Kommende Periode"
+        },
+        "BUTTON": {
+            "CHANGE": "Ändern",
+            "DISCARD_CHANGES": "Änderungen verwerfen",
+            "COMMIT_CHANGES": "Änderungen bestätigen"
+        }
     },
     "CAPACITY_PLANNING": {
         "HEADLINE": "Kapazitätsplanung",
