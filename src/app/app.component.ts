@@ -62,8 +62,4 @@ export class AppComponent implements OnInit {
   onProductDataChanged(event) {
     this.mrp2psns = event;
   }
-  callProcurmentData() {
-    this.ProcurementComponent.downloadData()
-  }
-
 }
