@@ -17,7 +17,7 @@ export class CapacityPlanningService {
   subscribeDataOfCapacity(cb: (data) => void) {
     
     this.capacityPlanningSubject.subscribe((data) => {
-      this.transformOutputData(cb(data));
+      cb(this.transformOutputData(data));
     });
   }
 
@@ -25,7 +25,7 @@ export class CapacityPlanningService {
     let result = new Array<any>();
 
     // Daten in die Struktur bringen, wie Simon die will 
-    for(var i = 0; i < result.length; ++i){
+    for(var i = 0; i < viewData.length; ++i){
       result.push({
         station: String(viewData[i].workplace),
         shift: String(viewData[i].shift),

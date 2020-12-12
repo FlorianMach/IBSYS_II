@@ -61,7 +61,7 @@ export class ResultComponent implements OnInit {
       this.mrp1Data = this.createMrpData(data);
     });
     this.capacityService.subscribeDataOfCapacity((data) => {
-      this.capacity = data;
+      this.capacity = data; console.log("888888888888888888888888888888888");console.log(this.capacity); console.log("888888888888888888888888888888888")
     });
     this.displayedColumns = ['article', 'quantity', 'price', 'penalty'];
     this.dataSource = ELEMENT_DATA;
