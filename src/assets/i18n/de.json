@@ -3,7 +3,9 @@
         "LANGUAGE": "Sprache"
     },
     "XML": {
-        "NAME": "Xml"
+        "NAME": "Xml",
+        "FILE_NAME": "Datei: ",
+        "PLEASE_UPLOAD": "Bitte Ergebisse hochladen"
     },
     "PRODUCT_PLANNING": {
         "NAME": "MRP II",

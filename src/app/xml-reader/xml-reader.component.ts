@@ -9,6 +9,7 @@ import { XmlReaderService } from './xml-reader.service';
 export class XmlReaderComponent implements OnInit {
   xmlFile: string | ArrayBuffer = '';
   data: any;
+  fileName = '';
 
   constructor(private xmlReaderService: XmlReaderService) {}
 
@@ -21,6 +22,7 @@ export class XmlReaderComponent implements OnInit {
   private readFile(inputValue: any): void {
     const file: File = inputValue.files[0];
     console.log(file);
+    this.fileName = file.name;
     const myReader: FileReader = new FileReader();
 
     myReader.onloadend = (e) => {
