@@ -29,6 +29,7 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
   oldViewData: Array<ViewData>;
   viewData: Array<ViewData>;
   changeModeIsOff = true;
+  primaryProductionOrder = 0;
 
   constructor(
     public dialog: MatDialog,
@@ -40,8 +41,18 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
     this.createViewData();
     console.log(this.viewData);
     this.mrp2Data.subject.subscribe((data) => {
+      if (this.product === 'P1') {
+        this.primaryProductionOrder = data[0].n1;
+      }
+      if (this.product === 'P2') {
+        this.primaryProductionOrder = data[1].n1;
+      }
+      if (this.product === 'P3') {
+        this.primaryProductionOrder = data[2].n1;
+      }
       console.log('Produktionsplanung');
-      console.log(data);
+      console.log(`${this.product}: ${this.primaryProductionOrder}`);
+      this.adjustPrimaryOrder(this.primaryProductionOrder.toString());
     });
   }
 
@@ -71,15 +82,23 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
       this.viewData.forEach((data) => {
         console.log(`${data.id} = ${data.safetyStock}`);
       });
-      this.viewData = this.materialRequirementsPlanningService.updateViewData(
-        this.product,
-        this.viewData,
-        this.bom,
-        this.salesOrderAmount
-      );
+      this.updateViewData();
     }
     this.oldViewData = this.createDeepCopyOf(this.viewData);
     this.toggleChangeMode();
+  }
+
+  private adjustPrimaryOrder(primaryOrder: string) {
+    this.viewData[0].result = primaryOrder;
+    this.viewData[0].safetyStock = (
+      Number(this.viewData[0].result) +
+      Number(this.viewData[0].workInProgress) +
+      Number(this.viewData[0].ordersInWaitingQueue) +
+      Number(this.viewData[0].currentStock) -
+      Number(this.viewData[0].requiredAmount)
+    ).toString();
+    this.updateViewData();
+    this.oldViewData = this.createDeepCopyOf(this.viewData);
   }
 
   private onDiscard() {
@@ -95,7 +114,7 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
       this.bom,
       this.salesOrderAmount
     );
-
+    this.materialRequirementsPlanningService.next(this.product, this.viewData);
     this.oldViewData = this.createDeepCopyOf(this.viewData);
     console.log('TEST');
     console.log(this.viewData);
@@ -107,5 +126,17 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
 
   private createDeepCopyOf(obj: any): any {
     return JSON.parse(JSON.stringify(obj));
+  }
+
+  private updateViewData() {
+    this.viewData = this.materialRequirementsPlanningService.updateViewData(
+      this.product,
+      this.viewData,
+      this.bom,
+      this.salesOrderAmount
+    );
+    console.log('DEBUG');
+    console.log(this.createDeepCopyOf(this.viewData));
+    this.materialRequirementsPlanningService.next(this.product, this.viewData);
   }
 }
