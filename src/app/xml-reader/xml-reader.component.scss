@@ -1,9 +1,18 @@
+// .xmlreader {
+//     cursor: pointer;
+//     font-size: 16px;
+//     width: 335px;
+// }
+
 .xmlreader {
-    cursor: pointer;
-    background-color: #1DA1F2;
-    font-size: 16px;
-    color: #fff;
-    width: 335px;
+    display: block;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+    
 }
 
 .xmlreaderdiv{
@@ -21,10 +30,12 @@
     align-items: center;
     display: flex; 
     justify-content: center;
+    height: 30%;
+    width: 30%;
     margin-bottom: 5%;
 }
 
 input[type="file"] {
-    font-size: 20px;
+    font-size: 14px;
     color: rgb(255, 255, 255);
 }
