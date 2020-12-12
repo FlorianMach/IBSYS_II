@@ -54,7 +54,7 @@ export class ResultComponent implements OnInit {
       this.data = data;
     });
     this.mrp2Service.subscribeDirectSalesData((data) => {
-      this.mrp2Data = data;
+      this.mrp2Data = data; 
     });
     this.mrp1Service.subscribe((data) => {
 
