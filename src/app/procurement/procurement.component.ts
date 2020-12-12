@@ -58,6 +58,7 @@ export class ProcurementComponent implements OnInit {
     private xmlReaderService: XmlReaderService,
     private SharedService: SharedService
   ) {}
+
   ngOnInit(): void {
     this.xmlReaderService.subscribe((data) => {
       this.data = data;
@@ -104,10 +105,9 @@ export class ProcurementComponent implements OnInit {
     this.editable = false;
     this.commit = false;
     this.change = true;
+    this.SharedService.nextProcurementData(this.outputData);
     console.log(this.nValues);
   }
-
-  
 
   onlyOneValue(e) {
     if(e.target.id == "orderN" && e.target.name == "order1"){this.outputData.item21.orderN = true;this.outputData.item21.orderE = false;}
@@ -169,10 +169,6 @@ export class ProcurementComponent implements OnInit {
     else if(e.target.id == "orderE" && e.target.name == "order28"){this.outputData.item57.orderN = false;this.outputData.item57.orderE = true;}
     else if(e.target.id == "orderE" && e.target.name == "order29"){this.outputData.item58.orderN = false;this.outputData.item58.orderE = true;}
     else if(e.target.id == "orderE" && e.target.name == "order30"){this.outputData.item59.orderN = false;this.outputData.item59.orderE = true;}
-    
-    if(e.target.id == "orderN" && e.checked){
-      console.log("test");
-    }
-
+  
   }
 }

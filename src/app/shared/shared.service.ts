@@ -9,6 +9,8 @@ export class SharedService {
   MRP2Value: MRP2PSNS;
   subject = new Subject<MRP2PSNS[]>();
   directSales = new Subject<any>();
+  outputData = new Subject<any>();
+  
   constructor() {}
   setDataOfMrp2data(value) {
     // this.MRP2Value = value
@@ -24,6 +26,16 @@ export class SharedService {
 
   subscribeDirectSalesData(cb: (data) => void) {
     this.directSales.subscribe((data) => {
+      cb(data);
+    });
+  }
+
+  nextProcurementData(outputData){
+    this.outputData.next(outputData);
+  }
+
+  subscribeProcurementData(cb: (data) => void){
+    this.outputData.subscribe((data) =>{
       cb(data);
     });
   }
