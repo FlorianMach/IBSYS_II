@@ -19,6 +19,6 @@
 <div mat-dialog-content>{{data.rest2}}</div>
 <div *ngIf="negativeValue()" style="color:red;">{{"RESULT.SPLIT.DIALOG.WARNING" | translate}}</div>
 <div mat-dialog-actions>
-  <button mat-button mat-dialog-close (click)="onNoClick()">{{"RESULT.SPLIT.DIALOG.DISCARD" | translate}}</button>
-  <button mat-button mat-dialog-close [mat-dialog-close]="data.rest1" [disabled]="negativeValue()">{{"RESULT.SPLIT.DIALOG.SPLIT" | translate}}</button>
+  <button mat-raised-button color="warn" mat-dialog-close (click)="onNoClick()">{{"RESULT.SPLIT.DIALOG.DISCARD" | translate}}</button>
+  <button mat-raised-button color="primary" mat-dialog-close [mat-dialog-close]="data.rest1" [disabled]="negativeValue()">{{"RESULT.SPLIT.DIALOG.SPLIT" | translate}}</button>
 </div>

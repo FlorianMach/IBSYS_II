@@ -1,6 +1,6 @@
 <div class="result-content-wrapper">
   <div class="button-export" (click)="exportXml()">
-    <button mat-raised-button> {{ "RESULT.XML" | translate }} </button>
+    <button mat-raised-button color="primary"> {{ "RESULT.XML" | translate }} </button>
   </div>
 <mat-tab-group dynamicHeight>
     <!-- Direct Sales Tab -->
@@ -87,7 +87,7 @@
               <ng-container matColumnDef="split">
                 <th mat-header-cell *matHeaderCellDef> {{"RESULT.SPLIT.NAME" | translate}} </th>
                 <td mat-cell *matCellDef="let element">
-                  <button mat-button (click)="openDialog(dataSource32.filteredData.indexOf(element), element.product, element.quantity)">{{"RESULT.SPLIT.SPLIT" | translate}}</button>
+                  <button mat-raised-button color="accent" (click)="openDialog(dataSource32.filteredData.indexOf(element), element.product, element.quantity)">{{"RESULT.SPLIT.SPLIT" | translate}}</button>
                 </td>
               </ng-container>
 
@@ -101,7 +101,7 @@
             </table>
           </div>
           <div class="button-reset" (click)="resetTable()">
-            <button mat-raised-button>{{ "RESULT.SPLIT.RESET" | translate}}</button>
+            <button mat-raised-button color="primary">{{ "RESULT.SPLIT.RESET" | translate}}</button>
           </div>
       </mat-tab>
       <mat-tab>
