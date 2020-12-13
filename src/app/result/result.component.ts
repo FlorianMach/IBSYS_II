@@ -67,20 +67,36 @@ export class ResultComponent implements OnInit {
     this.capacityService.subscribeDataOfCapacity((data) => {
       this.dataSource4 = data;
     });
-    this.mrp2Service.subscribeProcurementData((date) =>{
-      this.procurement = date;
-      console.log("procurement");
-      console.log(this.procurement);
+    this.mrp2Service.subscribeProcurementData((data) =>{
+      this.dataSource2 = this.transformProcurementData(createDeepCopyOf(data));
     })
     this.displayedColumns = ['article', 'quantity', 'price', 'penalty'];
     //this.dataSource = ELEMENT_DATA;
     this.displayedColumns2 = ['article', 'quantity', 'modus'];
-    this.dataSource2 = ELEMENT_DATA_SECOND;
+    //this.dataSource2 = ELEMENT_DATA_SECOND;
     this.displayedColumns3 = ['product', 'quantity', 'split'];
     //this.dataSource3 = JSON.parse(JSON.stringify(this.dataSource3deep));
     //this.dataSource32 = new MatTableDataSource(this.dataSource3);
     this.displayedColumns4 = ['station', 'shift', 'overtime'];
     //this.dataSource4 = this.capacity;
+  }
+
+  private transformProcurementData(data) {
+    const result: Order[] = [];
+    for(var k in data) {
+      if(data[k].quantity == 0) {}
+      else {
+        if(isEqual(data[k].modus, true)) {
+          data[k].modus = 'E';
+          result.push(data[k]); 
+        }
+        else {
+          data[k].modus = 'N';
+          result.push(data[k]);
+        }
+      }
+    }
+    return result;
   }
 
   private createMrpData(data) {
@@ -161,7 +177,7 @@ export class ResultComponent implements OnInit {
       '<qualitycontrol type="no" losequantity="0" delay="0" />'+
       this.sellWishXml(this.xmlData) +
       this.selldirectXml(this.dataSource) +
-      this.orderlistXml(ELEMENT_DATA_SECOND) +
+      this.orderlistXml(this.dataSource2) +
       this.productionlistXml(this.dataSource3) +
       this.workingtimeXml(this.dataSource4) +
       '</input>';
@@ -212,20 +228,26 @@ export class ResultComponent implements OnInit {
   }
 
   orderlistXml(data: Order[]): string {
-    var xmlString = '<orderlist>';
-    for (var i = 0; i < data.length; i++) {
-      xmlString =
-        xmlString +
-        '<order article="' +
-        data[i].article +
-        '" quantity="' +
-        data[i].quantity +
-        '" modus="' +
-        data[i].modus +
-        '" />';
-    }
-    xmlString = xmlString + '</orderlist>';
-    return xmlString;
+    if(isEmpty(data)) return '<orderlist></orderlist>';
+    else {
+      var xmlString = '<orderlist>';
+      var modus;
+      for (var i = 0; i < data.length; i++) {
+        if(data[i].modus == 'Normal') modus = '5';
+        else modus = '4'; 
+        xmlString =
+          xmlString +
+          '<order article="' +
+          data[i].article +
+          '" quantity="' +
+          data[i].quantity +
+          '" modus="' +
+          modus +
+          '" />';
+      }
+      xmlString = xmlString + '</orderlist>';
+      return xmlString;
+    }  
   }
 
   productionlistXml(data: Production[]): string {
@@ -247,21 +269,28 @@ export class ResultComponent implements OnInit {
   }
 
   workingtimeXml(data: WorkingTime[]): string {
-    var xmlString = '<workingtimelist>';
-    for (var i = 0; i < data.length; i++) {
-      xmlString =
-        xmlString +
-        '<workingtime station="' +
-        data[i].station +
-        '" shift="' +
-        data[i].shift +
-        '" overtime="' +
-        data[i].overtime +
-        '" />';
+    if(isEmpty(data)) return '<workingtimelist></workingtimelist>';
+    else {
+      var xmlString = '<workingtimelist>';
+      for (var i = 0; i < data.length; i++) {
+        xmlString =
+          xmlString +
+          '<workingtime station="' +
+          data[i].station +
+          '" shift="' +
+          data[i].shift +
+          '" overtime="' +
+          data[i].overtime +
+          '" />';
+      }
+      xmlString = xmlString + '</workingtimelist>';
+      return xmlString;
     }
-    xmlString = xmlString + '</workingtimelist>';
-    return xmlString;
   }
+}
+
+function isEqual(obj1, obj2) {
+  return obj1 === obj2;
 }
 
 function isEmpty(obj) {

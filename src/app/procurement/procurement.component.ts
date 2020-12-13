@@ -38,7 +38,7 @@ export class ProcurementComponent implements OnInit {
     item39: {article: '39' ,quantity: '0', modus: false },
     item40: {article: '40' ,quantity: '0', modus: false },
     item41: {article: '41' ,quantity: '0', modus: false },
-    item42: {article: '41' ,quantity: '0', modus: false },
+    item42: {article: '42' ,quantity: '0', modus: false },
     item43: {article: '43' ,quantity: '0', modus: false },
     item44: {article: '44' ,quantity: '0', modus: false },
     item45: {article: '45' ,quantity: '0', modus: false },
