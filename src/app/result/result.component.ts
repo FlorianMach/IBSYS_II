@@ -67,6 +67,11 @@ export class ResultComponent implements OnInit {
     this.capacityService.subscribeDataOfCapacity((data) => {
       this.dataSource4 = data;
     });
+    this.mrp2Service.subscribeProcurementData((date) =>{
+      this.procurement = date;
+      console.log("procurement");
+      console.log(this.procurement);
+    })
     this.displayedColumns = ['article', 'quantity', 'price', 'penalty'];
     //this.dataSource = ELEMENT_DATA;
     this.displayedColumns2 = ['article', 'quantity', 'modus'];
