@@ -718,7 +718,7 @@ export class CapacityPlanningComponent implements OnInit {
                   setuptime[i] +
                   capacityLastPeriod[i] +
                   setUpLastPeriod[i] -
-                  8400) /
+                  9600) /
                 5;
               secondShift = 4;
             } else {
@@ -745,7 +745,7 @@ export class CapacityPlanningComponent implements OnInit {
                   setuptime[i] +
                   capacityLastPeriod[i] +
                   setUpLastPeriod[i] -
-                  6000) /
+                  7200) /
                 5;
               secondShift = 3;
             } else {
@@ -772,7 +772,7 @@ export class CapacityPlanningComponent implements OnInit {
                   setuptime[i] +
                   capacityLastPeriod[i] +
                   setUpLastPeriod[i] -
-                  3600) /
+                  4800) /
                 5;
               secondShift = 2;
             } else {
@@ -896,21 +896,23 @@ export class CapacityPlanningComponent implements OnInit {
   getcapacitylastPeriod(data) {
     var result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-    for (
-      var i = 0;
-      i < data.results.waitinglistworkstations.workplace.length;
-      ++i
-    ) {
-      if (i < 4) {
-        result[i] += parseInt(
-          data.results.waitinglistworkstations.workplace[i]._attributes.timeneed
-        );
-      } else if (i === 4) {
-        result[i] = 0;
-      } else if (i < 15 && i > 4) {
-        result[i - 1] += parseInt(
-          data.results.waitinglistworkstations.workplace[i]._attributes.timeneed
-        );
+    if(data.results.waitinglistworkstations.workplace != undefined){
+      for (
+        var i = 0;
+        i < data.results.waitinglistworkstations.workplace.length;
+        ++i
+      ) {
+        if (i < 4) {
+          result[i] += parseInt(
+            data.results.waitinglistworkstations.workplace[i]._attributes.timeneed
+          );
+        } else if (i === 4) {
+          result[i] = 0;
+        } else if (i < 15 && i > 4) {
+          result[i - 1] += parseInt(
+            data.results.waitinglistworkstations.workplace[i]._attributes.timeneed
+          );
+        }
       }
     }
 
