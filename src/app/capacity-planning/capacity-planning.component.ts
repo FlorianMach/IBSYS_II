@@ -983,7 +983,7 @@ export class CapacityPlanningComponent implements OnInit {
               setuptime[i] +
               capacityLastPeriod[i] +
               setUpLastPeriod[i] -
-              8400) /
+              9600) /
             5;
           secondShift = 4;
         } else {
@@ -1010,7 +1010,7 @@ export class CapacityPlanningComponent implements OnInit {
               setuptime[i] +
               capacityLastPeriod[i] +
               setUpLastPeriod[i] -
-              6000) /
+              7200) /
             5;
           secondShift = 3;
         } else {
@@ -1037,7 +1037,7 @@ export class CapacityPlanningComponent implements OnInit {
               setuptime[i] +
               capacityLastPeriod[i] +
               setUpLastPeriod[i] -
-              3600) /
+              4800) /
             5;
           secondShift = 2;
         } else {
@@ -1085,8 +1085,9 @@ export class CapacityPlanningComponent implements OnInit {
         secondShift: secondShift,
       });
 
-      this.CapacityPlanningService.nextCapacityData(this.viewData);
+      
     }
+    this.CapacityPlanningService.nextCapacityData(this.viewData);
   }
 
   discardChanges() {
