@@ -1084,6 +1084,8 @@ export class CapacityPlanningComponent implements OnInit {
         overtime: overtime,
         secondShift: secondShift,
       });
+
+      this.CapacityPlanningService.nextCapacityData(this.viewData);
     }
   }
 
