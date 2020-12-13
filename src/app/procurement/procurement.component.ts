@@ -18,39 +18,38 @@ export class ProcurementComponent implements OnInit {
   data: any[] = [];
   nValues: MRP2PSNS[] = [];
   initialStock: any[] = [];
-  orderN = 'orderN';
-  orderE = 'orderE';
+  modus = 'modus';
 
   outputData = {
-    item21: { amount: '0', orderE: false, orderN: false },
-    item22: { amount: '0', orderE: false, orderN: false },
-    item23: { amount: '0', orderE: false, orderN: false },
-    item24: { amount: '0', orderE: false, orderN: false },
-    item25: { amount: '0', orderE: false, orderN: false },
-    item27: { amount: '0', orderE: false, orderN: false },
-    item28: { amount: '0', orderE: false, orderN: false },
-    item32: { amount: '0', orderE: false, orderN: false },
-    item33: { amount: '0', orderE: false, orderN: false },
-    item34: { amount: '0', orderE: false, orderN: false },
-    item35: { amount: '0', orderE: false, orderN: false },
-    item36: { amount: '0', orderE: false, orderN: false },
-    item37: { amount: '0', orderE: false, orderN: false },
-    item38: { amount: '0', orderE: false, orderN: false },
-    item39: { amount: '0', orderE: false, orderN: false },
-    item40: { amount: '0', orderE: false, orderN: false },
-    item41: { amount: '0', orderE: false, orderN: false },
-    item42: { amount: '0', orderE: false, orderN: false },
-    item43: { amount: '0', orderE: false, orderN: false },
-    item44: { amount: '0', orderE: false, orderN: false },
-    item45: { amount: '0', orderE: false, orderN: false },
-    item46: { amount: '0', orderE: false, orderN: false },
-    item47: { amount: '0', orderE: false, orderN: false },
-    item48: { amount: '0', orderE: false, orderN: false },
-    item52: { amount: '0', orderE: false, orderN: false },
-    item53: { amount: '0', orderE: false, orderN: false },
-    item57: { amount: '0', orderE: false, orderN: false },
-    item58: { amount: '0', orderE: false, orderN: false },
-    item59: { amount: '0', orderE: false, orderN: false },
+    item21: {article: '21' ,quantity: '0', modus: false },
+    item22: {article: '22' ,quantity: '0', modus: false },
+    item23: {article: '23' ,quantity: '0', modus: false },
+    item24: {article: '24' ,quantity: '0', modus: false },
+    item25: {article: '25' ,quantity: '0', modus: false },
+    item27: {article: '27' ,quantity: '0', modus: false },
+    item28: {article: '28' ,quantity: '0', modus: false },
+    item32: {article: '32' ,quantity: '0', modus: false },
+    item33: {article: '33' ,quantity: '0', modus: false },
+    item34: {article: '34' ,quantity: '0', modus: false },
+    item35: {article: '35' ,quantity: '0', modus: false },
+    item36: {article: '36' ,quantity: '0', modus: false },
+    item37: {article: '37' ,quantity: '0', modus: false },
+    item38: {article: '38' ,quantity: '0', modus: false },
+    item39: {article: '39' ,quantity: '0', modus: false },
+    item40: {article: '40' ,quantity: '0', modus: false },
+    item41: {article: '41' ,quantity: '0', modus: false },
+    item42: {article: '41' ,quantity: '0', modus: false },
+    item43: {article: '43' ,quantity: '0', modus: false },
+    item44: {article: '44' ,quantity: '0', modus: false },
+    item45: {article: '45' ,quantity: '0', modus: false },
+    item46: {article: '46' ,quantity: '0', modus: false },
+    item47: {article: '47' ,quantity: '0', modus: false },
+    item48: {article: '48' ,quantity: '0', modus: false },
+    item52: {article: '52' ,quantity: '0', modus: false },
+    item53: {article: '53' ,quantity: '0', modus: false },
+    item57: {article: '57' ,quantity: '0', modus: false },
+    item58: {article: '58' ,quantity: '0', modus: false },
+    item59: {article: '59' ,quantity: '0', modus: false },
   };
 
   constructor(
@@ -109,72 +108,7 @@ export class ProcurementComponent implements OnInit {
     console.log(this.nValues);
   }
 
-  onlyOneValue(e) {
-    if(e.target.id == "orderN" && e.target.name == "order1"){this.outputData.item21.orderN = true;this.outputData.item21.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order2"){this.outputData.item22.orderN = true;this.outputData.item22.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order3"){this.outputData.item23.orderN = true;this.outputData.item23.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order4"){this.outputData.item24.orderN = true;this.outputData.item24.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order5"){this.outputData.item25.orderN = true;this.outputData.item25.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order6"){this.outputData.item27.orderN = true;this.outputData.item27.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order7"){this.outputData.item28.orderN = true;this.outputData.item28.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order8"){this.outputData.item32.orderN = true;this.outputData.item32.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order9"){this.outputData.item33.orderN = true;this.outputData.item33.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order10"){this.outputData.item34.orderN = true;this.outputData.item34.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order11"){this.outputData.item35.orderN = true;this.outputData.item35.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order12"){this.outputData.item36.orderN = true;this.outputData.item36.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order13"){this.outputData.item37.orderN = true;this.outputData.item37.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order14"){this.outputData.item38.orderN = true;this.outputData.item38.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order15"){this.outputData.item39.orderN = true;this.outputData.item39.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order16"){this.outputData.item40.orderN = true;this.outputData.item40.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order17"){this.outputData.item41.orderN = true;this.outputData.item41.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order18"){this.outputData.item42.orderN = true;this.outputData.item42.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order19"){this.outputData.item43.orderN = true;this.outputData.item43.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order20"){this.outputData.item44.orderN = true;this.outputData.item44.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order21"){this.outputData.item45.orderN = true;this.outputData.item45.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order23"){this.outputData.item46.orderN = true;this.outputData.item46.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order24"){this.outputData.item47.orderN = true;this.outputData.item47.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order25"){this.outputData.item48.orderN = true;this.outputData.item48.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order26"){this.outputData.item52.orderN = true;this.outputData.item52.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order27"){this.outputData.item53.orderN = true;this.outputData.item53.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order28"){this.outputData.item57.orderN = true;this.outputData.item57.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order29"){this.outputData.item58.orderN = true;this.outputData.item58.orderE = false;}
-    else if(e.target.id == "orderN" && e.target.name == "order30"){this.outputData.item59.orderN = true;this.outputData.item59.orderE = false;}
+  turnValueE(e){
 
-    if(e.target.id == "orderE" && e.target.name == "order1"){this.outputData.item21.orderN = false;this.outputData.item21.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order2"){this.outputData.item22.orderN = false;this.outputData.item22.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order3"){this.outputData.item23.orderN = false;this.outputData.item23.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order4"){this.outputData.item24.orderN = false;this.outputData.item24.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order5"){this.outputData.item25.orderN = false;this.outputData.item25.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order6"){this.outputData.item27.orderN = false;this.outputData.item27.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order7"){this.outputData.item28.orderN = false;this.outputData.item28.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order8"){this.outputData.item32.orderN = false;this.outputData.item32.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order9"){this.outputData.item33.orderN = false;this.outputData.item33.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order10"){this.outputData.item34.orderN = false;this.outputData.item34.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order11"){this.outputData.item35.orderN = false;this.outputData.item35.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order12"){this.outputData.item36.orderN = false;this.outputData.item36.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order13"){this.outputData.item37.orderN = false;this.outputData.item37.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order14"){this.outputData.item38.orderN = false;this.outputData.item38.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order15"){this.outputData.item39.orderN = false;this.outputData.item39.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order16"){this.outputData.item40.orderN = false; this.outputData.item40.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order17"){this.outputData.item41.orderN = false;this.outputData.item41.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order18"){this.outputData.item42.orderN = false;this.outputData.item42.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order19"){this.outputData.item43.orderN = false;this.outputData.item43.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order20"){this.outputData.item44.orderN = false;this.outputData.item44.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order21"){this.outputData.item45.orderN = false;this.outputData.item45.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order23"){this.outputData.item46.orderN = false;this.outputData.item46.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order24"){this.outputData.item47.orderN = false;this.outputData.item47.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order25"){this.outputData.item48.orderN = false;this.outputData.item48.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order26"){this.outputData.item52.orderN = false;this.outputData.item52.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order27"){this.outputData.item53.orderN = false;this.outputData.item53.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order28"){this.outputData.item57.orderN = false;this.outputData.item57.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order29"){this.outputData.item58.orderN = false;this.outputData.item58.orderE = true;}
-    else if(e.target.id == "orderE" && e.target.name == "order30"){this.outputData.item59.orderN = false;this.outputData.item59.orderE = true;}
-  
-    /*
-    if(e.checked = true && e.target.id == "orderN"){
-      this.outputData.item21.orderN = false;
-    }
-    */
-    
   }
 }

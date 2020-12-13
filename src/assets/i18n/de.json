@@ -68,7 +68,7 @@
         "STOCK": "Anfangsbestand in Per n",
         "REQUIREMENTS": "Bruttobedarf gemäß Prod.progr.",
         "AMOUNT": "Bestellmenge",
-        "ORDER": "Bestellung",
+        "ORDER": "Eilbestellung",
         "BUTTON": {
             "CHANGE": "Ändern",
             "COMMIT": "Sichern"

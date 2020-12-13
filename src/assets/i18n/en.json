@@ -68,7 +68,7 @@
         "STOCK": "Initial stock in Per n",
         "REQUIREMENTS": "Gross requirements according the prod.progr.",
         "AMOUNT": "Amount",
-        "ORDER": "Order",
+        "ORDER": "Express Order",
         "BUTTON": {
             "CHANGE": "Change",
             "COMMIT": "Commit"
