@@ -27,7 +27,7 @@ export class SplitDialogComponent {
   */
 
   negativeValue(): boolean {
-    if(this.data.rest1 <= 0 || this.data.rest2 <= 0 || this.data.rest1 > (this.data.quantity - 1)) return true;
+    if(this.data.rest1 <= 0 || this.data.rest2 <= 0 || this.data.rest1 > (this.data.quantity - 1) || (this.data.rest1 % 1) != 0) return true;
     else return false;
   }
 

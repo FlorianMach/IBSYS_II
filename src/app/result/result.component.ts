@@ -34,8 +34,10 @@ export class ResultComponent implements OnInit {
   displayedColumns3;
   dataSource3;
   dataSource32;
+  dataSource3deep;
   displayedColumns4;
   dataSource4;
+  xmlData;
 
   constructor(
     private resultService: ResultService,
@@ -52,14 +54,15 @@ export class ResultComponent implements OnInit {
   ngOnInit(): void {
     console.log('its result data');
     this.xmlReaderService.subscribe((data) => {
-      this.data = data;
+      this.xmlData = data;
     });
     this.mrp2Service.subscribeDirectSalesData((data) => {
-      this.mrp2Data = data; 
+      this.dataSource = data;
     });
     this.mrp1Service.subscribe((data) => {
-
-      this.mrp1Data = this.createMrpData(data);
+      this.dataSource3 = this.createMrpData(data);
+      this.dataSource32 = new MatTableDataSource(this.dataSource3);
+      this.dataSource3deep = createDeepCopyOf(this.dataSource3);
     });
     this.capacityService.subscribeDataOfCapacity((data) => {
       this.dataSource4 = data;
@@ -68,9 +71,9 @@ export class ResultComponent implements OnInit {
     //this.dataSource = ELEMENT_DATA;
     this.displayedColumns2 = ['article', 'quantity', 'modus'];
     this.dataSource2 = ELEMENT_DATA_SECOND;
-    this.displayedColumns3 = ['article', 'quantity', 'split'];
-    this.dataSource3 = JSON.parse(JSON.stringify(ELEMENT_DATA_THIRD));
-    this.dataSource32 = new MatTableDataSource(this.dataSource3);
+    this.displayedColumns3 = ['product', 'quantity', 'split'];
+    //this.dataSource3 = JSON.parse(JSON.stringify(this.dataSource3deep));
+    //this.dataSource32 = new MatTableDataSource(this.dataSource3);
     this.displayedColumns4 = ['station', 'shift', 'overtime'];
     //this.dataSource4 = this.capacity;
   }
@@ -103,6 +106,10 @@ export class ResultComponent implements OnInit {
     return result;
   }
 
+  private getXmlData(data) {
+
+  }
+
   dropTable(event: CdkDragDrop<Production[]>) {
     const prevIndex = this.dataSource3.findIndex((d) => d === event.item.data);
     moveItemInArray(this.dataSource3, prevIndex, event.currentIndex);
@@ -128,18 +135,18 @@ export class ResultComponent implements OnInit {
 
   addSplittedArticle(
     index: number,
-    article: string,
+    product: string,
     quantity: string,
     result: number
   ) {
     this.dataSource3[index].quantity = String(Number(quantity) - result);
-    this.dataSource3.push({ article: article, quantity: result.toString() });
+    this.dataSource3.push({ product: product, quantity: result.toString() });
     this.dataSource32._updateChangeSubscription();
   }
 
   resetTable() {
     this.dataSource3 = [];
-    this.dataSource3 = JSON.parse(JSON.stringify(ELEMENT_DATA_THIRD));
+    this.dataSource3 = createDeepCopyOf(this.dataSource3deep);
     this.dataSource32 = new MatTableDataSource(this.dataSource3);
   }
 
@@ -147,10 +154,11 @@ export class ResultComponent implements OnInit {
     var xmlString =
       '<input>' +
       '<qualitycontrol type="no" losequantity="0" delay="0" />'+
+      this.sellWishXml(this.xmlData) +
       this.selldirectXml(this.dataSource) +
       this.orderlistXml(ELEMENT_DATA_SECOND) +
       this.productionlistXml(this.dataSource3) +
-      this.workingtimeXml(ELEMENT_DATA_FOURTH) +
+      this.workingtimeXml(this.dataSource4) +
       '</input>';
     let blob = new Blob([xmlString], { type: 'text/xml' });
     /*
@@ -161,8 +169,24 @@ export class ResultComponent implements OnInit {
     FileSaver.saveAs(blob, 'input_data.xml');
   }
 
+  sellWishXml(data): string {
+    if(isEmpty(data)) return '<sellwish></sellwish>';
+    else {
+      var xmlString = '<sellwish>';
+      xmlString += '<item article="1" quantity="' + this.xmlData.results.forecast._attributes.p1 + '" />';
+      xmlString += '<item article="2" quantity="' + this.xmlData.results.forecast._attributes.p2 + '" />';
+      xmlString += '<item article="3" quantity="' + this.xmlData.results.forecast._attributes.p3 + '" />';
+      xmlString += '</sellwish>';
+      return xmlString;
+    }
+
+  }
+
   selldirectXml(data: SellDirect[]): string {
-  
+    if(isEmpty(data)) {
+      return '<selldirect><item article="1" quantity="0" price="0.0" penalty="0.0" /><item article="2" quantity="0" price="0.0" penalty="0.0" /><item article="3" quantity="0" price="0.0" penalty="0.0" /></selldirect>';
+    }
+  else {
       var xmlString = '<selldirect>';
       for (var i = 0; i < data.length; i++) {
       xmlString =
@@ -176,7 +200,7 @@ export class ResultComponent implements OnInit {
         '" penalty="' +
         data[i].penalty +
         '" />';
-      
+      }
     }
     xmlString = xmlString + '</selldirect>';
     return xmlString;
@@ -200,18 +224,21 @@ export class ResultComponent implements OnInit {
   }
 
   productionlistXml(data: Production[]): string {
+    if(isEmpty(data)) return '<productionlist></productionlist>';
+    else {
     var xmlString = '<productionlist>';
     for (var i = 0; i < data.length; i++) {
       xmlString =
         xmlString +
         '<production article="' +
-        data[i].article +
+        data[i].product +
         '" quantity="' +
         data[i].quantity +
         '" />';
     }
     xmlString = xmlString + '</productionlist>';
     return xmlString;
+  }
   }
 
   workingtimeXml(data: WorkingTime[]): string {
@@ -230,6 +257,18 @@ export class ResultComponent implements OnInit {
     xmlString = xmlString + '</workingtimelist>';
     return xmlString;
   }
+}
+
+function isEmpty(obj) {
+  for(var key in obj) {
+      if(obj.hasOwnProperty(key))
+          return false;
+  }
+  return true;
+}
+
+function createDeepCopyOf(obj: any): any {
+  return JSON.parse(JSON.stringify(obj));
 }
 
 export interface SellDirect {
@@ -265,20 +304,20 @@ const ELEMENT_DATA_SECOND: Order[] = [
 ];
 
 export interface Production {
-  article: string;
+  product: string;
   quantity: string;
 }
 
 const ELEMENT_DATA_THIRD: Production[] = [
-  { article: '1', quantity: '100' },
-  { article: '2', quantity: '200' },
-  { article: '3', quantity: '300' },
-  { article: '4', quantity: '400' },
-  { article: '5', quantity: '500' },
-  { article: '6', quantity: '600' },
-  { article: '7', quantity: '700' },
-  { article: '8', quantity: '800' },
-  { article: '9', quantity: '900' },
+  { product: '1', quantity: '100' },
+  { product: '2', quantity: '200' },
+  { product: '3', quantity: '300' },
+  { product: '4', quantity: '400' },
+  { product: '5', quantity: '500' },
+  { product: '6', quantity: '600' },
+  { product: '7', quantity: '700' },
+  { product: '8', quantity: '800' },
+  { product: '9', quantity: '900' },
 ];
 
 export interface WorkingTime {

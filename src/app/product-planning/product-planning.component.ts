@@ -5,16 +5,16 @@ import { XmlReaderService } from '../xml-reader/xml-reader.service';
 import { ProductPlanningService } from './product-planning.service';
 
 export interface DirectSales {
-  product: string;
+  article: string;
   quantity: string;
   price: string;
   penalty: string;
 }
 
 const ELEMENT_DATA2: DirectSales[] = [
-  { product: 'P1', quantity: '0', price: '0', penalty: '0' },
-  { product: 'P2', quantity: '0', price: '0', penalty: '0' },
-  { product: 'P3', quantity: '0', price: '0', penalty: '0' },
+  { article: '1', quantity: '0', price: '0', penalty: '0' },
+  { article: '2', quantity: '0', price: '0', penalty: '0' },
+  { article: '3', quantity: '0', price: '0', penalty: '0' },
 ];
 
 @Component({
@@ -26,7 +26,7 @@ export class ProductPlanningComponent implements OnInit {
   @Output() dataChanged: EventEmitter<MRP2PSNS[]> = new EventEmitter();
   data: any;
   mrp2data: MRP2PSNS[];
-  displayedColumns2 = ['product', 'quantity', 'price', 'penalty'];
+  displayedColumns2 = ['article', 'quantity', 'price', 'penalty'];
   dataSource2 = ELEMENT_DATA2;
 
   constructor(
