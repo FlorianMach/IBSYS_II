@@ -17,7 +17,7 @@
           </div>
         </th>
         <th width="10%">{{ "PROCUREMENT.AMOUNT" | translate }}</th>
-        <th width="10%">{{ "PROCUREMENT.ORDER" | translate }}<br />N/E</th>
+        <th width="10%">{{ "PROCUREMENT.ORDER" | translate }}</th>
       </tr>
     </thead>
     <tbody>
@@ -101,24 +101,13 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order1"
-            ([value])="(orderN)"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item21.orderN"
-            (change)="onlyOneValue($event)"
-          />
-
-          <input
-            type="checkbox"
             id="orderE"
             name="order1"
             ([value])="(orderE)"
             [disabled]="!editable"
             [(ngModel)]="outputData.item21.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
-
           {{ outputData.item21 | json }}
         </td>
       </tr>
@@ -202,22 +191,13 @@
         </td>
         <td style="display: flex">
           <input
-            type="checkbox"
-            id="orderN"
-            name="order2"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item22.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
-            id="orderE"
-            name="order2"
-            value="orderE"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item22.orderE"
-            (change)="onlyOneValue($event)"
+          type="checkbox"
+          id="orderE"
+          name="order2"
+          ([value])="(orderE)"
+          [disabled]="!editable"
+          [(ngModel)]="outputData.item22.orderE"
+          (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -299,22 +279,13 @@
         </td>
         <td style="display: flex">
           <input
-            type="checkbox"
-            id="orderN"
-            name="order3"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item23.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
-            id="orderE"
-            name="order3"
-            value="orderE"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item23.orderE"
-            (change)="onlyOneValue($event)"
+          type="checkbox"
+          id="orderE"
+          name="order3"
+          ([value])="(orderE)"
+          [disabled]="!editable"
+          [(ngModel)]="outputData.item23.orderE"
+          (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -398,21 +369,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order4"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item24.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order4"
-            value="orderE"
+            ([value])="(orderE)"
             [disabled]="!editable"
             [(ngModel)]="outputData.item24.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -496,21 +458,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order5"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item25.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order5"
-            value="orderE"
+            ([value])="(orderE)"
             [disabled]="!editable"
             [(ngModel)]="outputData.item25.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -589,21 +542,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order6"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item27.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order6"
-            value="orderE"
+            ([value])="(orderE)"
             [disabled]="!editable"
             [(ngModel)]="outputData.item27.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -682,21 +626,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order7"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item28.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order7"
             value="orderE"
             [disabled]="!editable"
             [(ngModel)]="outputData.item28.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -775,21 +710,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order8"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item32.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order8"
             value="orderE"
             [disabled]="!editable"
             [(ngModel)]="outputData.item32.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -868,21 +794,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order9"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item33.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order9"
             value="orderE"
             [disabled]="!editable"
             [(ngModel)]="outputData.item33.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -961,21 +878,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order10"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item34.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order10"
             value="orderE"
             [disabled]="!editable"
             [(ngModel)]="outputData.item34.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -1054,21 +962,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order11"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item35.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order11"
             value="orderE"
             [disabled]="!editable"
             [(ngModel)]="outputData.item35.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -1147,21 +1046,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order12"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item36.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order12"
             value="orderE"
             [disabled]="!editable"
             [(ngModel)]="outputData.item36.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -1240,21 +1130,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order13"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item37.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order13"
             value="orderE"
             [disabled]="!editable"
             [(ngModel)]="outputData.item37.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -1333,21 +1214,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order14"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item38.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order14"
             value="orderE"
             [disabled]="!editable"
             [(ngModel)]="outputData.item38.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -1426,21 +1298,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order15"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item39.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order15"
             value="orderE"
             [disabled]="!editable"
             [(ngModel)]="outputData.item39.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -1519,21 +1382,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order16"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item40.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order16"
             value="orderE"
             [disabled]="!editable"
             [(ngModel)]="outputData.item40.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -1612,21 +1466,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order17"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item41.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order17"
-            value="orderE"
+            ([value])="(orderE)"
             [disabled]="!editable"
             [(ngModel)]="outputData.item41.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -1705,21 +1550,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order18"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item42.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order18"
             value="orderE"
             [disabled]="!editable"
             [(ngModel)]="outputData.item42.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -1798,21 +1634,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order19"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item43.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order19"
             value="orderE"
             [disabled]="!editable"
             [(ngModel)]="outputData.item43.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -1888,21 +1715,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order20"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item44.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order20"
             value="orderE"
             [disabled]="!editable"
             [(ngModel)]="outputData.item44.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -1978,21 +1796,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order21"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item45.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order21"
             value="orderE"
             [disabled]="!editable"
             [(ngModel)]="outputData.item45.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -2068,21 +1877,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order23"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item46.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order23"
             value="orderE"
             [disabled]="!editable"
             [(ngModel)]="outputData.item46.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -2158,21 +1958,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order24"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item47.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order24"
             value="orderE"
             [disabled]="!editable"
             [(ngModel)]="outputData.item47.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -2248,21 +2039,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order25"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item48.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order25"
             value="orderE"
             [disabled]="!editable"
             [(ngModel)]="outputData.item48.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -2338,21 +2120,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order26"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item52.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order26"
             value="orderE"
             [disabled]="!editable"
             [(ngModel)]="outputData.item52.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -2428,21 +2201,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order27"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item53.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order27"
             value="orderE"
             [disabled]="!editable"
             [(ngModel)]="outputData.item53.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -2518,21 +2282,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order28"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item57.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order28"
             value="orderE"
             [disabled]="!editable"
             [(ngModel)]="outputData.item57.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -2608,21 +2363,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order29"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item58.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order29"
             value="orderE"
             [disabled]="!editable"
             [(ngModel)]="outputData.item58.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
@@ -2698,21 +2444,12 @@
         <td style="display: flex">
           <input
             type="checkbox"
-            id="orderN"
-            name="order30"
-            value="orderN"
-            [disabled]="!editable"
-            [(ngModel)]="outputData.item59.orderN"
-            (change)="onlyOneValue($event)"
-          />
-          <input
-            type="checkbox"
             id="orderE"
             name="order30"
             value="orderE"
             [disabled]="!editable"
             [(ngModel)]="outputData.item59.orderE"
-            (change)="onlyOneValue($event)"
+            (change)="turnValueE($event)"
           />
         </td>
       </tr>
