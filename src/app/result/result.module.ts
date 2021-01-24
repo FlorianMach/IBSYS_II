@@ -7,7 +7,8 @@ import { I18nModule } from '../shared/i18n/i18n.module';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { MatButtonModule } from '@angular/material/button'; 
+import { MatButtonModule } from '@angular/material/button';
+import { ScrollingModule } from '@angular/cdk/scrolling';
 
 @NgModule({
   declarations: [ResultComponent],
@@ -19,7 +20,8 @@ import { MatButtonModule } from '@angular/material/button';
     DragDropModule,
     BrowserModule,
     BrowserAnimationsModule,
-    MatButtonModule
+    MatButtonModule,
+    ScrollingModule,
   ],
   exports: [ResultComponent],
 })

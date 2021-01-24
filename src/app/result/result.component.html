@@ -94,77 +94,79 @@
       <ng-template mat-tab-label>
         {{ "RESULT.PRODUCTION.ORDERS.NAME" | translate }}
       </ng-template>
-      <div class="draggable-table scrollable-table">
-        <table
-          mat-table
-          #table
-          [dataSource]="dataSource32"
-          class="mat-elevation-z8"
-          cdkDropList
-          [cdkDropListData]="dataSource32"
-          (cdkDropListDropped)="dropTable($event)"
-        >
-          <!-- Article Column -->
-          <ng-container matColumnDef="product">
-            <th mat-header-cell *matHeaderCellDef>
-              {{ "RESULT.PRODUCTION.ORDERS.ARTICLE" | translate }}
-            </th>
-            <td mat-cell *matCellDef="let element">{{ element.product }}</td>
-          </ng-container>
+      <div style="height: 100%; display: flex; flex-direction: column">
+        <div class="draggable-table scrollable-table" cdkScrollable>
+          <table
+            mat-table
+            #table
+            [dataSource]="dataSource32"
+            class="mat-elevation-z8"
+            cdkDropList
+            [cdkDropListData]="dataSource32"
+            (cdkDropListDropped)="dropTable($event)"
+          >
+            <!-- Article Column -->
+            <ng-container matColumnDef="product">
+              <th mat-header-cell *matHeaderCellDef>
+                {{ "RESULT.PRODUCTION.ORDERS.ARTICLE" | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element">{{ element.product }}</td>
+            </ng-container>
 
-          <!-- Quantity Column -->
-          <ng-container matColumnDef="quantity">
-            <th mat-header-cell *matHeaderCellDef>
-              {{ "RESULT.PRODUCTION.ORDERS.QUANTITY" | translate }}
-            </th>
-            <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
-          </ng-container>
+            <!-- Quantity Column -->
+            <ng-container matColumnDef="quantity">
+              <th mat-header-cell *matHeaderCellDef>
+                {{ "RESULT.PRODUCTION.ORDERS.QUANTITY" | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element">{{ element.quantity }}</td>
+            </ng-container>
 
-          <!-- Split Column -->
-          <ng-container matColumnDef="split">
-            <th mat-header-cell *matHeaderCellDef>
-              {{ "RESULT.SPLIT.NAME" | translate }}
-            </th>
-            <td mat-cell *matCellDef="let element">
-              <button
-                mat-raised-button
-                color="accent"
-                (click)="
-                  openDialog(
-                    dataSource32.filteredData.indexOf(element),
-                    element.product,
-                    element.quantity
-                  )
-                "
-              >
-                {{ "RESULT.SPLIT.SPLIT" | translate }}
-              </button>
-            </td>
-          </ng-container>
+            <!-- Split Column -->
+            <ng-container matColumnDef="split">
+              <th mat-header-cell *matHeaderCellDef>
+                {{ "RESULT.SPLIT.NAME" | translate }}
+              </th>
+              <td mat-cell *matCellDef="let element">
+                <button
+                  mat-raised-button
+                  color="accent"
+                  (click)="
+                    openDialog(
+                      dataSource32.filteredData.indexOf(element),
+                      element.product,
+                      element.quantity
+                    )
+                  "
+                >
+                  {{ "RESULT.SPLIT.SPLIT" | translate }}
+                </button>
+              </td>
+            </ng-container>
 
-          <ng-container matColumnDef="index">
-            <mat-header-cell *matHeaderCellDef> Index </mat-header-cell>
-            <mat-cell *matCellDef="let element; let i = index">{{
-              i
-            }}</mat-cell>
-          </ng-container>
+            <ng-container matColumnDef="index">
+              <mat-header-cell *matHeaderCellDef> Index </mat-header-cell>
+              <mat-cell *matCellDef="let element; let i = index">{{
+                i
+              }}</mat-cell>
+            </ng-container>
 
-          <tr
-            mat-header-row
-            *matHeaderRowDef="displayedColumns3; sticky: true"
-          ></tr>
-          <tr
-            mat-row
-            *matRowDef="let row; columns: displayedColumns3; let i = index"
-            cdkDrag
-            [cdkDragData]="row"
-          ></tr>
-        </table>
-      </div>
-      <div class="button-reset" (click)="resetTable()">
-        <button mat-raised-button color="primary">
-          {{ "RESULT.SPLIT.RESET" | translate }}
-        </button>
+            <tr
+              mat-header-row
+              *matHeaderRowDef="displayedColumns3; sticky: true"
+            ></tr>
+            <tr
+              mat-row
+              *matRowDef="let row; columns: displayedColumns3; let i = index"
+              cdkDrag
+              [cdkDragData]="row"
+            ></tr>
+          </table>
+        </div>
+        <div class="button-reset" (click)="resetTable()">
+          <button mat-raised-button color="primary">
+            {{ "RESULT.SPLIT.RESET" | translate }}
+          </button>
+        </div>
       </div>
     </mat-tab>
     <mat-tab>
