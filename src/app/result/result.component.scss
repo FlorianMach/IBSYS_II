@@ -1,38 +1,48 @@
-  table {
-    width: 100%;
-  }
+.app-content-flex-box {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+}
 
-  .draggable-table {
-    cursor: grab;
-  }
+.scrollable-table {
+  flex-grow: 1;
+}
 
-  .cdk-drag-preview {
-    box-sizing: border-box;
-    border-radius: 4px;
-    box-shadow:0 5px 5px -3px rgba(0, 0, 0, 0.2),
-    0 8px 10px 1px rgba(0, 0, 0, 0.14),
-    0 3px 14px 2px rgba(0, 0, 0, 0.12);
-    cursor: grabbing;
-  }
+table {
+  width: 100%;
+}
 
-  .cdk-drop-list-dragging {
-    cursor: grabbing;
-  }
+.draggable-table {
+  cursor: grab;
+}
 
-  .cdk-drag-placeholder {
-    opacity: 0;
-  }
-  
-  .cdk-drag-animating {
-    transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
-  }
+.cdk-drag-preview {
+  box-sizing: border-box;
+  border-radius: 4px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  cursor: grabbing;
+}
 
-  .button-export {
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
+.cdk-drop-list-dragging {
+  cursor: grabbing;
+}
 
-  .button-reset {
-    margin-top: 5px;
-    margin-bottom: 5px;
-  }
+.cdk-drag-placeholder {
+  opacity: 0;
+}
+
+.cdk-drag-animating {
+  transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+.button-export {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+
+.button-reset {
+  margin-top: 5px;
+  margin-bottom: 5px;
+}

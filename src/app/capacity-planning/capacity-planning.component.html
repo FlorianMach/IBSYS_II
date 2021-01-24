@@ -1,88 +1,141 @@
 <div class="app-content-flex-box">
-    <div class="scrollable-table">
-        <h1>{{ "CAPACITY_PLANNING.INFO" | translate }}</h1>   
+  <h1>{{ "CAPACITY_PLANNING.INFO" | translate }}</h1>
 
-        <p>{{ "CAPACITY_PLANNING.INFO" | translate }}</p>
-        <div
-            style="
-                width: 100%;
-                display: flex;
-                margin-top: 0.5em;
-                margin-bottom: 0.5em;
-                justify-content: flex-end;"> 
-            
-            <button mat-flat-button color="warn" style="margin-right:8px" [disabled]="toggleButton" (click)="discardChanges()" type="button">{{ "CAPACITY_PLANNING.DISCARD"| translate }}</button>      
-            <button mat-flat-button color="secondary" style="margin-right:8px" [disabled]="toggleButton" (click)="updateTable()" type="button">{{ "CAPACITY_PLANNING.UPDATE"| translate }}</button>
-            <button mat-flat-button color="primary" style="margin-right:8px" [disabled]="!toggleButton" (click)="enable()" type="button">{{ "CAPACITY_PLANNING.CHANGEMODE"| translate }}</button>
-    
-        </div>
+  <p>{{ "CAPACITY_PLANNING.INFO" | translate }}</p>
+  <div
+    style="
+      width: 100%;
+      display: flex;
+      margin-top: 0.5em;
+      margin-bottom: 0.5em;
+      justify-content: flex-end;
+    "
+  >
+    <button
+      mat-flat-button
+      color="warn"
+      style="margin-right: 8px"
+      [disabled]="toggleButton"
+      (click)="discardChanges()"
+      type="button"
+    >
+      {{ "CAPACITY_PLANNING.DISCARD" | translate }}
+    </button>
+    <button
+      mat-flat-button
+      color="secondary"
+      style="margin-right: 8px"
+      [disabled]="toggleButton"
+      (click)="updateTable()"
+      type="button"
+    >
+      {{ "CAPACITY_PLANNING.UPDATE" | translate }}
+    </button>
+    <button
+      mat-flat-button
+      color="primary"
+      style="margin-right: 8px"
+      [disabled]="!toggleButton"
+      (click)="enable()"
+      type="button"
+    >
+      {{ "CAPACITY_PLANNING.CHANGEMODE" | translate }}
+    </button>
+  </div>
+  <div class="scrollable-table">
+    <table mat-table [dataSource]="viewData" class="mat-elevation-z8">
+      <!-- Workplace Column -->
+      <ng-container matColumnDef="workplace">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ "CAPACITY_PLANNING.WORKPLACE" | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.workplace }}</td>
+      </ng-container>
 
-        <table mat-table [dataSource]="viewData" class="mat-elevation-z8">
+      <!-- capacityRequirements Column -->
+      <ng-container matColumnDef="capacityRequirements">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ "CAPACITY_PLANNING.CAPACITYREQ" | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.capareq }}</td>
+      </ng-container>
 
-            <!-- Workplace Column -->
-            <ng-container matColumnDef="workplace">
-                <th mat-header-cell *matHeaderCellDef> {{ "CAPACITY_PLANNING.WORKPLACE" | translate }} </th>
-                <td mat-cell *matCellDef="let element"> {{element.workplace}} </td>
-            </ng-container> 
+      <!-- Set-up Time Column -->
+      <ng-container matColumnDef="setupTime">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ "CAPACITY_PLANNING.SETUPTIME" | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-form-field>
+            <div style="text-align: center">
+              <input
+                matInput
+                [(ngModel)]="element.setup"
+                [disabled]="toggleButton"
+                type="number"
+                value="{{ element.setup }}"
+              />
+            </div>
+          </mat-form-field>
+        </td>
+      </ng-container>
 
-            <!-- capacityRequirements Column -->
-            <ng-container matColumnDef="capacityRequirements">
-                <th mat-header-cell *matHeaderCellDef> {{ "CAPACITY_PLANNING.CAPACITYREQ" | translate }} </th>
-                <td mat-cell *matCellDef="let element"> {{element.capareq}} </td>
-            </ng-container> 
+      <!-- capacityRequirementsLastPeriod Column -->
+      <ng-container matColumnDef="capacityRequirementsLastPeriod">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ "CAPACITY_PLANNING.CAPACITYREQLAST" | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.capalast }}</td>
+      </ng-container>
 
-            <!-- Set-up Time Column -->
-            <ng-container matColumnDef="setupTime">
-                <th mat-header-cell *matHeaderCellDef> {{ "CAPACITY_PLANNING.SETUPTIME" | translate }} </th>
-                <td mat-cell *matCellDef="let element">  
-                <mat-form-field>
-                    <div style="text-align:center;">
-                        <input matInput [(ngModel)]="element.setup" [disabled]='toggleButton' type="number" value={{element.setup}}>
-                    </div>
-                </mat-form-field>
-                </td>
-            </ng-container> 
+      <!-- setupTimeLastPeriod Column -->
+      <ng-container matColumnDef="setupTimeLastPeriod">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ "CAPACITY_PLANNING.SETUPTIMELAST" | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element">
+          <mat-form-field>
+            <div style="text-align: center">
+              <input
+                matInput
+                [(ngModel)]="element.setuplast"
+                [disabled]="toggleButton"
+                type="number"
+                value="{{ element.setuplast }}"
+              />
+            </div>
+          </mat-form-field>
+        </td>
+      </ng-container>
 
-            <!-- capacityRequirementsLastPeriod Column -->
-            <ng-container matColumnDef="capacityRequirementsLastPeriod">
-                <th mat-header-cell *matHeaderCellDef> {{ "CAPACITY_PLANNING.CAPACITYREQLAST" | translate }} </th>
-                <td mat-cell *matCellDef="let element"> {{element.capalast}}</td>
-            </ng-container> 
+      <!-- totalRequirement Column -->
+      <ng-container matColumnDef="totalRequirement">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ "CAPACITY_PLANNING.TOTALREQUIREMENT" | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element">
+          {{ element.totalRequirement }}
+        </td>
+      </ng-container>
 
-            <!-- setupTimeLastPeriod Column -->
-            <ng-container matColumnDef="setupTimeLastPeriod">
-                <th mat-header-cell *matHeaderCellDef> {{ "CAPACITY_PLANNING.SETUPTIMELAST" | translate }} </th>
-                <td mat-cell *matCellDef="let element">  
-                    <mat-form-field>
-                        <div style="text-align:center;">
-                            <input matInput [(ngModel)]="element.setuplast" [disabled]='toggleButton'  type="number" value={{element.setuplast}}>
-                        </div>
-                    </mat-form-field>
-                </td>
-            </ng-container> 
+      <!-- Overtime Column -->
+      <ng-container matColumnDef="overtime">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ "CAPACITY_PLANNING.OVERTIME" | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.overtime }}</td>
+      </ng-container>
 
-            <!-- totalRequirement Column -->
-            <ng-container matColumnDef="totalRequirement">
-                <th mat-header-cell *matHeaderCellDef> {{ "CAPACITY_PLANNING.TOTALREQUIREMENT" | translate }} </th>
-                <td mat-cell *matCellDef="let element"> {{element.totalRequirement}} </td>
-            </ng-container> 
+      <!-- Second Shift Column -->
+      <ng-container matColumnDef="secondShift">
+        <th mat-header-cell *matHeaderCellDef>
+          {{ "CAPACITY_PLANNING.SECONDSHIFT" | translate }}
+        </th>
+        <td mat-cell *matCellDef="let element">{{ element.secondShift }}</td>
+      </ng-container>
 
-            <!-- Overtime Column -->
-            <ng-container matColumnDef="overtime">
-                <th mat-header-cell *matHeaderCellDef> {{ "CAPACITY_PLANNING.OVERTIME" | translate }} </th>
-                <td mat-cell *matCellDef="let element"> {{element.overtime}} </td>
-            </ng-container> 
-
-            <!-- Second Shift Column -->
-            <ng-container matColumnDef="secondShift">
-                <th mat-header-cell *matHeaderCellDef> {{ "CAPACITY_PLANNING.SECONDSHIFT" | translate }} </th>
-                <td mat-cell *matCellDef="let element"> {{element.secondShift}} </td>
-            </ng-container>
-
-            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
-
-        </table>
-
-
+      <tr mat-header-row *matHeaderRowDef="displayedColumns; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    </table>
+  </div>
 </div>
