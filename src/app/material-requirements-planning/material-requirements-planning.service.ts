@@ -56,8 +56,6 @@ export class MaterialRequirementsPlanningService {
 
       result.push(newData);
     });
-    console.log('NEXT');
-    console.log(result);
     return result;
   }
 
@@ -104,8 +102,6 @@ export class MaterialRequirementsPlanningService {
   ): Array<ViewData> {
     const mrpData = this.getTransformedData(xmlData, workFlowMap);
     const viewData = this.createViewData(mrpData, bom, salesOrderAmount);
-    console.log('getViewData');
-    console.log(viewData);
     return viewData;
   }
 
@@ -121,9 +117,6 @@ export class MaterialRequirementsPlanningService {
     );
 
     const viewArray: Array<ViewData> = [];
-
-    console.log(mrpData);
-    console.log(resultData);
 
     for (let i = 0; i < resultData.length; ++i) {
       const curMrpInfo = mrpData.find((element) => {
@@ -290,7 +283,6 @@ export class MaterialRequirementsPlanningService {
 
       resultArr.push(adjustedItem);
     }
-    // console.log(uniqueOrderList);
     return resultArr;
   }
 
@@ -318,7 +310,6 @@ export class MaterialRequirementsPlanningService {
         if (node.parent) {
           requiredAmount = node.parent.result + node.parent.currentItem;
         }
-        console.log(currentItem);
         const safetyStock = currentItem.safetyStock
           ? currentItem.safetyStock
           : 100;
@@ -328,10 +319,6 @@ export class MaterialRequirementsPlanningService {
           currentItem.currentStock -
           currentItem.ordersInWaitingQueue -
           currentItem.workInProgress;
-
-        // console.log(
-        //   `${requiredAmount} + ${safetyStock} - ${currentItem.currentStock} - ${currentItem.ordersInWaitingQueue} - ${currentItem.workInProgress} = ${result}`
-        // );
 
         node.result = result;
 
