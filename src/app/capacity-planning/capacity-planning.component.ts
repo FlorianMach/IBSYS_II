@@ -630,26 +630,27 @@ export class CapacityPlanningComponent implements OnInit {
     data[0].forEach((element) => {
       result.push(element);
     });
-
-    // data from P2
-    data[1].forEach((element, index) => {
-      if (result.find((x) => x.product === element.product)) {
-        result[index].quantity += element.quantity;
-      } else {
-        result.push(element);
-      }
+    data[1].forEach((element) => {
+      result.push(element);
+    });
+    data[2].forEach((element) => {
+      result.push(element);
     });
 
-    // data from P3
-    data[2].forEach((element, index) => {
-      if (result.find((x) => x.product === element.product)) {
-        result[index].quantity += element.quantity;
-      } else {
-        result.push(element);
-      }
-    });
+    // https://stackoverflow.com/questions/23357933/merge-duplicates-in-javascript-array
 
-    return result;
+    let temp = {};
+    const trueResult = [];
+
+    result.map(function (current) {
+      temp[current.product] = (temp[current.product] || 0) + current.quantity;
+    });
+    for (var key in temp) {
+      // Form that into the desired output format.
+      trueResult.push({ product: parseInt(key, 10), quantity: temp[key] });
+    }
+
+    return trueResult;
   }
 
   capacityPlaning(product, productionplanning, data) {
