@@ -376,7 +376,6 @@ export class ProcurementComponent implements OnInit {
   }
 
   calcRecommendedAmount(outputData, nValues) {
-    console.log('MEGA TEST');
     for (const [key, value] of Object.entries(outputData)) {
       const currentItem: any = value;
       // get brutto demand
@@ -413,11 +412,9 @@ export class ProcurementComponent implements OnInit {
               currentItem.p3
             )
           : 0;
-        console.log('triggered');
       }
 
       const bruttoDemand = demandN0 + demandN1 + demandN2 + demandN3;
-      console.log(`${currentItem.article}: ${bruttoDemand}`);
 
       const curStock = this.mapInitialStockValue(currentItem.article);
       // check stock
@@ -445,7 +442,6 @@ export class ProcurementComponent implements OnInit {
     this.commit = false;
     this.change = true;
     this.SharedService.nextProcurementData(this.outputData);
-    console.log(this.nValues);
   }
 
   turnValueE(e) {}

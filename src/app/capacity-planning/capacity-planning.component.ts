@@ -614,9 +614,6 @@ export class CapacityPlanningComponent implements OnInit {
     this.materialRequirementsPlanningService.subscribe((data) => {
       this.mrp2Data = this.createMrpData(data);
       if (data[0].length != 0 && data[1].length != 0 && data[2].length != 0) {
-        console.log('MRP2 DATA!!');
-        console.log(this.mrp2Data);
-
         this.viewData = this.capacityPlaning(
           this.mrp2Data,
           PRODUCTIONPLANNING,
@@ -896,7 +893,7 @@ export class CapacityPlanningComponent implements OnInit {
   getcapacitylastPeriod(data) {
     var result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
 
-    if(data.results.waitinglistworkstations.workplace != undefined){
+    if (data.results.waitinglistworkstations.workplace != undefined) {
       for (
         var i = 0;
         i < data.results.waitinglistworkstations.workplace.length;
@@ -904,13 +901,15 @@ export class CapacityPlanningComponent implements OnInit {
       ) {
         if (i < 4) {
           result[i] += parseInt(
-            data.results.waitinglistworkstations.workplace[i]._attributes.timeneed
+            data.results.waitinglistworkstations.workplace[i]._attributes
+              .timeneed
           );
         } else if (i === 4) {
           result[i] = 0;
         } else if (i < 15 && i > 4) {
           result[i - 1] += parseInt(
-            data.results.waitinglistworkstations.workplace[i]._attributes.timeneed
+            data.results.waitinglistworkstations.workplace[i]._attributes
+              .timeneed
           );
         }
       }
@@ -1084,8 +1083,6 @@ export class CapacityPlanningComponent implements OnInit {
         overtime: overtime,
         secondShift: secondShift,
       });
-
-      
     }
     this.CapacityPlanningService.nextCapacityData(this.viewData);
   }

@@ -65,8 +65,6 @@ export class ProductPlanningComponent implements OnInit {
   ngOnInit(): void {
     this.xmlReaderService.subscribe((data) => {
       this.data = data;
-      console.log(this.data);
-      console.log(this.dataSource2);
     });
   }
   // onValueChanged(event) {
@@ -91,6 +89,5 @@ export class ProductPlanningComponent implements OnInit {
     this.change = true;
     this.SharedService.setDataOfMrp2data(this.mrp2data);
     this.SharedService.nextDirectSales(this.dataSource2);
-    console.log(this.dataSource2);
   }
 }

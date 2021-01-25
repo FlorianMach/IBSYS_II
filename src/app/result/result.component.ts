@@ -52,7 +52,6 @@ export class ResultComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    console.log('its result data');
     this.xmlReaderService.subscribe((data) => {
       this.xmlData = data;
     });
@@ -67,9 +66,9 @@ export class ResultComponent implements OnInit {
     this.capacityService.subscribeDataOfCapacity((data) => {
       this.dataSource4 = data;
     });
-    this.mrp2Service.subscribeProcurementData((data) =>{
+    this.mrp2Service.subscribeProcurementData((data) => {
       this.dataSource2 = this.transformProcurementData(createDeepCopyOf(data));
-    })
+    });
     this.displayedColumns = ['article', 'quantity', 'price', 'penalty'];
     //this.dataSource = ELEMENT_DATA;
     this.displayedColumns2 = ['article', 'quantity', 'modus'];
@@ -83,14 +82,13 @@ export class ResultComponent implements OnInit {
 
   private transformProcurementData(data) {
     const result: Order[] = [];
-    for(var k in data) {
-      if(data[k].quantity == 0) {}
-      else {
-        if(isEqual(data[k].modus, true)) {
+    for (var k in data) {
+      if (data[k].quantity == 0) {
+      } else {
+        if (isEqual(data[k].modus, true)) {
           data[k].modus = 'E';
-          result.push(data[k]); 
-        }
-        else {
+          result.push(data[k]);
+        } else {
           data[k].modus = 'N';
           result.push(data[k]);
         }
@@ -127,9 +125,7 @@ export class ResultComponent implements OnInit {
     return result;
   }
 
-  private getXmlData(data) {
-
-  }
+  private getXmlData(data) {}
 
   dropTable(event: CdkDragDrop<Production[]>) {
     const prevIndex = this.dataSource3.findIndex((d) => d === event.item.data);
@@ -174,7 +170,7 @@ export class ResultComponent implements OnInit {
   exportXml() {
     var xmlString =
       '<input>' +
-      '<qualitycontrol type="no" losequantity="0" delay="0" />'+
+      '<qualitycontrol type="no" losequantity="0" delay="0" />' +
       this.sellWishXml(this.xmlData) +
       this.selldirectXml(this.dataSource) +
       this.orderlistXml(this.dataSource2) +
@@ -191,36 +187,43 @@ export class ResultComponent implements OnInit {
   }
 
   sellWishXml(data): string {
-    if(isEmpty(data)) return '<sellwish></sellwish>';
+    if (isEmpty(data)) return '<sellwish></sellwish>';
     else {
       var xmlString = '<sellwish>';
-      xmlString += '<item article="1" quantity="' + this.xmlData.results.forecast._attributes.p1 + '" />';
-      xmlString += '<item article="2" quantity="' + this.xmlData.results.forecast._attributes.p2 + '" />';
-      xmlString += '<item article="3" quantity="' + this.xmlData.results.forecast._attributes.p3 + '" />';
+      xmlString +=
+        '<item article="1" quantity="' +
+        this.xmlData.results.forecast._attributes.p1 +
+        '" />';
+      xmlString +=
+        '<item article="2" quantity="' +
+        this.xmlData.results.forecast._attributes.p2 +
+        '" />';
+      xmlString +=
+        '<item article="3" quantity="' +
+        this.xmlData.results.forecast._attributes.p3 +
+        '" />';
       xmlString += '</sellwish>';
       return xmlString;
     }
-
   }
 
   selldirectXml(data: SellDirect[]): string {
-    if(isEmpty(data)) {
+    if (isEmpty(data)) {
       return '<selldirect><item article="1" quantity="0" price="0.0" penalty="0.0" /><item article="2" quantity="0" price="0.0" penalty="0.0" /><item article="3" quantity="0" price="0.0" penalty="0.0" /></selldirect>';
-    }
-  else {
+    } else {
       var xmlString = '<selldirect>';
       for (var i = 0; i < data.length; i++) {
-      xmlString =
-        xmlString +
-        '<item article="' +
-        data[i].article +
-        '" quantity="' +
-        data[i].quantity +
-        '" price="' +
-        data[i].price +
-        '" penalty="' +
-        data[i].penalty +
-        '" />';
+        xmlString =
+          xmlString +
+          '<item article="' +
+          data[i].article +
+          '" quantity="' +
+          data[i].quantity +
+          '" price="' +
+          data[i].price +
+          '" penalty="' +
+          data[i].penalty +
+          '" />';
       }
     }
     xmlString = xmlString + '</selldirect>';
@@ -228,13 +231,13 @@ export class ResultComponent implements OnInit {
   }
 
   orderlistXml(data: Order[]): string {
-    if(isEmpty(data)) return '<orderlist></orderlist>';
+    if (isEmpty(data)) return '<orderlist></orderlist>';
     else {
       var xmlString = '<orderlist>';
       var modus;
       for (var i = 0; i < data.length; i++) {
-        if(data[i].modus == 'Normal') modus = '5';
-        else modus = '4'; 
+        if (data[i].modus == 'Normal') modus = '5';
+        else modus = '4';
         xmlString =
           xmlString +
           '<order article="' +
@@ -247,29 +250,29 @@ export class ResultComponent implements OnInit {
       }
       xmlString = xmlString + '</orderlist>';
       return xmlString;
-    }  
+    }
   }
 
   productionlistXml(data: Production[]): string {
-    if(isEmpty(data)) return '<productionlist></productionlist>';
+    if (isEmpty(data)) return '<productionlist></productionlist>';
     else {
-    var xmlString = '<productionlist>';
-    for (var i = 0; i < data.length; i++) {
-      xmlString =
-        xmlString +
-        '<production article="' +
-        data[i].product +
-        '" quantity="' +
-        data[i].quantity +
-        '" />';
+      var xmlString = '<productionlist>';
+      for (var i = 0; i < data.length; i++) {
+        xmlString =
+          xmlString +
+          '<production article="' +
+          data[i].product +
+          '" quantity="' +
+          data[i].quantity +
+          '" />';
+      }
+      xmlString = xmlString + '</productionlist>';
+      return xmlString;
     }
-    xmlString = xmlString + '</productionlist>';
-    return xmlString;
-  }
   }
 
   workingtimeXml(data: WorkingTime[]): string {
-    if(isEmpty(data)) return '<workingtimelist></workingtimelist>';
+    if (isEmpty(data)) return '<workingtimelist></workingtimelist>';
     else {
       var xmlString = '<workingtimelist>';
       for (var i = 0; i < data.length; i++) {
@@ -294,9 +297,8 @@ function isEqual(obj1, obj2) {
 }
 
 function isEmpty(obj) {
-  for(var key in obj) {
-      if(obj.hasOwnProperty(key))
-          return false;
+  for (var key in obj) {
+    if (obj.hasOwnProperty(key)) return false;
   }
   return true;
 }

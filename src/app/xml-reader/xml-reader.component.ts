@@ -21,14 +21,12 @@ export class XmlReaderComponent implements OnInit {
 
   private readFile(inputValue: any): void {
     const file: File = inputValue.files[0];
-    console.log(file);
     this.fileName = file.name;
     const myReader: FileReader = new FileReader();
 
     myReader.onloadend = (e) => {
       this.xmlFile = myReader.result;
       this.data = this.xmlReaderService.convertXmlToJs(this.xmlFile.toString());
-      console.log(this.data);
       this.xmlReaderService.next(this.data);
     };
     myReader.readAsText(file);

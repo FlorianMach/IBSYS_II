@@ -39,7 +39,6 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
 
   ngOnInit(): void {
     this.createViewData();
-    console.log(this.viewData);
     this.mrp2Data.subject.subscribe((data) => {
       if (this.product === 'P1') {
         this.primaryProductionOrder = data[0].n1;
@@ -50,8 +49,6 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
       if (this.product === 'P3') {
         this.primaryProductionOrder = data[2].n1;
       }
-      console.log('Produktionsplanung');
-      console.log(`${this.product}: ${this.primaryProductionOrder}`);
       this.adjustPrimaryOrder(this.primaryProductionOrder.toString());
     });
   }
@@ -78,10 +75,7 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
     if (!this.changeModeIsOff) {
       // log the array
       // useful for checking if binding works correctly
-      console.log('viewdata updated:');
-      this.viewData.forEach((data) => {
-        console.log(`${data.id} = ${data.safetyStock}`);
-      });
+      this.viewData.forEach((data) => {});
       this.updateViewData();
     }
     this.oldViewData = this.createDeepCopyOf(this.viewData);
@@ -116,8 +110,6 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
     );
     this.materialRequirementsPlanningService.next(this.product, this.viewData);
     this.oldViewData = this.createDeepCopyOf(this.viewData);
-    console.log('TEST');
-    console.log(this.viewData);
   }
 
   private toggleChangeMode(): void {
@@ -135,8 +127,6 @@ export class MaterialRequirementsPlanningComponent implements OnInit {
       this.bom,
       this.salesOrderAmount
     );
-    console.log('DEBUG');
-    console.log(this.createDeepCopyOf(this.viewData));
     this.materialRequirementsPlanningService.next(this.product, this.viewData);
   }
 }
