@@ -893,26 +893,15 @@ export class CapacityPlanningComponent implements OnInit {
   // Berechnung der benötigten Zeit für die letzte Periode
   getcapacitylastPeriod(data) {
     var result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-
+    console.log(data)
     if (data.results.waitinglistworkstations.workplace != undefined) {
       for (
         var i = 0;
         i < data.results.waitinglistworkstations.workplace.length;
         ++i
       ) {
-        if (i < 4) {
-          result[i] += parseInt(
-            data.results.waitinglistworkstations.workplace[i]._attributes
-              .timeneed
-          );
-        } else if (i === 4) {
-          result[i] = 0;
-        } else if (i < 15 && i > 4) {
-          result[i - 1] += parseInt(
-            data.results.waitinglistworkstations.workplace[i]._attributes
-              .timeneed
-          );
-        }
+        var id = data.results.waitinglistworkstations.workplace[i]._attributes.id;
+        result[id -1] += parseInt(data.results.waitinglistworkstations.workplace[i]._attributes.timeneed)
       }
     }
 
@@ -922,7 +911,9 @@ export class CapacityPlanningComponent implements OnInit {
         data.results.ordersinwork.workplace[i]._attributes.timeneed
       );
     }
+    console.log(result);
     return result;
+
   }
 
   enable() {
