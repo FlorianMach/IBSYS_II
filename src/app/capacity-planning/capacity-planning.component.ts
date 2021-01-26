@@ -893,7 +893,6 @@ export class CapacityPlanningComponent implements OnInit {
   // Berechnung der benötigten Zeit für die letzte Periode
   getcapacitylastPeriod(data) {
     var result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    console.log(data)
     if (data.results.waitinglistworkstations.workplace != undefined) {
       for (
         var i = 0;
@@ -911,7 +910,6 @@ export class CapacityPlanningComponent implements OnInit {
         data.results.ordersinwork.workplace[i]._attributes.timeneed
       );
     }
-    console.log(result);
     return result;
 
   }
