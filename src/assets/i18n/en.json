@@ -57,7 +57,9 @@
         "INFO": "All times are calculated and indicated in minutes",
         "CHANGEMODE": "Changemode on/off",
         "UPDATE": "Update",
-        "DISCARD": "Discard"
+        "DISCARD": "Discard",
+        "WARNING": "WARNING: The result of the total capacity of the following workstations have more than 24 hours in a day: ",
+        "WARNING2": " These hours are automatically capped. To avoid errors, you can adjust the quantities in MRP II, for example!"
     },
     "PROCUREMENT": {
         "NAME": "Procurement",

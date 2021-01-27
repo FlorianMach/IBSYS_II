@@ -57,7 +57,9 @@
         "INFO": "Alle Zeitangaben werden in Minuten berechnet und angegeben",
         "CHANGEMODE": "Änderungsmodus an/aus",
         "UPDATE": "Aktualisieren",
-        "DISCARD": "Verwerfen"
+        "DISCARD": "Verwerfen",
+        "WARNING": "WARNUNG: Das Ergebnis der Gesamtkapazität der folgenden Arbeitsplätze weißt mehr als 24 Stunden am Tag auf: ",
+        "WARNING2": " Diese Stunden werden automatisch gekappt. Um Fehler zu vermeiden, können Sie beispielsweise die Mengen in MRP II anpassen!"
     },
     "PROCUREMENT": {
         "NAME": "Einkauf",

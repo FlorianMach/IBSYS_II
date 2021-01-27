@@ -1,7 +1,12 @@
 <div class="app-content-flex-box">
   <h1>{{ "CAPACITY_PLANNING.INFO" | translate }}</h1>
+  <mat-card *ngIf="this.displayWarning" style="background-color: yellow; text-align: center;">
+    <mat-card-subtitle style="font-weight: bold;">
+      {{ "CAPACITY_PLANNING.WARNING" | translate }} {{ this.workplaceCutted }}
+    </mat-card-subtitle> 
+    {{ "CAPACITY_PLANNING.WARNING2" | translate }}
+  </mat-card>
 
-  <p>{{ "CAPACITY_PLANNING.INFO" | translate }}</p>
   <div
     style="
       width: 100%;

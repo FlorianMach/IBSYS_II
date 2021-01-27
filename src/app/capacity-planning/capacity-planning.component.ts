@@ -583,11 +583,11 @@ export class CapacityPlanningComponent implements OnInit {
     'secondShift',
   ];
 
+  displayWarning: boolean;
+  workplaceCutted: Array<any>;
   viewData: Array<any>;
   oldViewData: Array<any>;
   setupEventLastPeriod: any[] = [];
-  counter: number = 0;
-
   toggleButton: boolean = true;
   xmlData;
   mrp2Data: Array<any> = [];
@@ -595,20 +595,12 @@ export class CapacityPlanningComponent implements OnInit {
   constructor(
     private CapacityPlanningService: CapacityPlanningService,
     private xmlReaderService: XmlReaderService,
-    private materialRequirementsPlanningService: MaterialRequirementsPlanningService
+    private materialRequirementsPlanningService: MaterialRequirementsPlanningService,
   ) {}
 
   ngOnInit(): void {
     this.xmlReaderService.subscribe((data) => {
       this.xmlData = data;
-      // this.viewData = this.capacityPlaning(
-      //   this.mrp2Data,
-      //   PRODUCTIONPLANNING,
-      //   data
-      // );
-      // this.oldViewData = this.createDeepCopyOf(this.capacityPlaning(this.mrp2Data,
-      //   PRODUCTIONPLANNING,
-      //   data))
     });
 
     this.materialRequirementsPlanningService.subscribe((data) => {
@@ -655,6 +647,7 @@ export class CapacityPlanningComponent implements OnInit {
 
   capacityPlaning(product, productionplanning, data) {
     var result = new Array();
+    var workplaceOvertimeCut: Array<any> = new Array();
 
     if (product && product.length != 0) {
       var capacity;
@@ -667,6 +660,7 @@ export class CapacityPlanningComponent implements OnInit {
 
       // Berechnung der Kapazität
       capacity = this.capacityRequirements(product, productionplanning);
+      console.log(capacity)
 
       // Berechnung Set-Up
       setupevents = this.getSetupEvents(data);
@@ -681,7 +675,6 @@ export class CapacityPlanningComponent implements OnInit {
       // Zusammenbauen des Arrays für die Tabelle
       for (var i = 0; i < capacity.length; ++i) {
         // Zusammenbauen des Arrays für die Tabelle
-        for (var i = 0; i < capacity.length; ++i) {
           if (i === 4) {
             overtime = 0;
             secondShift = 0;
@@ -701,34 +694,7 @@ export class CapacityPlanningComponent implements OnInit {
               setuptime[i] +
               capacityLastPeriod[i] +
               setUpLastPeriod[i] >
-            8400
-          ) {
-            if (
-              capacity[i] +
-                setuptime[i] +
-                capacityLastPeriod[i] +
-                setUpLastPeriod[i] -
-                9600 / 5 >
-              0
-            ) {
-              overtime =
-                (capacity[i] +
-                  setuptime[i] +
-                  capacityLastPeriod[i] +
-                  setUpLastPeriod[i] -
-                  9600) /
-                5;
-              secondShift = 4;
-            } else {
-              overtime = 0;
-              secondShift = 4;
-            }
-          } else if (
-            capacity[i] +
-              setuptime[i] +
-              capacityLastPeriod[i] +
-              setUpLastPeriod[i] >
-            6000
+            6000  
           ) {
             if (
               capacity[i] +
@@ -738,14 +704,9 @@ export class CapacityPlanningComponent implements OnInit {
                 7200 >
               0
             ) {
-              overtime =
-                (capacity[i] +
-                  setuptime[i] +
-                  capacityLastPeriod[i] +
-                  setUpLastPeriod[i] -
-                  7200) /
-                5;
+              overtime = 0;   
               secondShift = 3;
+              workplaceOvertimeCut.push(i+1)
             } else {
               overtime = 0;
               secondShift = 3;
@@ -817,11 +778,23 @@ export class CapacityPlanningComponent implements OnInit {
             overtime: overtime,
             secondShift: secondShift,
           });
-        }
       }
-      this.CapacityPlanningService.nextCapacityData(result);
-      return result;
     }
+    
+    if(
+      workplaceOvertimeCut.length > 0
+    ) {
+      this.workplaceCutted = workplaceOvertimeCut;
+      this.displayWarning = true;
+
+    } else {
+      this.workplaceCutted = workplaceOvertimeCut;
+      this.displayWarning = false;
+    }
+    
+    
+    this.CapacityPlanningService.nextCapacityData(result);
+    return result;
   }
 
   // Funktion für die Berechnung der benötigten Kapazität pro Arbeitsplatz
@@ -921,6 +894,7 @@ export class CapacityPlanningComponent implements OnInit {
   // Neue Berechnung der Tabelle, nachdem Änderungen vorgenommen werden
   updateTable() {
     this.toggleButton = !this.toggleButton;
+    var workplaceOvertimeCut: Array<any> = new Array();
     var capacity: any[] = [];
     var setuptime: any[] = [];
     var capacityLastPeriod: any[] = [];
@@ -938,126 +912,95 @@ export class CapacityPlanningComponent implements OnInit {
     this.viewData = [];
 
     for (var i = 0; i < capacity.length; ++i) {
-      if (i === 4) {
-        overtime = 0;
-        secondShift = 0;
-      } else if (
-        (capacity[i] +
-          setuptime[i] +
-          capacityLastPeriod[i] +
-          setUpLastPeriod[i] -
-          2400) /
-          5 <
-        0
-      ) {
-        overtime = 0;
-        secondShift = 1;
-      } else if (
-        capacity[i] +
-          setuptime[i] +
-          capacityLastPeriod[i] +
-          setUpLastPeriod[i] >
-        8400
-      ) {
-        if (
-          capacity[i] +
-            setuptime[i] +
-            capacityLastPeriod[i] +
-            setUpLastPeriod[i] -
-            9600 / 5 >
-          0
-        ) {
-          overtime =
-            (capacity[i] +
-              setuptime[i] +
-              capacityLastPeriod[i] +
-              setUpLastPeriod[i] -
-              9600) /
-            5;
-          secondShift = 4;
-        } else {
+      // Zusammenbauen des Arrays für die Tabelle
+        if (i === 4) {
           overtime = 0;
-          secondShift = 4;
-        }
-      } else if (
-        capacity[i] +
-          setuptime[i] +
-          capacityLastPeriod[i] +
-          setUpLastPeriod[i] >
-        6000
-      ) {
-        if (
-          capacity[i] +
+          secondShift = 0;
+        } else if (
+          (capacity[i] +
             setuptime[i] +
             capacityLastPeriod[i] +
             setUpLastPeriod[i] -
-            7200 >
+            2400) /
+            5 <
           0
         ) {
-          overtime =
-            (capacity[i] +
-              setuptime[i] +
-              capacityLastPeriod[i] +
-              setUpLastPeriod[i] -
-              7200) /
-            5;
-          secondShift = 3;
-        } else {
           overtime = 0;
-          secondShift = 3;
-        }
-      } else if (
-        capacity[i] +
-          setuptime[i] +
-          capacityLastPeriod[i] +
-          setUpLastPeriod[i] >
-        3600
-      ) {
-        if (
-          capacity[i] +
-            setuptime[i] +
-            capacityLastPeriod[i] +
-            setUpLastPeriod[i] -
-            4800 >
-          0
-        ) {
-          overtime =
-            (capacity[i] +
-              setuptime[i] +
-              capacityLastPeriod[i] +
-              setUpLastPeriod[i] -
-              4800) /
-            5;
-          secondShift = 2;
-        } else {
-          overtime = 0;
-          secondShift = 2;
-        }
-      } else if (
-        capacity[i] +
-          setuptime[i] +
-          capacityLastPeriod[i] +
-          setUpLastPeriod[i] >
-        1200
-      ) {
-        if (
-          capacity[i] +
-            setuptime[i] +
-            capacityLastPeriod[i] +
-            setUpLastPeriod[i] -
-            2400 >
-          0
-        ) {
-          overtime =
-            (capacity[i] +
-              setuptime[i] +
-              capacityLastPeriod[i] +
-              setUpLastPeriod[i] -
-              2400) /
-            5;
           secondShift = 1;
+        } else if (
+          capacity[i] +
+            setuptime[i] +
+            capacityLastPeriod[i] +
+            setUpLastPeriod[i] >
+          6000  
+        ) {
+          if (
+            capacity[i] +
+              setuptime[i] +
+              capacityLastPeriod[i] +
+              setUpLastPeriod[i] -
+              7200 >
+            0
+          ) {
+            overtime = 0;   
+            secondShift = 3;
+            workplaceOvertimeCut.push(i+1)
+          } else {
+            overtime = 0;
+            secondShift = 3;
+          }
+        } else if (
+          capacity[i] +
+            setuptime[i] +
+            capacityLastPeriod[i] +
+            setUpLastPeriod[i] >
+          3600
+        ) {
+          if (
+            capacity[i] +
+              setuptime[i] +
+              capacityLastPeriod[i] +
+              setUpLastPeriod[i] -
+              4800 >
+            0
+          ) {
+            overtime =
+              (capacity[i] +
+                setuptime[i] +
+                capacityLastPeriod[i] +
+                setUpLastPeriod[i] -
+                4800) /
+              5;
+            secondShift = 2;
+          } else {
+            overtime = 0;
+            secondShift = 2;
+          }
+        } else if (
+          capacity[i] +
+            setuptime[i] +
+            capacityLastPeriod[i] +
+            setUpLastPeriod[i] >
+          1200
+        ) {
+          if (
+            capacity[i] +
+              setuptime[i] +
+              capacityLastPeriod[i] +
+              setUpLastPeriod[i] -
+              2400 >
+            0
+          ) {
+            overtime =
+              (capacity[i] +
+                setuptime[i] +
+                capacityLastPeriod[i] +
+                setUpLastPeriod[i] -
+                2400) /
+              5;
+            secondShift = 1;
+          }
         }
-      }
 
       this.viewData.push({
         workplace: i + 1,
@@ -1074,6 +1017,18 @@ export class CapacityPlanningComponent implements OnInit {
         secondShift: secondShift,
       });
     }
+
+    if(
+      workplaceOvertimeCut.length > 0
+    ) {
+      this.workplaceCutted = workplaceOvertimeCut;
+      this.displayWarning = true;
+
+    } else {
+      this.workplaceCutted = workplaceOvertimeCut;
+      this.displayWarning = false;
+    }
+
     this.CapacityPlanningService.nextCapacityData(this.viewData);
   }
 
