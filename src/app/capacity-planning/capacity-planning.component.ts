@@ -550,20 +550,20 @@ const PRODUCTIONPLANNING = [
 // Durchschnittliche Rüstzeiten je Arbeitsplatz
 const SETUPTIME = [
   { w: 1, time: 20 },
-  { w: 2, time: 20 },
+  { w: 2, time: 25 },
   { w: 3, time: 20 },
   { w: 4, time: 20 },
   { w: 5, time: 0 },
   { w: 6, time: 15 },
-  { w: 7, time: 90 },
-  { w: 8, time: 50 },
-  { w: 9, time: 20 },
-  { w: 10, time: 40 },
+  { w: 7, time: 20 },
+  { w: 8, time: 20 },
+  { w: 9, time: 15 },
+  { w: 10, time: 20 },
   { w: 11, time: 20 },
   { w: 12, time: 0 },
   { w: 13, time: 0 },
   { w: 14, time: 0 },
-  { w: 15, time: 30 },
+  { w: 15, time: 15 },
 ];
 
 @Component({
@@ -884,7 +884,6 @@ export class CapacityPlanningComponent implements OnInit {
       );
     }
     return result;
-
   }
 
   enable() {
