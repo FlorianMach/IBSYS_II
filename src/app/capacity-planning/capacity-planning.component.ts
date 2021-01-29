@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { parse } from 'path';
 import { MaterialRequirementsPlanningService } from '../material-requirements-planning/material-requirements-planning.service';
 import { XmlReaderService } from '../xml-reader/xml-reader.service';
 import { CapacityPlanningService } from './capacity-planning.service';
@@ -877,6 +878,17 @@ export class CapacityPlanningComponent implements OnInit {
       }
     }
 
+    if(data.results.waitingliststock.missingpart != undefined) {
+      for(var i = 0; i < data.results.waitingliststock.missingpart.length; i++) {
+        if(data.results.waitingliststock.missingpart[i].workplace != undefined) {
+          var id = data.results.waitingliststock.missingpart[i].workplace._attributes.id;
+          result[id - 1] += parseInt(
+            data.results.waitingliststock.missingpart[i].workplace._attributes.timeneed
+          );
+        }
+      }
+    }
+
     for (var i = 0; i < data.results.ordersinwork.workplace.length; ++i) {
       var id = data.results.ordersinwork.workplace[i]._attributes.id;
       var item = data.results.ordersinwork.workplace[i]._attributes.item;
@@ -893,8 +905,8 @@ export class CapacityPlanningComponent implements OnInit {
   }
 
   lastPeriodNextSteps(id, item) {
-    var items = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-    var ids = [0, 0, 0, 0, 0, 0, items, items, items, 0, items, 0, items, items];
+    var items = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var ids = [0, 0, 0, 0, 0, 0, items, items, items, 0, items, 0, items, items, 0, 0];
     ids[6] [16] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0];
     ids[6] [18] = [0, 0, 0, 0, 0, 0, 20, 30, 20, 0, 0, 0, 0, 0, 0];
     ids[6] [19] = [0, 0, 0, 0, 0, 0, 20, 30, 20, 0, 0, 0, 0, 0, 0];
@@ -937,7 +949,7 @@ export class CapacityPlanningComponent implements OnInit {
     ids[13] [14] = [0, 0, 0, 0, 0, 0, 20, 20, 30, 0, 0, 30, 0, 0, 0];
     ids[13] [15] = [0, 0, 0, 0, 0, 0, 20, 20, 30, 0, 0, 30, 0, 0, 0];
 
-    if(ids[id] [item] == 0 || ids[id] [item] == null) {
+    if(ids[id] [item] == undefined || ids[id] [item] == 0 || ids[id] [item] == null) {
       return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     }  
     else {
