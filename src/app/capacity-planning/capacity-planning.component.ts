@@ -991,6 +991,7 @@ export class CapacityPlanningComponent implements OnInit {
       }   
     }
     console.log(result);
+    return result;
   }
 
   enable() {
