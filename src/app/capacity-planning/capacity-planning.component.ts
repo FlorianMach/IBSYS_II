@@ -671,8 +671,8 @@ export class CapacityPlanningComponent implements OnInit {
       capacityLastPeriod = this.getcapacitylastPeriod(data);
 
       //Berechnung Set-Up Last Period
-      setUpLastPeriod = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
-      this.getSetUpTimeLastPeriod(data, SETUPTIME);
+      //setUpLastPeriod = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      setUpLastPeriod = this.getSetUpTimeLastPeriod(data, SETUPTIME);
 
       // Zusammenbauen des Arrays für die Tabelle
       for (var i = 0; i < capacity.length; ++i) {
@@ -771,7 +771,7 @@ export class CapacityPlanningComponent implements OnInit {
             capareq: capacity[i],
             setup: setuptime[i],
             capalast: capacityLastPeriod[i],
-            setuplast: 0,
+            setuplast: setUpLastPeriod[i],
             totalRequirement:
               capacity[i] +
               setuptime[i] +
@@ -990,7 +990,7 @@ export class CapacityPlanningComponent implements OnInit {
         }
       }   
     }
-    console.log(result);
+    //console.log(result);
     return result;
   }
 
