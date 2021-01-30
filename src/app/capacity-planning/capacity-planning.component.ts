@@ -672,6 +672,7 @@ export class CapacityPlanningComponent implements OnInit {
 
       //Berechnung Set-Up Last Period
       setUpLastPeriod = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+      this.getSetUpTimeLastPeriod(data, SETUPTIME);
 
       // Zusammenbauen des Arrays für die Tabelle
       for (var i = 0; i < capacity.length; ++i) {
@@ -889,15 +890,17 @@ export class CapacityPlanningComponent implements OnInit {
       }
     }
 
-    for (var i = 0; i < data.results.ordersinwork.workplace.length; ++i) {
-      var id = data.results.ordersinwork.workplace[i]._attributes.id;
-      var item = data.results.ordersinwork.workplace[i]._attributes.item;
-      result[id - 1] += parseInt(
-        data.results.ordersinwork.workplace[i]._attributes.timeneed
-      );
-      var nextIds = this.lastPeriodNextSteps(id, item);
-      for(var j = 0; j < result.length; j++) {
-        result[j] += parseInt(nextIds[j]);
+    if(data.results.ordersinwork.workplace != undefined && data.results.ordersinwork.workplace.length != undefined) {
+      for (var i = 0; i < data.results.ordersinwork.workplace.length; ++i) {
+        var id = data.results.ordersinwork.workplace[i]._attributes.id;
+        var item = data.results.ordersinwork.workplace[i]._attributes.item;
+        result[id - 1] += parseInt(
+          data.results.ordersinwork.workplace[i]._attributes.timeneed
+        );
+        var nextIds = this.lastPeriodNextSteps(id, item);
+        for(var j = 0; j < result.length; j++) {
+          result[j] += (parseInt(nextIds[j]) * 10);
+        }
       }
     }
     console.log(result);
@@ -907,47 +910,47 @@ export class CapacityPlanningComponent implements OnInit {
   lastPeriodNextSteps(id, item) {
     var items = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     var ids = [0, 0, 0, 0, 0, 0, items, items, items, 0, items, 0, items, items, 0, 0];
-    ids[6] [16] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0];
-    ids[6] [18] = [0, 0, 0, 0, 0, 0, 20, 30, 20, 0, 0, 0, 0, 0, 0];
-    ids[6] [19] = [0, 0, 0, 0, 0, 0, 20, 30, 20, 0, 0, 0, 0, 0, 0];
-    ids[6] [20] = [0, 0, 0, 0, 0, 0, 20, 30, 20, 0, 0, 0, 0, 0, 0];
-    ids[7] [10] = [0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 0, 0];
-    ids[7] [11] = [0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 0, 0];
-    ids[7] [12] = [0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 0, 0];
-    ids[7] [13] = [0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 0, 0];
-    ids[7] [14] = [0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 0, 0];
-    ids[7] [15] = [0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0, 0, 0];
-    ids[7] [18] = [0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0];
-    ids[7] [19] = [0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0];
-    ids[7] [20] = [0, 0, 0, 0, 0, 0, 0, 0, 20, 0, 0, 0, 0, 0, 0];
-    ids[7] [26] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30];
-    ids[8] [10] = [0, 0, 0, 0, 0, 0, 20, 0, 30, 0, 0, 0, 0, 0, 0];
-    ids[8] [11] = [0, 0, 0, 0, 0, 0, 20, 0, 30, 0, 0, 0, 0, 0, 0];
-    ids[8] [12] = [0, 0, 0, 0, 0, 0, 20, 0, 30, 0, 0, 0, 0, 0, 0];
-    ids[8] [13] = [0, 0, 0, 0, 0, 0, 20, 0, 30, 0, 0, 0, 0, 0, 0];
-    ids[8] [14] = [0, 0, 0, 0, 0, 0, 20, 0, 30, 0, 0, 0, 0, 0, 0];
-    ids[8] [15] = [0, 0, 0, 0, 0, 0, 20, 0, 30, 0, 0, 0, 0, 0, 0];
-    ids[8] [18] = [0, 0, 0, 0, 0, 0, 20, 0, 20, 0, 0, 0, 0, 0, 0];
-    ids[8] [19] = [0, 0, 0, 0, 0, 0, 20, 0, 20, 0, 0, 0, 0, 0, 0];
-    ids[8] [20] = [0, 0, 0, 0, 0, 0, 20, 0, 20, 0, 0, 0, 0, 0, 0];
-    ids[10] [4] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0];
-    ids[10] [5] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0];
-    ids[10] [6] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0];
-    ids[10] [7] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0];
-    ids[10] [8] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0];
-    ids[10] [9] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 30, 0, 0, 0, 0];
-    ids[12] [10] = [0, 0, 0, 0, 0, 0, 20, 10, 30, 0, 0, 0, 0, 0, 0];
-    ids[12] [11] = [0, 0, 0, 0, 0, 0, 20, 20, 30, 0, 0, 0, 0, 0, 0];
-    ids[12] [12] = [0, 0, 0, 0, 0, 0, 20, 20, 30, 0, 0, 0, 0, 0, 0];
-    ids[12] [13] = [0, 0, 0, 0, 0, 0, 20, 10, 30, 0, 0, 0, 0, 0, 0];
-    ids[12] [14] = [0, 0, 0, 0, 0, 0, 20, 20, 30, 0, 0, 0, 0, 0, 0];
-    ids[12] [15] = [0, 0, 0, 0, 0, 0, 20, 20, 30, 0, 0, 0, 0, 0, 0];
-    ids[13] [10] = [0, 0, 0, 0, 0, 0, 20, 10, 30, 0, 0, 30, 0, 0, 0];
-    ids[13] [11] = [0, 0, 0, 0, 0, 0, 20, 20, 30, 0, 0, 30, 0, 0, 0];
-    ids[13] [12] = [0, 0, 0, 0, 0, 0, 20, 20, 30, 0, 0, 30, 0, 0, 0];
-    ids[13] [13] = [0, 0, 0, 0, 0, 0, 20, 10, 30, 0, 0, 30, 0, 0, 0];
-    ids[13] [14] = [0, 0, 0, 0, 0, 0, 20, 20, 30, 0, 0, 30, 0, 0, 0];
-    ids[13] [15] = [0, 0, 0, 0, 0, 0, 20, 20, 30, 0, 0, 30, 0, 0, 0];
+    ids[6] [16] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0];
+    ids[6] [18] = [0, 0, 0, 0, 0, 0, 2, 3, 2, 0, 0, 0, 0, 0, 0];
+    ids[6] [19] = [0, 0, 0, 0, 0, 0, 2, 3, 2, 0, 0, 0, 0, 0, 0];
+    ids[6] [20] = [0, 0, 0, 0, 0, 0, 2, 3, 2, 0, 0, 0, 0, 0, 0];
+    ids[7] [10] = [0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0];
+    ids[7] [11] = [0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0];
+    ids[7] [12] = [0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0];
+    ids[7] [13] = [0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0];
+    ids[7] [14] = [0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0];
+    ids[7] [15] = [0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0, 0, 0];
+    ids[7] [18] = [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0];
+    ids[7] [19] = [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0];
+    ids[7] [20] = [0, 0, 0, 0, 0, 0, 0, 0, 2, 0, 0, 0, 0, 0, 0];
+    ids[7] [26] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3];
+    ids[8] [10] = [0, 0, 0, 0, 0, 0, 2, 0, 3, 0, 0, 0, 0, 0, 0];
+    ids[8] [11] = [0, 0, 0, 0, 0, 0, 2, 0, 3, 0, 0, 0, 0, 0, 0];
+    ids[8] [12] = [0, 0, 0, 0, 0, 0, 2, 0, 3, 0, 0, 0, 0, 0, 0];
+    ids[8] [13] = [0, 0, 0, 0, 0, 0, 2, 0, 3, 0, 0, 0, 0, 0, 0];
+    ids[8] [14] = [0, 0, 0, 0, 0, 0, 2, 0, 3, 0, 0, 0, 0, 0, 0];
+    ids[8] [15] = [0, 0, 0, 0, 0, 0, 2, 0, 3, 0, 0, 0, 0, 0, 0];
+    ids[8] [18] = [0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0];
+    ids[8] [19] = [0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0];
+    ids[8] [20] = [0, 0, 0, 0, 0, 0, 2, 0, 2, 0, 0, 0, 0, 0, 0];
+    ids[10] [4] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0];
+    ids[10] [5] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0];
+    ids[10] [6] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0];
+    ids[10] [7] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0];
+    ids[10] [8] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0];
+    ids[10] [9] = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 3, 0, 0, 0, 0];
+    ids[12] [10] = [0, 0, 0, 0, 0, 0, 2, 1, 3, 0, 0, 0, 0, 0, 0];
+    ids[12] [11] = [0, 0, 0, 0, 0, 0, 2, 2, 3, 0, 0, 0, 0, 0, 0];
+    ids[12] [12] = [0, 0, 0, 0, 0, 0, 2, 2, 3, 0, 0, 0, 0, 0, 0];
+    ids[12] [13] = [0, 0, 0, 0, 0, 0, 2, 1, 3, 0, 0, 0, 0, 0, 0];
+    ids[12] [14] = [0, 0, 0, 0, 0, 0, 2, 2, 3, 0, 0, 0, 0, 0, 0];
+    ids[12] [15] = [0, 0, 0, 0, 0, 0, 2, 2, 3, 0, 0, 0, 0, 0, 0];
+    ids[13] [10] = [0, 0, 0, 0, 0, 0, 2, 1, 3, 0, 0, 3, 0, 0, 0];
+    ids[13] [11] = [0, 0, 0, 0, 0, 0, 2, 2, 3, 0, 0, 3, 0, 0, 0];
+    ids[13] [12] = [0, 0, 0, 0, 0, 0, 2, 2, 3, 0, 0, 3, 0, 0, 0];
+    ids[13] [13] = [0, 0, 0, 0, 0, 0, 2, 1, 3, 0, 0, 3, 0, 0, 0];
+    ids[13] [14] = [0, 0, 0, 0, 0, 0, 2, 2, 3, 0, 0, 3, 0, 0, 0];
+    ids[13] [15] = [0, 0, 0, 0, 0, 0, 2, 2, 3, 0, 0, 3, 0, 0, 0];
 
     if(ids[id] [item] == undefined || ids[id] [item] == 0 || ids[id] [item] == null) {
       return [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
@@ -956,6 +959,38 @@ export class CapacityPlanningComponent implements OnInit {
       return ids[id] [item];
     }
 
+  }
+
+  getSetUpTimeLastPeriod(data, setUpTime) {
+    var result = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
+    var setUpTime = setUpTime;
+    if (data.results.waitinglistworkstations.workplace != undefined && data.results.waitinglistworkstations.workplace.length != undefined) {
+      for (var i = 0; i < data.results.waitinglistworkstations.workplace.length; ++i) {
+        var id = data.results.waitinglistworkstations.workplace[i]._attributes.id;
+        var items = [];
+        if(data.results.waitinglistworkstations.workplace[i].waitinglist != undefined && data.results.waitinglistworkstations.workplace[i].waitinglist.length != undefined) {
+          //console.log(id);
+          //console.log(data.results.waitinglistworkstations.workplace[i].waitinglist.length);
+          if(data.results.ordersinwork.workplace != undefined && data.results.ordersinwork.workplace.length != undefined) {
+            for(var j = 0; j < data.results.ordersinwork.workplace.length; j++) {
+              if(id == data.results.ordersinwork.workplace[j]._attributes.id) {
+                items.push(data.results.ordersinwork.workplace[j]._attributes.item);
+              }
+            }
+          }
+          for(var j = 0; j < data.results.waitinglistworkstations.workplace[i].waitinglist.length; j++) {
+            items.push(data.results.waitinglistworkstations.workplace[i].waitinglist[j]._attributes.item);
+          }
+          //console.log(items);
+        }
+        if(items[0] != undefined && items[0] != null) {
+          var count = [...new Set(items)];
+          //console.log(count);
+          result[id - 1] += (count.length - 1) * setUpTime[id - 1].time;
+        }
+      }   
+    }
+    console.log(result);
   }
 
   enable() {
@@ -1112,4 +1147,6 @@ export class CapacityPlanningComponent implements OnInit {
   private createDeepCopyOf(obj: any): any {
     return JSON.parse(JSON.stringify(obj));
   }
+
+  
 }
