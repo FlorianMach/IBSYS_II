@@ -2,7 +2,6 @@ import { Component, Input, EventEmitter, OnInit, Output } from '@angular/core';
 import { MRP2PSNS } from '../Models';
 import { SharedService } from '../shared/shared.service';
 import { XmlReaderService } from '../xml-reader/xml-reader.service';
-import { ProductPlanningService } from './product-planning.service';
 
 export interface DirectSales {
   article: string;
@@ -28,12 +27,14 @@ export class ProductPlanningComponent implements OnInit {
   mrp2data: MRP2PSNS[];
   displayedColumns2 = ['article', 'quantity', 'price', 'penalty'];
   dataSource2 = ELEMENT_DATA2;
+  displayWarning: boolean = false;
+  toLessProduction: any[];
 
   constructor(
-    private productPlanningService: ProductPlanningService,
     private xmlReaderService: XmlReaderService,
     private SharedService: SharedService
   ) {
+    
     this.mrp2data = [
       {
         n1: 0,
@@ -66,6 +67,7 @@ export class ProductPlanningComponent implements OnInit {
     this.xmlReaderService.subscribe((data) => {
       this.data = data;
     });
+    
   }
   // onValueChanged(event) {
   //   // this.dataChanged.emit(this.mrp2data);
@@ -89,5 +91,34 @@ export class ProductPlanningComponent implements OnInit {
     this.change = true;
     this.SharedService.setDataOfMrp2data(this.mrp2data);
     this.SharedService.nextDirectSales(this.dataSource2);
+    this.displaywarning ()
   }
+
+  displaywarning () {
+
+    var toLessProduction: Array<any> = new Array();
+
+    const p1 = Number(this.data.results.warehousestock.article[0]._attributes.amount) + Number(this.mrp2data[0].n1) - Number(this.data.results.forecast._attributes.p1)
+    const p2 = Number(this.data.results.warehousestock.article[1]._attributes.amount) + Number(this.mrp2data[1].n1) - Number(this.data.results.forecast._attributes.p2)
+    const p3 = Number(this.data.results.warehousestock.article[2]._attributes.amount) + Number(this.mrp2data[2].n1) - Number(this.data.results.forecast._attributes.p3)
+
+    if(p1 < 0){
+      toLessProduction.push("P1");
+    }
+    if(p2 < 0){
+      toLessProduction.push("P2");
+    }
+    if(p3 < 0){
+      toLessProduction.push("P3");
+    }
+
+    this.toLessProduction = toLessProduction;
+
+    if(toLessProduction.length != 0){
+      this.displayWarning = true; 
+    } else {
+      this.displayWarning = false;
+    }
+  }
+
 }

@@ -7,6 +7,7 @@ import { I18nModule } from '../shared/i18n/i18n.module';
 import { MatInputModule } from '@angular/material/input';
 import { MatTableModule } from '@angular/material/table';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [ProductPlanningComponent],
@@ -17,6 +18,7 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     I18nModule,
     MatInputModule,
     MatTableModule,
+    MatCardModule,
     MatFormFieldModule
 ],
   exports: [ProductPlanningComponent],

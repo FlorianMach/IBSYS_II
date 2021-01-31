@@ -13,6 +13,8 @@
         "QUANTITY": "Menge",
         "PRICE": "Preis",
         "PENALTY": "Strafe",
+        "WARNING": "Für den geplanten Verkauf müssen mehr Teile hergestellt werden!",
+        "WARNING2": "Die folgenden Produkte sind betroffen: ",
         "WISH": {
             "NAME": "Produktionsplan"
         },

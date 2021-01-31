@@ -13,6 +13,8 @@
         "QUANTITY": "Quantity",
         "PRICE": "Price",
         "PENALTY": "Penalty",
+        "WARNING": "More parts need to be made for the planned sale!",
+        "WARNING2": "The following products are affected: ",
         "WISH": {
             "NAME": "Product program"
         },

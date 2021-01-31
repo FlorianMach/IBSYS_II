@@ -1,4 +1,10 @@
 <div class="result-content-wrapper">
+  <mat-card *ngIf="this.displayWarning" style="background-color: yellow; text-align: center;">
+    <mat-card-subtitle style="font-weight: bold;">
+      {{ "PRODUCT_PLANNING.WARNING" | translate }}
+    </mat-card-subtitle> 
+    {{ "PRODUCT_PLANNING.WARNING2" | translate }} {{this.toLessProduction}}
+  </mat-card>
   <mat-tab-group dynamicHeight>
     <!-- Sales Wish Tab -->
     <mat-tab>

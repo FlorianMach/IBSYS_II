@@ -20,7 +20,7 @@ import { MatButtonModule } from '@angular/material/button';
     MatTableModule,
     MatCardModule,
     MatCheckboxModule,
-    I18nModule
+    I18nModule,
   ],
   exports: [CapacityPlanningComponent],
 })
