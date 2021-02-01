@@ -98,9 +98,9 @@ export class ProductPlanningComponent implements OnInit {
 
     var toLessProduction: Array<any> = new Array();
 
-    const p1 = Number(this.data.results.warehousestock.article[0]._attributes.amount) + Number(this.mrp2data[0].n1) - Number(this.data.results.forecast._attributes.p1)
-    const p2 = Number(this.data.results.warehousestock.article[1]._attributes.amount) + Number(this.mrp2data[1].n1) - Number(this.data.results.forecast._attributes.p2)
-    const p3 = Number(this.data.results.warehousestock.article[2]._attributes.amount) + Number(this.mrp2data[2].n1) - Number(this.data.results.forecast._attributes.p3)
+    const p1 = Number(this.data.results.warehousestock.article[0]._attributes.amount) + Number(this.mrp2data[0].n1) - Number(this.data.results.forecast._attributes.p1) - Number(this.dataSource2[0].quantity)
+    const p2 = Number(this.data.results.warehousestock.article[1]._attributes.amount) + Number(this.mrp2data[1].n1) - Number(this.data.results.forecast._attributes.p2) - Number(this.dataSource2[1].quantity)
+    const p3 = Number(this.data.results.warehousestock.article[2]._attributes.amount) + Number(this.mrp2data[2].n1) - Number(this.data.results.forecast._attributes.p3) - Number(this.dataSource2[2].quantity)
 
     if(p1 < 0){
       toLessProduction.push("P1");
