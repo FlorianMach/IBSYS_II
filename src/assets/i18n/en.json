@@ -55,7 +55,7 @@
         "SETUPTIMELAST": "Set-Up Time Last Periode",
         "TOTALREQUIREMENT": "Total Requirement",
         "OVERTIME": "Overtime per Week",
-        "SECONDSHIFT": "Second Shift",
+        "SECONDSHIFT": "# Shifts",
         "INFO": "All times are calculated and indicated in minutes",
         "CHANGEMODE": "Changemode on/off",
         "UPDATE": "Update",

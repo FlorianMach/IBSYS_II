@@ -55,7 +55,7 @@
         "SETUPTIMELAST": "Rüstzeit Vorperiode",
         "TOTALREQUIREMENT": "Gesamtbedarf",
         "OVERTIME": "Überstunden pro Woche",
-        "SECONDSHIFT": "Zweite Schicht",
+        "SECONDSHIFT": "# Schichten",
         "INFO": "Alle Zeitangaben werden in Minuten berechnet und angegeben",
         "CHANGEMODE": "Änderungsmodus an/aus",
         "UPDATE": "Aktualisieren",
